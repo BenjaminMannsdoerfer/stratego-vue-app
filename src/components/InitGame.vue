@@ -1,4 +1,8 @@
 <template>
+  <div class="row text-center">
+  <div class="init-game-top">
+    <img class="img-fluid img-game-top" :src="'http://localhost:9000/' + border.top"/>
+  </div>
   <div class="mid-border">
     <div class="row justify-content-center">
       <div class="col-auto init-game-left">
@@ -39,9 +43,27 @@
         </table>
       </div>
       <div class="col-auto init-game-right">
-        <img class="img-game-right" :src="'http://localhost:9000/' +border.right"/>
+        <img class="img-game-right" :src="'http://localhost:9000/' + border.right"/>
       </div>
     </div>
+  </div>
+    <div class="init-game-bot">
+      <img class="img-game-bot" :src="'http://localhost:9000/' + border.bot"/>
+    </div>
+
+    <div class="my-2">
+      <router-link to='/playGame'>
+        <v-btn
+            x-large
+            color="success"
+            dark
+            @click="init"
+        >
+          Extra large Button
+        </v-btn>
+      </router-link>
+    </div>
+
   </div>
 </template>
 
@@ -86,7 +108,13 @@ export default {
         }
       };
     },
-
+    init() {
+      window.websocket.send(JSON.stringify({
+        "init": {
+          "initGane": true,
+        }
+      }))
+    },
 
     set(row, col, charac) {
       window.websocket.send(JSON.stringify({
