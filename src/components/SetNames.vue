@@ -26,6 +26,7 @@
           ></v-text-field>
         </v-col>
         <div class="my-2">
+          <router-link to='/initGame'>
           <v-btn
               x-large
               color="success"
@@ -34,6 +35,7 @@
           >
             Extra large Button
           </v-btn>
+          </router-link>
         </div>
       </v-row>
     </v-container>
