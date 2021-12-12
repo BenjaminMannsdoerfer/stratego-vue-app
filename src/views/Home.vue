@@ -1,15 +1,30 @@
 <template>
-  <hello-world />
+  <v-app>
+  <Start>
+
+  </Start>
+  </v-app>
 </template>
 
 <script>
-  import HelloWorld from '../components/HelloWorld'
 
-  export default {
-    name: 'Home',
+import Start from "../components/Start";
+//import PlayGame from "../components/PlayGame";
+export default {
+  name: 'Home',
+  data: () => ({
+    size: 10,
+    fields: [],
+    currentPlayerIndex: 0,
+    currentPlayer: "",
+    playerListBufferBlue: 40,
+    playerListBufferRed: 40,
+    gameStatus: "",
+    border: { }
+  }),
+  components: {
+    Start
+  },
 
-    components: {
-      HelloWorld,
-    },
-  }
+}
 </script>

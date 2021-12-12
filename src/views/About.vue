@@ -1,5 +1,14 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
+
+  <body class="backgroundd">
+
+  </body>
+
 </template>
+
+<style>
+
+.backgroundd {
+  background-color: #fcf5da;
+}
+</style>
