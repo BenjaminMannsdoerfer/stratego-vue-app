@@ -142,7 +142,6 @@ export default {
             this.attack(this.row, this.col, this.rowD, this.colD)
             this.setAttack = false
           }
-          console.log(row + " " + col);
         }
       }
     },
