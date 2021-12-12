@@ -25,6 +25,28 @@ export default {
   components: {
     Start
   },
+  methods: {
+    createWebsocket() {
+      //this.websocket.setTimeout
+      window.websocket.onopen = () => {
+        window.websocket.send(JSON.stringify({
+          "connected": {
+            "connect": "successful"
+          }
+        }))
+        console.log("Connected to Websocket");
+      }
+    }
+  },
+  created() {
+    this.createWebsocket();
+  }
 
 }
 </script>
+
+<style>
+.backgroundd {
+  background-color: #fcf5da;
+}
+</style>

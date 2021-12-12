@@ -1,6 +1,7 @@
 <template>
   <v-app id="inspire">
     <v-navigation-drawer
+        color="#ecd88a"
       v-model="drawer"
       app>
       <v-list-item>
@@ -9,7 +10,6 @@
             Stratego
           </v-list-item-title>
           <v-list-item-subtitle>
-            subtext
           </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
@@ -36,18 +36,11 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-
-<!--    <v-app-bar app>-->
-<!--      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>-->
-
-<!--      <v-toolbar-title>Application</v-toolbar-title>-->
-<!--    </v-app-bar>-->
     <v-app-bar
         app
         dark
         src="@/assets/stratego_title.png"
         height="400"
-        prominent
     >
       <template v-slot:img="{ props }">
         <v-img
@@ -56,22 +49,16 @@
         ></v-img>
       </template>
 
-      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon si @click="drawer = !drawer">
+
+      </v-app-bar-nav-icon>
 
       <v-app-bar-title></v-app-bar-title>
 
       <v-spacer></v-spacer>
 
       <v-btn icon>
-        <v-icon>mdi-magnify</v-icon>
-      </v-btn>
-
-      <v-btn icon>
-        <v-icon>mdi-heart</v-icon>
-      </v-btn>
-
-      <v-btn icon>
-        <v-icon>mdi-dots-vertical</v-icon>
+        <v-icon size="50">mdi-dots-vertical</v-icon>
       </v-btn>
     </v-app-bar>
 
@@ -124,16 +111,11 @@ export default {
           this.playerListBufferBlue = json.playerListBufferBlue
           this.playerListBufferRed = json.playerListBufferRed
           this.border = json.border
-          /*this.checkGame()
-          if (this.playerListBufferBlue === 0 && this.playerListBufferRed === 0 && window.location.href.indexOf("set") > -1) {
-            this.goToPlayGame()
-          }*/
         }
       };
     },
     created() {
       this.createWebsocket();
-      window.onkeydown = this.onkeydown
     }
   }
 }

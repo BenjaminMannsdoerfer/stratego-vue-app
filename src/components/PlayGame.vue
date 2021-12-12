@@ -94,7 +94,7 @@ export default {
     init() {
       window.websocket.send(JSON.stringify({
         "init": {
-          "initGane": true,
+          "initGame": true,
         }
       }))
     },

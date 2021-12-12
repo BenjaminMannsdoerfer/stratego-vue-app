@@ -30,9 +30,9 @@
                   <div v-else>
                   </div>
                 </td>
-                <td v-else-if="aField.isWater || aField.row === 4 || aField.row === 5" class="char-pic" :key="aField">
+                <td v-else-if="aField.isWater || aField.row === 4 || aField.row === 5" class="char-pic">
                 </td>
-                <td v-else class="char-pic field" :key="aField">
+                <td v-else class="char-pic field">
                   <input class="fig-cards" type="image" @click="clickSet(aField.row, aField.col)"
                          :src="'http://localhost:9000/' + aField.blackSrc" alt="black"/>
                 </td>
