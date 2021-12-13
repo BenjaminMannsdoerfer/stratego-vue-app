@@ -70,13 +70,6 @@ export default {
   name: "InitGame",
   data() {
     return {
-      size: 10,
-      fields: [],
-      currentPlayerIndex: 0,
-      currentPlayer: "",
-      playerListBufferBlue: 40,
-      playerListBufferRed: 40,
-      gameStatus: "",
       row: 0,
       col: 0,
       charac: "",
@@ -84,30 +77,19 @@ export default {
       dir: '',
       rowD: 0,
       colD: 0,
-      border: {}
-
     }
   },
+  props: {
+    size: Number,
+    fields: Array,
+    currentPlayerIndex: Number,
+    currentPlayer: String,
+    playerListBufferBlue: Number,
+    playerListBufferRed: Number,
+    gameStatus: String,
+    border: Object
+  },
   methods: {
-    createWebsocket() {
-      window.websocket.onmessage = (e) => {
-        if (typeof e.data === "string") {
-          let json = JSON.parse(e.data);
-          console.log(e.data)
-          this.size = json.matchfieldSize;
-          this.fields = json.matchField
-          this.currentPlayerIndex = json.currentPlayerIndex
-          this.currentPlayer = json.currentPlayer
-          this.gameStatus = json.gameStatus
-          this.playerListBufferBlue = json.playerListBufferBlue
-          this.playerListBufferRed = json.playerListBufferRed
-          this.border = json.border
-          if (this.playerListBufferBlue === 0 && this.playerListBufferRed === 0 && window.location.href.indexOf("initGame") > -1) {
-            this.goToPlayGame()
-          }
-        }
-      }
-    },
     changeStatus() {
       window.websocket.send(JSON.stringify({
         "status": {
@@ -238,7 +220,6 @@ export default {
     },
   },
   created() {
-    this.createWebsocket();
     window.onkeydown = this.onkeydown
   },
 

@@ -4,11 +4,13 @@
 
     <SetNames v-else-if="status === 'lobby'" :status="status" ></SetNames>
 
-    <InitGame v-else-if="status === 'initGame'" ></InitGame>
+    <InitGame v-else-if="status === 'initGame'" :size="size" :fields="fields" :currentPlayerIndex="currentPlayerIndex"
+              :currentPlayer="currentPlayer" :playerListBufferBlue="playerListBufferBlue" :playerListBufferRed="playerListBufferRed"
+              :gameStatus="gameStatus" :border="border"></InitGame>
 
-    <PlayGame v-else-if="status === 'playGame'" :size="size" :fields="fields" :current-player-index="currentPlayerIndex"
-    :current-player="currentPlayer" :player-list-buffer-blue="playerListBufferBlue" :player-list-buffer-red="playerListBufferRed"
-    :game-status="gameStatus" :bord="bord"></PlayGame>
+    <PlayGame v-else-if="status === 'playGame'" :size="size" :fields="fields" :currentPlayerIndex="currentPlayerIndex"
+    :currentPlayer="currentPlayer" :playerListBufferBlue="playerListBufferBlue" :playerListBufferRed="playerListBufferRed"
+    :gameStatus="gameStatus" :border="border"></PlayGame>
 
   </v-app>
 </template>
@@ -29,7 +31,7 @@ export default {
     playerListBufferBlue: 40,
     playerListBufferRed: 40,
     gameStatus: "",
-    bord: { },
+    border: { },
     status: "start"
   }),
   components: {
@@ -53,17 +55,21 @@ export default {
         if (typeof e.data === "string") {
           let json = JSON.parse(e.data);
           console.log(e.data)
-          this.size = json.matchfieldSize;
-          this.fields = json.matchField
-          this.currentPlayerIndex = json.currentPlayerIndex
-          this.currentPlayer = json.currentPlayer
-          this.gameStatus = json.gameStatus
-          this.playerListBufferBlue = json.playerListBufferBlue
-          this.playerListBufferRed = json.playerListBufferRed
-          this.bord = json.border
-          this.status = json.status
-          if (this.playerListBufferBlue === 0 && this.playerListBufferRed === 0 && window.location.href.indexOf("initGame") > -1) {
-            this.goToPlayGame()
+          if(Object.keys(json)[0] === "status") {
+            console.log(json.status)
+            this.status = json.status
+          } else {
+            this.size = json.matchfieldSize;
+            this.fields = json.matchField
+            this.currentPlayerIndex = json.currentPlayerIndex
+            this.currentPlayer = json.currentPlayer
+            this.gameStatus = json.gameStatus
+            this.playerListBufferBlue = json.playerListBufferBlue
+            this.playerListBufferRed = json.playerListBufferRed
+            this.border = json.border
+            if (this.playerListBufferBlue === 0 && this.playerListBufferRed === 0 && window.location.href.indexOf("initGame") > -1) {
+              this.goToPlayGame()
+            }
           }
         }
       }

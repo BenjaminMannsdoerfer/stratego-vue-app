@@ -88,7 +88,6 @@
 </template>
 
 <script>
-import PlayGame from "./components/PlayGame";
 
 window.websocket = new WebSocket("ws://localhost:9000/websocket")
 export default {
@@ -104,7 +103,6 @@ export default {
     ],
   }),
   components: {
-    PlayGame
   },
   methods: {
     async join() {
@@ -117,43 +115,6 @@ export default {
       await this.$router.push({path: '/playGame'}).catch(() => {
       })
     },
-    createWebsocket() {
-      //this.websocket.setTimeout
-      window.websocket.onopen = () => {
-        window.websocket.send(JSON.stringify({
-          "connected": {
-            "connect": "successful"
-          }
-        }))
-        console.log("Connected to Websocket");
-      }
-
-      window.websocket.onclose = () => {
-        console.log('Connection with Websocket Closed!');
-      };
-
-      window.websocket.onerror = (error) => {
-        console.log('Error in Websocket Occured: ' + error);
-      };
-
-      window.websocket.onmessage = (e) => {
-        if (typeof e.data === "string") {
-          let json = JSON.parse(e.data);
-          console.log(e.data)
-          this.size = json.matchfieldSize;
-          this.fields = json.matchField
-          this.currentPlayerIndex = json.currentPlayerIndex
-          this.currentPlayer = json.currentPlayer
-          this.gameStatus = json.gameStatus
-          this.playerListBufferBlue = json.playerListBufferBlue
-          this.playerListBufferRed = json.playerListBufferRed
-          this.border = json.border
-        }
-      };
-    },
-    created() {
-      this.createWebsocket();
-    }
   }
 }
 </script>
