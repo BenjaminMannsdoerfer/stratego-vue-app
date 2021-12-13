@@ -2,13 +2,14 @@
   <v-row justify="center" align="center" class="backgroundd">
     <v-col cols="12" sm="4">
       <router-link to="/setNames">
-        <v-img src="@/assets/logo.png" @click="getMatchfieldSize(10)" height="93" width="320"/>
+        <v-img src="@/assets/logo.png" @click="getMatchfieldSize(4)" height="93" width="320"/>
       </router-link>
     </v-col>
   </v-row>
 </template>
 
 <script>
+
   export default {
     name: 'Start',
     methods: {

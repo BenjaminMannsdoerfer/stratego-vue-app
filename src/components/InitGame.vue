@@ -62,6 +62,15 @@
           Extra large Button
         </v-btn>
       </router-link>
+        <router-link to='/playGame'>
+          <v-btn
+              x-large
+              color="success"
+              dark
+          >
+            Button
+          </v-btn>
+        </router-link>
     </div>
 
   </div>
@@ -105,8 +114,20 @@ export default {
           this.playerListBufferBlue = json.playerListBufferBlue
           this.playerListBufferRed = json.playerListBufferRed
           this.border = json.border
+          if (this.playerListBufferBlue === 0 && this.playerListBufferRed === 0 && window.location.href.indexOf("initGame") > -1) {
+            this.goToPlayGame()
+          }
         }
       };
+    },
+    async goToPlayGame() {
+      window.websocket.send(JSON.stringify({
+        "join": {
+          "initGane": true,
+        }
+      }))
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      await this.$router.push({path: '/playGame'}).catch(()=>{})
     },
     init() {
       window.websocket.send(JSON.stringify({

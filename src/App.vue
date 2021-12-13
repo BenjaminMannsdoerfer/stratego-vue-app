@@ -57,9 +57,28 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn icon>
-        <v-icon size="50">mdi-dots-vertical</v-icon>
-      </v-btn>
+
+      <div class="text-center">
+        <v-menu offset-y>
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn
+                v-bind="attrs"
+                v-on="on"
+            >
+              <v-icon size="50">mdi-dots-vertical</v-icon>
+            </v-btn>
+          </template>
+          <v-list>
+            <v-list-item
+                v-for="(items, index) in settings"
+                :key="index"
+                @click="join"
+            >
+              <v-list-item-title>{{ items.listItem }}</v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+      </div>
     </v-app-bar>
 
     <v-main>
@@ -69,6 +88,8 @@
 </template>
 
 <script>
+import PlayGame from "./components/PlayGame";
+
 window.websocket = new WebSocket("ws://localhost:9000/websocket")
 export default {
   data: () => ({
@@ -78,8 +99,24 @@ export default {
       { title: 'About', icon: 'mdi-help-box', to: '/about' },
       { title: 'Game', icon: 'mdi-fencing', to: '/game' },
     ],
+    settings : [
+      { listItem: 'Join', to: '/playGame' }
+    ],
   }),
+  components: {
+    PlayGame
+  },
   methods: {
+    async join() {
+      window.websocket.send(JSON.stringify({
+        "join": {
+          "joinGame": "successful"
+        }
+      }))
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      await this.$router.push({path: '/playGame'}).catch(() => {
+      })
+    },
     createWebsocket() {
       //this.websocket.setTimeout
       window.websocket.onopen = () => {

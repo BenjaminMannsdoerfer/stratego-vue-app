@@ -76,6 +76,15 @@ export default {
   },
   methods: {
     createWebsocket() {
+      window.websocket.onopen = () => {
+        window.websocket.send(JSON.stringify({
+          "connected": {
+            "connect": "successful"
+          }
+        }))
+        console.log("Connected to Websocket");
+      }
+
       window.websocket.onmessage = (e) => {
         if (typeof e.data === "string") {
           let json = JSON.parse(e.data);
