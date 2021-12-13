@@ -94,7 +94,7 @@ export default {
   data: () => ({
     drawer: null,
     items: [
-      { title: 'Game', icon: 'mdi-fencing', to: '/' },
+      { title: 'Home', icon: 'mdi-fencing', to: '/' },
       { title: 'About', icon: 'mdi-help-box', to: '/about' },
       // { title: 'Game', icon: 'mdi-fencing', to: '/game' },
     ],

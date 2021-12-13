@@ -62,7 +62,6 @@ export default {
           "playGame": true,
         }
       }))
-      this.hiddeButton()
     },
   }
 

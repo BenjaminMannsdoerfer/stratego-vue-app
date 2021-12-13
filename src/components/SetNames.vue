@@ -35,6 +35,12 @@
               v-model="player2"
           ></v-text-field>
         </v-col>
+        <v-row justify="center">
+          <v-col
+              cols="12"
+              sm="6"
+              md="3"
+          >
         <div class="my-2" id="btn">
           <v-btn
               x-large
@@ -44,6 +50,23 @@
             Play
           </v-btn>
         </div>
+          </v-col>
+          <v-col
+              cols="12"
+              sm="6"
+              md="3"
+          >
+        <div class="my-2">
+          <v-btn
+              x-large
+              color="rgba(192,141,43,255)"
+              @click="changeStatus()"
+          >
+            Join
+          </v-btn>
+        </div>
+          </v-col>
+          </v-row>
       </v-row>
     </v-container>
   </v-form>
