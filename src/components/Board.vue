@@ -1,55 +1,46 @@
 <template>
-      <div id="gamefield" class="col-auto init-game-mid">
-        <table class="matchfield">
-          <tbody>
-          <template v-for="(row, index) in fields">
-            <tr :key="'row' + index">
-              <template v-for="(aField, index) in row.cols">
-                <td v-if="aField.isSet" class="char-pic field" :key="'aField' + index">
-                  <div v-if="aField.colour && playerListBufferBlue !== 0">
-                    <input class="fig-cards blue" type="image" :src="'http://localhost:9000/' + aField.figSrc" alt=""/>
-                  </div>
-                  <div v-else-if="!aField.colour && playerListBufferRed !== 0">
-                    <input class="fig-cards red" type="image" :src="'http://localhost:9000/' + aField.figSrc" alt=""/>
-                  </div>
-                  <div v-else-if="playerListBufferBlue === 0 && aField.colour">
-                    <input class="fig-cards" type="image" :src="'http://localhost:9000/' + aField.blueSrc" alt="blue"/>
-                  </div>
-                  <div v-else-if="playerListBufferRed === 0 && !aField.colour">
-                    <input class="fig-cards" type="image" :src="'http://localhost:9000/' + aField.redSrc" alt="red"/>
-                  </div>
-                  <div v-else>
-                  </div>
-                </td>
-                <td v-else-if="aField.isWater || aField.row === 4 || aField.row === 5" class="char-pic">
-                </td>
-                <td v-else class="char-pic field">
-                  <input class="fig-cards" type="image" @click="clickSet(aField.row, aField.col)"
-                         :src="'http://localhost:9000/' + aField.blackSrc" alt="black"/>
-                </td>
-              </template>
-            </tr>
-          </template>
-          </tbody>
-        </table>
+  <div class="row text-center">
+    <div class="init-game-top">
+      <img class="img-fluid img-game-top" :src="'http://localhost:9000/' + border.top"/>
+    </div>
+    <div class="mid-border">
+      <div class="row justify-content-center">
+        <div class="col-auto init-game-left">
+          <img class="img-game-left" :src="'http://localhost:9000/' + border.left"/>
+        </div>
+        <InitGame v-if="this.playerListBufferRed > 0" :size="size" :fields="fields" :currentPlayerIndex="currentPlayerIndex"
+                  :currentPlayer="currentPlayer" :playerListBufferBlue="playerListBufferBlue" :playerListBufferRed="playerListBufferRed"
+                  :gameStatus="gameStatus" :border="border"></InitGame>
+        <PlayGame v-else-if="this.playerListBufferRed === 0" :size="size" :fields="fields" :currentPlayerIndex="currentPlayerIndex"
+                  :currentPlayer="currentPlayer" :playerListBufferBlue="playerListBufferBlue" :playerListBufferRed="playerListBufferRed"
+                  :gameStatus="gameStatus" :border="border"></PlayGame>
+        <div class="col-auto init-game-right">
+          <img class="img-game-right" :src="'http://localhost:9000/' + border.right"/>
+        </div>
       </div>
+    </div>
+    <div class="init-game-bot">
+      <img class="img-game-bot" :src="'http://localhost:9000/' + border.bot"/>
+    </div>
+
+    <div class="my-2">
+      <v-btn
+          x-large
+          color="success"
+          dark
+          @click="init()"
+      >
+        Extra large Button
+      </v-btn>
+    </div>
+  </div>
 </template>
 
-
 <script>
+import InitGame from "./InitGame";
+import PlayGame from "./PlayGame";
 export default {
-  name: "InitGame",
-  data() {
-    return {
-      row: 0,
-      col: 0,
-      charac: "",
-      setAttack: false,
-      dir: '',
-      rowD: 0,
-      colD: 0,
-    }
-  },
+  name: "Board",
   props: {
     size: Number,
     fields: Array,
@@ -60,122 +51,16 @@ export default {
     gameStatus: String,
     border: Object
   },
+  components: {PlayGame, InitGame},
   methods: {
-    async goToPlayGame() {
+    init() {
       window.websocket.send(JSON.stringify({
-        "join": {
+        "init": {
           "playGame": true,
         }
       }))
-      await new Promise(resolve => setTimeout(resolve, 2000));
     },
-    set(row, col, charac) {
-      window.websocket.send(JSON.stringify({
-        "set": {
-          "row": row,
-          "col": col,
-          "charac": charac
-        }
-      }))
-    },
-    clickSet(row, col) {
-      if (this.setAttack === false) {
-        this.row = row
-        this.col = col
-      } else {
-        if (this.row !== undefined || this.col !== undefined) {
-          this.rowD = row
-          this.colD = col
-          if (this.gameStatus !== "WON") {
-            this.attack(this.row, this.col, this.rowD, this.colD)
-            this.setAttack = false
-          }
-          console.log(row + " " + col);
-        }
-      }
-    },
-
-    onkeydown(event) {
-      switch (event.keyCode) {
-        case 70:
-        case 102:
-          this.charac = 'F'; // F
-          break;
-        case 66:
-        case 98:
-          this.charac = 'B'; // B
-          break;
-        case 77:
-        case 109:
-          this.charac = 'M'; // M
-          break;
-        case 49:
-          this.charac = '1'; // 1
-          break;
-        case 50:
-          this.charac = '2'; // 2
-          break;
-        case 51:
-          this.charac = '3'; // 3
-          break;
-        case 52:
-          this.charac = '4'; // 4
-          break;
-        case 53:
-          this.charac = '5'; // 5
-          break;
-        case 54:
-          this.charac = '6'; // 6
-          break;
-        case 55:
-          this.charac = '7'; // 7
-          break;
-        case 56:
-          this.charac = '8'; // 8
-          break;
-        case 57:
-          this.charac = '9'; // 9
-          break;
-        case 65:
-        case 87:
-          this.setAttack = true;
-          break;
-        case 68:
-        case 100:
-        case 40:
-          this.dir = 'd'; // d
-          break;
-        case 85:
-        case 117:
-        case 38:
-          this.dir = 'u'; // u
-          break;
-        case 76:
-        case 108:
-        case 37:
-          this.dir = 'l'; // l
-          break;
-        case 82:
-        case 114:
-        case 39:
-          this.dir = 'r'; // r
-          break;
-      }
-      if (this.charac !== "") {
-        this.set(this.row, this.col, this.charac)
-      }
-      if (this.dir === undefined || this.dir === "") {
-      } else if (this.dir.length > 1 || this.row === undefined || this.col === undefined || this.setAttack === true) {
-      } else {
-        if (this.gameStatus !== "WON") {
-          this.move(this.dir, this.row, this.col);
-        }
-      }
-    },
-  },
-  created() {
-    window.onkeydown = this.onkeydown
-  },
+  }
 
 }
 </script>

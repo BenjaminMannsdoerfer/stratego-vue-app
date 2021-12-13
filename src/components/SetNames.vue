@@ -67,7 +67,7 @@ export default {
     changeStatus() {
       window.websocket.send(JSON.stringify({
         "status": {
-          "currentStatus": "initGame"
+          "currentStatus": "Board"
         }
       }))
     },

@@ -1,14 +1,4 @@
 <template>
-  <div class="row text-center">
-  <div class="init-game-top">
-    <img class="img-fluid img-game-top" :src="'http://localhost:9000/' + this.border.top"/>
-  </div>
-  <div class="mid-border">
-    <div class="row justify-content-center">
-      <div class="col-auto init-game-left">
-        <img class="img-game-left" :src="'http://localhost:9000/' + this.border.left"/>
-      </div>
-      <div id="app" class="col-auto init-game-mid">
         <div id="gamefield" class="col-auto init-game-mid">
           <table class="matchfield">
             <tbody>
@@ -39,16 +29,6 @@
             </tbody>
           </table>
         </div>
-      </div>
-      <div class="col-auto init-game-right">
-        <img class="img-game-right" :src="'http://localhost:9000/' + this.border.right"/>
-      </div>
-    </div>
-  </div>
-  <div class="init-game-bot">
-    <img class="img-game-bot" :src="'http://localhost:9000/' + this.border.bot "/>
-  </div>
-  </div>
 </template>
 
 <script>

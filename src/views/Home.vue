@@ -4,13 +4,9 @@
 
     <SetNames v-else-if="status === 'lobby'" :status="status" ></SetNames>
 
-    <InitGame v-else-if="status === 'initGame'" :size="size" :fields="fields" :currentPlayerIndex="currentPlayerIndex"
-              :currentPlayer="currentPlayer" :playerListBufferBlue="playerListBufferBlue" :playerListBufferRed="playerListBufferRed"
-              :gameStatus="gameStatus" :border="border"></InitGame>
-
-    <PlayGame v-else-if="status === 'playGame'" :size="size" :fields="fields" :currentPlayerIndex="currentPlayerIndex"
-    :currentPlayer="currentPlayer" :playerListBufferBlue="playerListBufferBlue" :playerListBufferRed="playerListBufferRed"
-    :gameStatus="gameStatus" :border="border"></PlayGame>
+    <Board v-else-if="status === 'Board'" :size="size" :fields="fields" :currentPlayerIndex="currentPlayerIndex"
+           :currentPlayer="currentPlayer" :playerListBufferBlue="playerListBufferBlue" :playerListBufferRed="playerListBufferRed"
+           :gameStatus="gameStatus" :border="border"></Board>
 
   </v-app>
 </template>
@@ -21,6 +17,7 @@ import Start from "../components/Start";
 import SetNames from "../components/SetNames";
 import InitGame from "../components/InitGame";
 import PlayGame from "../components/PlayGame";
+import Board from "../components/Board";
 export default {
   name: 'Home',
   data: () => ({
@@ -35,6 +32,7 @@ export default {
     status: "start"
   }),
   components: {
+    Board,
     PlayGame,
     InitGame,
     SetNames,
@@ -42,7 +40,6 @@ export default {
   },
   methods: {
     createWebsocket() {
-      //this.websocket.setTimeout
       window.websocket.onopen = () => {
         window.websocket.send(JSON.stringify({
           "connected": {
