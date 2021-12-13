@@ -118,12 +118,13 @@ export default {
             this.goToPlayGame()
           }
         }
-      };
+      }
     },
+
     async goToPlayGame() {
       window.websocket.send(JSON.stringify({
         "join": {
-          "initGane": true,
+          "initGame": true,
         }
       }))
       await new Promise(resolve => setTimeout(resolve, 2000));
@@ -146,28 +147,6 @@ export default {
         }
       }))
     },
-
-    move(dir, row, col) {
-      window.websocket.send(JSON.stringify({
-        "move": {
-          "row": row,
-          "col": col,
-          "dir": dir
-        }
-      }))
-    },
-
-    attack(row, col, rowD, colD) {
-      window.websocket.send(JSON.stringify({
-        "attack": {
-          "row": row,
-          "col": col,
-          "rowD": rowD,
-          "colD": colD
-        }
-      }))
-    },
-
     clickSet(row, col) {
       if (this.setAttack === false) {
         this.row = row

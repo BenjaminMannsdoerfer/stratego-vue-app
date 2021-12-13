@@ -1,14 +1,18 @@
 <template>
   <v-app>
-  <Start>
+  <Start v-if="status === 'start'"></Start>
 
-  </Start>
+    <SetNames v-else-if="status === 'lobby'" :status="status" ></SetNames>
+
+    <InitGame v-else-if="status === 'initGame'"></InitGame>
   </v-app>
 </template>
 
 <script>
 
 import Start from "../components/Start";
+import SetNames from "../components/SetNames";
+import InitGame from "../components/InitGame";
 //import PlayGame from "../components/PlayGame";
 export default {
   name: 'Home',
@@ -20,9 +24,12 @@ export default {
     playerListBufferBlue: 40,
     playerListBufferRed: 40,
     gameStatus: "",
-    border: { }
+    border: { },
+    status: "start"
   }),
   components: {
+    InitGame,
+    SetNames,
     Start
   },
   methods: {
@@ -35,6 +42,24 @@ export default {
           }
         }))
         console.log("Connected to Websocket");
+      }
+      window.websocket.onmessage = (e) => {
+        if (typeof e.data === "string") {
+          let json = JSON.parse(e.data);
+          console.log(e.data)
+          this.size = json.matchfieldSize;
+          this.fields = json.matchField
+          this.currentPlayerIndex = json.currentPlayerIndex
+          this.currentPlayer = json.currentPlayer
+          this.gameStatus = json.gameStatus
+          this.playerListBufferBlue = json.playerListBufferBlue
+          this.playerListBufferRed = json.playerListBufferRed
+          this.border = json.border
+          this.status = json.status
+          if (this.playerListBufferBlue === 0 && this.playerListBufferRed === 0 && window.location.href.indexOf("initGame") > -1) {
+            this.goToPlayGame()
+          }
+        }
       }
     }
   },

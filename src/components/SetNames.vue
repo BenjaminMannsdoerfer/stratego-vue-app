@@ -38,7 +38,6 @@
           ></v-text-field>
         </v-col>
         <div class="my-2">
-          <router-link to='/initGame'>
           <v-btn
               x-large
               color="success"
@@ -47,7 +46,6 @@
           >
             Extra large Button
           </v-btn>
-          </router-link>
         </div>
       </v-row>
     </v-container>
@@ -66,6 +64,13 @@ export default {
     }
   },
   methods: {
+    changeStatus() {
+      window.websocket.send(JSON.stringify({
+        "status": {
+          "currentStatus": "initGame"
+        }
+      }))
+    },
     getMatchfieldSize: function(size) {
       switch (size) {
         case 4:
@@ -93,6 +98,7 @@ export default {
       }
     },
     getNames: function () {
+      this.changeStatus()
       window.websocket.send(JSON.stringify({
         "setNames": {
           "player1": this.player1,

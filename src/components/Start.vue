@@ -1,9 +1,7 @@
 <template>
   <v-row justify="center" align="center" class="backgroundd">
     <v-col cols="12" sm="4">
-      <router-link to="/setNames">
-        <v-img src="@/assets/logo.png" @click="getMatchfieldSize(4)" height="93" width="320"/>
-      </router-link>
+        <v-img src="@/assets/logo.png" @click="changeStatus()" height="93" width="320"/>
     </v-col>
   </v-row>
 </template>
@@ -12,33 +10,17 @@
 
   export default {
     name: 'Start',
+    props: {
+      status: String
+    },
     methods: {
-      getMatchfieldSize: function(size) {
-        switch (size) {
-          case 4:
-            window.websocket.send(JSON.stringify({
-              "small": {
-                "matchfieldSize": size
-              }
-            }))
-            break;
-          case 7:
-            window.websocket.send(JSON.stringify({
-              "medium": {
-                "matchfieldSize": size
-              }
-            }))
-            break;
-          case 10:
-            window.websocket.send(JSON.stringify({
-              "large": {
-                "matchfieldSize": size
-              }
-
-            }))
-            break;
-        }
-      },
+      changeStatus() {
+        window.websocket.send(JSON.stringify({
+          "status": {
+            "currentStatus": "lobby"
+          }
+        }))
+      }
     }
   }
 </script>
