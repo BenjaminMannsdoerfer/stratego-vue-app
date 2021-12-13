@@ -1,12 +1,12 @@
 <template>
   <div class="row text-center">
   <div class="init-game-top">
-    <img class="img-fluid img-game-top" :src="'http://localhost:9000/' + border.top"/>
+    <img class="img-fluid img-game-top" :src="'http://localhost:9000/' + this.border.top"/>
   </div>
   <div class="mid-border">
     <div class="row justify-content-center">
       <div class="col-auto init-game-left">
-        <img class="img-game-left" :src="'http://localhost:9000/' + border.left"/>
+        <img class="img-game-left" :src="'http://localhost:9000/' + this.border.left"/>
       </div>
       <div id="app" class="col-auto init-game-mid">
         <div id="gamefield" class="col-auto init-game-mid">
@@ -41,12 +41,12 @@
         </div>
       </div>
       <div class="col-auto init-game-right">
-        <img class="img-game-right" :src="'http://localhost:9000/' + border.right"/>
+        <img class="img-game-right" :src="'http://localhost:9000/' + this.border.right"/>
       </div>
     </div>
   </div>
   <div class="init-game-bot">
-    <img class="img-game-bot" :src="'http://localhost:9000/' + border.bot "/>
+    <img class="img-game-bot" :src="'http://localhost:9000/' + this.border.bot "/>
   </div>
   </div>
 </template>
@@ -56,13 +56,6 @@ export default {
   name: 'PlayGame',
   data() {
     return {
-      size: 10,
-      fields: [],
-      currentPlayerIndex: 0,
-      currentPlayer: "",
-      playerListBufferBlue: 40,
-      playerListBufferRed: 40,
-      gameStatus: "",
       row: 0,
       col: 0,
       charac: "",
@@ -70,54 +63,19 @@ export default {
       dir: '',
       rowD: 0,
       colD: 0,
-      border: {}
-
     }
   },
+  props: {
+      size: Number,
+      fields: Array,
+      currentPlayerIndex: Number,
+      currentPlayer: String,
+      playerListBufferBlue: Number,
+      playerListBufferRed: Number,
+      gameStatus: String,
+      border: Object
+  },
   methods: {
-    createWebsocket() {
-      window.websocket.onopen = () => {
-        window.websocket.send(JSON.stringify({
-          "connected": {
-            "connect": "successful"
-          }
-        }))
-        console.log("Connected to Websocket");
-      }
-
-      window.websocket.onmessage = (e) => {
-        if (typeof e.data === "string") {
-          let json = JSON.parse(e.data);
-          console.log(e.data)
-          this.size = json.matchfieldSize;
-          this.fields = json.matchField
-          this.currentPlayerIndex = json.currentPlayerIndex
-          this.currentPlayer = json.currentPlayer
-          this.gameStatus = json.gameStatus
-          this.playerListBufferBlue = json.playerListBufferBlue
-          this.playerListBufferRed = json.playerListBufferRed
-          this.border = json.border
-        }
-      };
-    },
-    init() {
-      window.websocket.send(JSON.stringify({
-        "init": {
-          "initGame": true,
-        }
-      }))
-    },
-
-    set(row, col, charac) {
-      window.websocket.send(JSON.stringify({
-        "set": {
-          "row": row,
-          "col": col,
-          "charac": charac
-        }
-      }))
-    },
-
     move(dir, row, col) {
       window.websocket.send(JSON.stringify({
         "move": {
@@ -234,7 +192,6 @@ export default {
     },
   },
   created() {
-    this.createWebsocket();
     window.onkeydown = this.onkeydown
   },
 }

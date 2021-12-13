@@ -52,27 +52,15 @@
     </div>
 
     <div class="my-2">
-      <router-link to='/playGame'>
         <v-btn
             x-large
             color="success"
             dark
-            @click="init"
+            @click="init()"
         >
           Extra large Button
         </v-btn>
-      </router-link>
-        <router-link to='/playGame'>
-          <v-btn
-              x-large
-              color="success"
-              dark
-          >
-            Button
-          </v-btn>
-        </router-link>
     </div>
-
   </div>
 </template>
 
@@ -120,20 +108,27 @@ export default {
         }
       }
     },
-
+    changeStatus() {
+      window.websocket.send(JSON.stringify({
+        "status": {
+          "currentStatus": "playGame"
+        }
+      }))
+    },
     async goToPlayGame() {
+      this.changeStatus()
       window.websocket.send(JSON.stringify({
         "join": {
-          "initGame": true,
+          "playGame": true,
         }
       }))
       await new Promise(resolve => setTimeout(resolve, 2000));
-      await this.$router.push({path: '/playGame'}).catch(()=>{})
     },
     init() {
+      this.changeStatus()
       window.websocket.send(JSON.stringify({
         "init": {
-          "initGane": true,
+          "playGame": true,
         }
       }))
     },
