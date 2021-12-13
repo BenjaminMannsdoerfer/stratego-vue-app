@@ -1,6 +1,7 @@
 <template>
-  <v-form><v-container fluid>
-    <v-row align="center">
+  <v-form class="backgroundd">
+    <v-container fluid>
+    <v-row justify="center">
       <v-col
           class="d-flex"
           cols="12"
@@ -10,10 +11,7 @@
         </v-select>
       </v-col>
     </v-row>
-  </v-container>
-
-    <v-container>
-      <v-row>
+      <v-row justify="center">
 
         <v-col
             cols="12"
@@ -37,14 +35,13 @@
               v-model="player2"
           ></v-text-field>
         </v-col>
-        <div class="my-2">
+        <div class="my-2" id="btn">
           <v-btn
               x-large
-              color="success"
-              dark
+              color="rgba(192,141,43,255)"
               @click="getNames()"
           >
-            Extra large Button
+            Play
           </v-btn>
         </div>
       </v-row>
@@ -106,11 +103,25 @@ export default {
         }
       }))
     },
-
+  },
+  mounted: function() {
+    let elHtml = document.getElementsByTagName('html')[0]
+    elHtml.style.overflowY = 'hidden'
+  },
+  destroyed: function() {
+    let elHtml = document.getElementsByTagName('html')[0]
+    elHtml.style.overflowY = null
   },
 }
 </script>
 
 <style scoped>
+.backgroundd {
+  background-color: #fcf5da;
+  min-height: 100vh
+}
 
+#btn {
+  text-align: center;
+}
 </style>

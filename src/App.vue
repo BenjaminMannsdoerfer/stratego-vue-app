@@ -1,5 +1,5 @@
 <template>
-  <v-app id="inspire">
+  <v-app id="inspire" class="backgroundd">
     <v-navigation-drawer
         color="#ecd88a"
       v-model="drawer"
@@ -94,9 +94,9 @@ export default {
   data: () => ({
     drawer: null,
     items: [
-      { title: 'Home', icon: 'mdi-view-dashboard', to: '/' },
+      { title: 'Game', icon: 'mdi-fencing', to: '/' },
       { title: 'About', icon: 'mdi-help-box', to: '/about' },
-      { title: 'Game', icon: 'mdi-fencing', to: '/game' },
+      // { title: 'Game', icon: 'mdi-fencing', to: '/game' },
     ],
     settings : [
       { listItem: 'Join', to: '/playGame' }
@@ -118,3 +118,9 @@ export default {
   }
 }
 </script>
+
+<style>
+.backgroundd {
+  background-color: #fcf5da;
+}
+</style>

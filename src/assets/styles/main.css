@@ -3,7 +3,8 @@
 /* every page */
 
 .backgroundd {
-    background-color: #fcf5da;
+   background-color: #fcf5da;
+    min-height: 100vh
 }
 
 .row {
@@ -238,22 +239,6 @@
 
 /* game */
 
-
-
-
-
-/* Bootstrap */
-/* soni */
-.img {
-    display: block;
-    max-width: 100%;
-    height: auto;
-    background-color: #fcf5da;
-}
-
-.backgroundd{
-    background-color: #fcf5da;
-}
 .spielfeld_img{
     padding-top: 50px;
     padding-bottom: 50px;
@@ -315,7 +300,7 @@ table{
 .github_box{
     padding-top: 50px;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 0px;
 }
 
 

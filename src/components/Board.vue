@@ -1,5 +1,5 @@
 <template>
-  <div class="row text-center">
+  <div class="row text-center" style="flex: 0 0 auto">
     <div class="init-game-top">
       <img class="img-fluid img-game-top" :src="'http://localhost:9000/' + border.top"/>
     </div>
@@ -8,11 +8,15 @@
         <div class="col-auto init-game-left">
           <img class="img-game-left" :src="'http://localhost:9000/' + border.left"/>
         </div>
-        <InitGame v-if="this.playerListBufferRed > 0" :size="size" :fields="fields" :currentPlayerIndex="currentPlayerIndex"
-                  :currentPlayer="currentPlayer" :playerListBufferBlue="playerListBufferBlue" :playerListBufferRed="playerListBufferRed"
+        <InitGame v-if="this.playerListBufferRed > 0" :size="size" :fields="fields"
+                  :currentPlayerIndex="currentPlayerIndex"
+                  :currentPlayer="currentPlayer" :playerListBufferBlue="playerListBufferBlue"
+                  :playerListBufferRed="playerListBufferRed"
                   :gameStatus="gameStatus" :border="border"></InitGame>
-        <PlayGame v-else-if="this.playerListBufferRed === 0" :size="size" :fields="fields" :currentPlayerIndex="currentPlayerIndex"
-                  :currentPlayer="currentPlayer" :playerListBufferBlue="playerListBufferBlue" :playerListBufferRed="playerListBufferRed"
+        <PlayGame v-else-if="this.playerListBufferRed === 0" :size="size" :fields="fields"
+                  :currentPlayerIndex="currentPlayerIndex"
+                  :currentPlayer="currentPlayer" :playerListBufferBlue="playerListBufferBlue"
+                  :playerListBufferRed="playerListBufferRed"
                   :gameStatus="gameStatus" :border="border"></PlayGame>
         <div class="col-auto init-game-right">
           <img class="img-game-right" :src="'http://localhost:9000/' + border.right"/>
@@ -22,15 +26,13 @@
     <div class="init-game-bot">
       <img class="img-game-bot" :src="'http://localhost:9000/' + border.bot"/>
     </div>
-
     <div class="my-2">
       <v-btn
           x-large
-          color="success"
-          dark
+          color="rgba(192,141,43,255)"
           @click="init()"
       >
-        Extra large Button
+        set all characters
       </v-btn>
     </div>
   </div>
@@ -39,6 +41,7 @@
 <script>
 import InitGame from "./InitGame";
 import PlayGame from "./PlayGame";
+
 export default {
   name: "Board",
   props: {
@@ -59,6 +62,7 @@ export default {
           "playGame": true,
         }
       }))
+      this.hiddeButton()
     },
   }
 

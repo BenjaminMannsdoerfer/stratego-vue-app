@@ -82,7 +82,5 @@ export default {
 </script>
 
 <style>
-.backgroundd {
-  background-color: #fcf5da;
-}
+
 </style>
