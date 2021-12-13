@@ -1,5 +1,22 @@
 <template>
   <div class="row text-center" style="flex: 0 0 auto">
+    <div v-if="gameStatus === 'WON'">
+      <h1 v-if="currentPlayerIndex === 0" class="color-blue">{{currentPlayer + " you found the flag and won the game!"}}</h1>
+      <h1 v-if="currentPlayerIndex === 1" class="color-red">{{currentPlayer + " you found the flag and won the game!"}}</h1>
+      <v-btn
+          x-large
+          color="rgba(192,141,43,255)"
+          @click="changeStatus()"
+      >
+        new game
+      </v-btn>
+    </div>
+    <div v-else>
+    <h1 v-if="playerListBufferRed === 0 && currentPlayerIndex === 0" class="color-blue">{{currentPlayer + " it's your turn"}}</h1>
+    <h1 v-else-if="playerListBufferRed === 0 && currentPlayerIndex === 1" class="color-red">{{currentPlayer + " it's your turn"}}</h1>
+    <h1 v-else-if="playerListBufferRed > 0 && currentPlayerIndex === 0" class="color-blue">{{"Enter your figures " + currentPlayer}}</h1>
+    <h1 v-else-if="playerListBufferRed > 0 && currentPlayerIndex === 1" class="color-red">{{"Enter your figures " + currentPlayer}}</h1>
+    </div>
     <div class="init-game-top">
       <img class="img-fluid img-game-top" :src="'http://localhost:9000/' + border.top"/>
     </div>
@@ -60,6 +77,13 @@ export default {
       window.websocket.send(JSON.stringify({
         "init": {
           "playGame": true,
+        }
+      }))
+    },
+    changeStatus() {
+      window.websocket.send(JSON.stringify({
+        "status": {
+          "currentStatus": "start"
         }
       }))
     },
