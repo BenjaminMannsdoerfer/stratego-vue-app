@@ -1,11 +1,12 @@
 <template>
   <v-app>
-  <Start v-if="status === 'start'"></Start>
+    <Start v-if="status === 'start'"></Start>
 
-    <SetNames v-else-if="status === 'lobby'" :status="status" ></SetNames>
+    <SetNames v-else-if="status === 'lobby'" :status="status"></SetNames>
 
     <Board v-else-if="status === 'Board'" :size="size" :fields="fields" :currentPlayerIndex="currentPlayerIndex"
-           :currentPlayer="currentPlayer" :playerListBufferBlue="playerListBufferBlue" :playerListBufferRed="playerListBufferRed"
+           :currentPlayer="currentPlayer" :playerListBufferBlue="playerListBufferBlue"
+           :playerListBufferRed="playerListBufferRed"
            :gameStatus="gameStatus" :border="border"></Board>
 
   </v-app>
@@ -18,6 +19,7 @@ import SetNames from "../components/SetNames";
 import InitGame from "../components/InitGame";
 import PlayGame from "../components/PlayGame";
 import Board from "../components/Board";
+
 export default {
   name: 'Home',
   data: () => ({
@@ -28,7 +30,7 @@ export default {
     playerListBufferBlue: 40,
     playerListBufferRed: 40,
     gameStatus: "",
-    border: { },
+    border: {},
     status: "start"
   }),
   components: {
@@ -52,7 +54,7 @@ export default {
         if (typeof e.data === "string") {
           let json = JSON.parse(e.data);
           console.log(e.data)
-          if(Object.keys(json)[0] === "status") {
+          if (Object.keys(json)[0] === "status") {
             console.log(json.status)
             this.status = json.status
           } else {

@@ -38,7 +38,6 @@ export default {
     return {
       row: 0,
       col: 0,
-      charac: "",
       setAttack: false,
       dir: '',
       rowD: 0,
@@ -95,45 +94,6 @@ export default {
 
     onkeydown(event) {
       switch (event.keyCode) {
-        case 70:
-        case 102:
-          this.charac = 'F'; // F
-          break;
-        case 66:
-        case 98:
-          this.charac = 'B'; // B
-          break;
-        case 77:
-        case 109:
-          this.charac = 'M'; // M
-          break;
-        case 49:
-          this.charac = '1'; // 1
-          break;
-        case 50:
-          this.charac = '2'; // 2
-          break;
-        case 51:
-          this.charac = '3'; // 3
-          break;
-        case 52:
-          this.charac = '4'; // 4
-          break;
-        case 53:
-          this.charac = '5'; // 5
-          break;
-        case 54:
-          this.charac = '6'; // 6
-          break;
-        case 55:
-          this.charac = '7'; // 7
-          break;
-        case 56:
-          this.charac = '8'; // 8
-          break;
-        case 57:
-          this.charac = '9'; // 9
-          break;
         case 65:
         case 87:
           this.setAttack = true;
@@ -158,9 +118,6 @@ export default {
         case 39:
           this.dir = 'r'; // r
           break;
-      }
-      if (this.charac !== "") {
-        this.set(this.row, this.col, this.charac)
       }
       if (this.dir === undefined || this.dir === "") {
       } else if (this.dir.length > 1 || this.row === undefined || this.col === undefined || this.setAttack === true) {
