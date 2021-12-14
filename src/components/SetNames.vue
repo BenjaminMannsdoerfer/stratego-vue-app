@@ -91,6 +91,7 @@ export default {
         }
       }))
     },
+
     getMatchfieldSize: function(size) {
       switch (size) {
         case 4:
@@ -139,12 +140,5 @@ export default {
 </script>
 
 <style scoped>
-.backgroundd {
-  background-color: #fcf5da;
-  min-height: 100vh
-}
-
-#btn {
-  text-align: center;
-}
+@import '../assets/styles/main.css';
 </style>

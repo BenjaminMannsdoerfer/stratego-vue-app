@@ -40,7 +40,7 @@
         app
         dark
         src="@/assets/stratego_title.png"
-        height="400"
+        height="200"
     >
       <template v-slot:img="{ props }">
         <v-img
@@ -56,29 +56,6 @@
       <v-app-bar-title></v-app-bar-title>
 
       <v-spacer></v-spacer>
-
-
-      <div class="text-center">
-        <v-menu offset-y>
-          <template v-slot:activator="{ on, attrs }">
-            <v-btn
-                v-bind="attrs"
-                v-on="on"
-            >
-              <v-icon size="50">mdi-dots-vertical</v-icon>
-            </v-btn>
-          </template>
-          <v-list>
-            <v-list-item
-                v-for="(items, index) in settings"
-                :key="index"
-                @click="join"
-            >
-              <v-list-item-title>{{ items.listItem }}</v-list-item-title>
-            </v-list-item>
-          </v-list>
-        </v-menu>
-      </div>
     </v-app-bar>
 
     <v-main>
@@ -96,7 +73,6 @@ export default {
     items: [
       { title: 'Home', icon: 'mdi-fencing', to: '/' },
       { title: 'About', icon: 'mdi-help-box', to: '/about' },
-      // { title: 'Game', icon: 'mdi-fencing', to: '/game' },
     ],
     settings : [
       { listItem: 'Join', to: '/playGame' }
@@ -120,7 +96,5 @@ export default {
 </script>
 
 <style>
-.backgroundd {
-  background-color: #fcf5da;
-}
+@import '/assets/styles/main.css';
 </style>
