@@ -1,33 +1,72 @@
 <template>
-  <v-row justify="center" >
-    <v-col cols="12" sm="4">
-        <v-img src="@/assets/logo.png" @click="changeStatus()" height="93" width="320"/>
-    </v-col>
-  </v-row>
+  <v-form class="backgroundd">
+    <v-container fluid>
+      <v-row justify="center">
+
+        <v-col
+            cols="12"
+            sm="6"
+            md="3"
+        >
+          <v-text-field
+              label="Enter your name"
+              solo
+              v-model="player"
+          ></v-text-field>
+        </v-col>
+      </v-row>
+      <v-row justify="center">
+        <v-col cols="12" sm="6" md="3">
+          <v-img src="@/assets/logo.png" @click="changeStatus()" height="93" width="320"/>
+        </v-col>
+      </v-row>
+    </v-container>
+  </v-form>
 </template>
 
 <script>
 
-  export default {
-    name: 'Start',
-    methods: {
-      changeStatus() {
-        window.websocket.send(JSON.stringify({
-          "status": {
-            "currentStatus": "lobby"
-          }
-        }))
+export default {
+  name: 'Start',
+  data() {
+    return {
+      player: ""
+    }
+  },
+  props: {
+    lobby: Object
+  },
+  methods: {
+    changeStatus() {
+      window.websocket.send(JSON.stringify({
+        "status": {
+          "currentStatus": "lobby"
+        }
+      }))
+      this.joinLobby()
+    },
+    joinLobby() {
+      if (this.player === '') {
+        return;
       }
+      this.lobby.participants.push(this.player)
+      window.websocket.send(JSON.stringify({
+        "lobby": {
+        "currentPlayer": this.player,
+            "updateLobby": this.lobby
+      }}))
     },
-    mounted: function() {
-      let elHtml = document.getElementsByTagName('html')[0]
-      elHtml.style.overflowY = 'hidden'
-    },
-    destroyed: function() {
-      let elHtml = document.getElementsByTagName('html')[0]
-      elHtml.style.overflowY = null
-    },
-  }
+
+  },
+  mounted: function () {
+    let elHtml = document.getElementsByTagName('html')[0]
+    elHtml.style.overflowY = 'hidden'
+  },
+  destroyed: function () {
+    let elHtml = document.getElementsByTagName('html')[0]
+    elHtml.style.overflowY = null
+  },
+}
 </script>
 
 <style>

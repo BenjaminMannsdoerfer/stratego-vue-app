@@ -11,29 +11,21 @@
         </v-select>
       </v-col>
     </v-row>
-      <v-row justify="center">
+      <v-row justify="center" style="text-align: center">
 
         <v-col
             cols="12"
             sm="6"
             md="3"
         >
-          <v-text-field
-              label="Blue"
-              solo
-              v-model="player1"
-          ></v-text-field>
+          <h2>{{lobby.participants[0]}}</h2>
         </v-col>
         <v-col
             cols="12"
             sm="6"
             md="3"
         >
-          <v-text-field
-              label="Red"
-              solo
-              v-model="player2"
-          ></v-text-field>
+          <h2>{{lobby.participants[1]}}</h2>
         </v-col>
         <v-row justify="center">
           <v-col
@@ -82,6 +74,9 @@ export default {
         items: [{name: 'small', value: 4}, {name: 'medium', value: 7}, {name: 'large', value: 10
         }],
     }
+  },
+  props: {
+    lobby: Object
   },
   methods: {
     changeStatus() {

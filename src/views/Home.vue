@@ -1,8 +1,8 @@
 <template>
   <v-app>
-    <Start v-if="status === 'start'"></Start>
+    <Start v-if="status === 'start'" :lobby="lobby"></Start>
 
-    <SetNames v-else-if="status === 'lobby'" :status="status"></SetNames>
+    <SetNames v-else-if="status === 'lobby'" :status="status" :lobby="lobby"></SetNames>
 
     <Board v-else-if="status === 'Board'" :size="size" :fields="fields" :currentPlayerIndex="currentPlayerIndex"
            :currentPlayer="currentPlayer" :playerListBufferBlue="playerListBufferBlue"
@@ -23,6 +23,7 @@ import Board from "../components/Board";
 export default {
   name: 'Home',
   data: () => ({
+    player: "",
     size: 10,
     fields: [],
     currentPlayerIndex: 0,
@@ -31,7 +32,10 @@ export default {
     playerListBufferRed: 40,
     gameStatus: "",
     border: {},
-    status: "start"
+    status: "start",
+    lobby: {
+      participants: []
+    }
   }),
   components: {
     Board,
@@ -57,6 +61,11 @@ export default {
           if (Object.keys(json)[0] === "status") {
             console.log(json.status)
             this.status = json.status
+            this.player = json.player
+          } else if (Object.keys(json)[1] === "lobby") {
+            this.player = json.player
+            this.lobby.participants = json.lobby
+            console.log(this.lobby.participants[0] + " " + this.lobby.participants[1])
           } else {
             this.size = json.matchfieldSize;
             this.fields = json.matchField
