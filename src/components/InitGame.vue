@@ -7,22 +7,22 @@
           <template v-for="(aField, index) in row.cols">
             <td v-if="aField.isSet" class="char-pic field" :key="'aField' + index">
               <div v-if="aField.colour && playerListBufferBlue !== 0 && currentPlayer === player">
-                <input class="fig-cards blue" type="image" :src="'http://localhost:9000/' + aField.figSrc" alt=""/>
+                <img class="fig-cards blue" type="image" :src="'http://localhost:9000/' + aField.figSrc" alt=""/>
               </div>
               <div v-else-if="aField.colour && playerListBufferBlue !== 0 && currentPlayer !== player">
-                <input class="fig-cards" type="image" :src="'http://localhost:9000/' + aField.blueSrc" alt="blue"/>
+                <img class="fig-cards" type="image" :src="'http://localhost:9000/' + aField.blueSrc" alt="blue"/>
               </div>
               <div v-else-if="!aField.colour && playerListBufferRed !== 0 && currentPlayer === player">
-                <input class="fig-cards red" type="image" :src="'http://localhost:9000/' + aField.figSrc" alt=""/>
+                <img class="fig-cards red" type="image" :src="'http://localhost:9000/' + aField.figSrc" alt=""/>
               </div>
               <div v-else-if="!aField.colour && playerListBufferRed !== 0 && currentPlayer !== player">
-                <input class="fig-cards" type="image" :src="'http://localhost:9000/' + aField.redSrc" alt="red"/>
+                <img class="fig-cards" type="image" :src="'http://localhost:9000/' + aField.redSrc" alt="red"/>
               </div>
               <div v-else-if="playerListBufferBlue === 0 && aField.colour">
-                <input class="fig-cards" type="image" :src="'http://localhost:9000/' + aField.blueSrc" alt="blue"/>
+                <img class="fig-cards" type="image" :src="'http://localhost:9000/' + aField.blueSrc" alt="blue"/>
               </div>
               <div v-else-if="playerListBufferRed === 0 && !aField.colour">
-                <input class="fig-cards" type="image" :src="'http://localhost:9000/' + aField.redSrc" alt="red"/>
+                <img class="fig-cards" type="image" :src="'http://localhost:9000/' + aField.redSrc" alt="red"/>
               </div>
               <div v-else>
               </div>
@@ -30,8 +30,14 @@
             <td v-else-if="aField.isWater || aField.row === 4 || aField.row === 5" class="char-pic">
             </td>
             <td v-else class="char-pic field">
+              <div v-if="currentPlayer === player">
               <input class="fig-cards" type="image" @click="clickSet(aField.row, aField.col)"
                      :src="'http://localhost:9000/' + aField.blackSrc" alt="black"/>
+              </div>
+              <div v-else-if="currentPlayer !== player">
+                <img class="fig-cards" type="image" @click="clickSet(aField.row, aField.col)"
+                       :src="'http://localhost:9000/' + aField.blackSrc" alt="black"/>
+              </div>
             </td>
           </template>
         </tr>
