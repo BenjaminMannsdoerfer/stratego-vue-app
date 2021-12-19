@@ -27,6 +27,13 @@
         >
           <h2>{{lobby.participants[1]}}</h2>
         </v-col>
+        <v-col
+            cols="12"
+            sm="6"
+            md="3"
+        >
+          <h2>{{"myName: " + player}}</h2>
+        </v-col>
         <v-row justify="center">
           <v-col
               cols="12"
@@ -69,8 +76,6 @@ export default {
   name: 'SetNames',
   data () {
     return {
-      player1: '',
-      player2: '',
         items: [{name: 'small', value: 4}, {name: 'medium', value: 7}, {name: 'large', value: 10
         }],
     }

@@ -1,8 +1,9 @@
 <template>
   <div class="row text-center" style="flex: 0 0 auto">
+    <h2>{{"hier steht mein Name: " + player}}</h2>
     <div v-if="gameStatus === 'WON'">
-      <h1 v-if="currentPlayerIndex === 0" class="color-blue">{{currentPlayer + " you found the flag and won the game!"}}</h1>
-      <h1 v-if="currentPlayerIndex === 1" class="color-red">{{currentPlayer + " you found the flag and won the game!"}}</h1>
+      <h2 v-if="currentPlayerIndex === 0" class="color-blue">{{currentPlayer + " you found the flag and won the game!"}}</h2>
+      <h2 v-if="currentPlayerIndex === 1" class="color-red">{{currentPlayer + " you found the flag and won the game!"}}</h2>
       <v-btn
           x-large
           color="rgba(192,141,43,255)"
@@ -12,10 +13,10 @@
       </v-btn>
     </div>
     <div v-else>
-    <h1 v-if="playerListBufferRed === 0 && currentPlayerIndex === 0" class="color-blue">{{currentPlayer + " it's your turn"}}</h1>
-    <h1 v-else-if="playerListBufferRed === 0 && currentPlayerIndex === 1" class="color-red">{{currentPlayer + " it's your turn"}}</h1>
-    <h1 v-else-if="playerListBufferRed > 0 && currentPlayerIndex === 0" class="color-blue">{{"Enter your figures " + currentPlayer}}</h1>
-    <h1 v-else-if="playerListBufferRed > 0 && currentPlayerIndex === 1" class="color-red">{{"Enter your figures " + currentPlayer}}</h1>
+    <h2 v-if="playerListBufferRed === 0 && currentPlayerIndex === 0" class="color-blue">{{currentPlayer + " it's your turn"}}</h2>
+    <h2 v-else-if="playerListBufferRed === 0 && currentPlayerIndex === 1" class="color-red">{{currentPlayer + " it's your turn"}}</h2>
+    <h2 v-else-if="playerListBufferRed > 0 && currentPlayerIndex === 0" class="color-blue">{{"Enter your figures " + currentPlayer}}</h2>
+    <h2 v-else-if="playerListBufferRed > 0 && currentPlayerIndex === 1" class="color-red">{{"Enter your figures " + currentPlayer}}</h2>
     </div>
     <div class="init-game-top">
       <img class="img-fluid img-game-top" :src="'http://localhost:9000/' + border.top"/>
@@ -29,12 +30,12 @@
                   :currentPlayerIndex="currentPlayerIndex"
                   :currentPlayer="currentPlayer" :playerListBufferBlue="playerListBufferBlue"
                   :playerListBufferRed="playerListBufferRed"
-                  :gameStatus="gameStatus" :border="border"></InitGame>
+                  :gameStatus="gameStatus" :border="border" :player="player"></InitGame>
         <PlayGame v-else-if="this.playerListBufferRed === 0" :size="size" :fields="fields"
                   :currentPlayerIndex="currentPlayerIndex"
                   :currentPlayer="currentPlayer" :playerListBufferBlue="playerListBufferBlue"
                   :playerListBufferRed="playerListBufferRed"
-                  :gameStatus="gameStatus" :border="border"></PlayGame>
+                  :gameStatus="gameStatus" :border="border" :player="player"></PlayGame>
         <div class="col-auto init-game-right">
           <img class="img-game-right" :src="'http://localhost:9000/' + border.right"/>
         </div>

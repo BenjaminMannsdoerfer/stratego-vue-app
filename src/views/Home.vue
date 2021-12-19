@@ -2,7 +2,7 @@
   <v-app>
     <Start v-if="status === 'start'" :lobby="lobby" :player="player"></Start>
 
-    <SetNames v-else-if="status === 'lobby'" :status="status" :lobby="lobby"></SetNames>
+    <SetNames v-else-if="status === 'lobby'" :status="status" :lobby="lobby" :player="player"></SetNames>
 
     <Board v-else-if="status === 'Board'" :size="size" :fields="fields" :currentPlayerIndex="currentPlayerIndex"
            :currentPlayer="currentPlayer" :playerListBufferBlue="playerListBufferBlue"
@@ -57,15 +57,21 @@ export default {
       window.websocket.onmessage = (e) => {
         if (typeof e.data === "string") {
           let json = JSON.parse(e.data);
-          console.log(e.data)
+          //console.log(e.data)
+          console.log(Object.keys(json)[0])
+
           if (Object.keys(json)[0] === "status") {
             console.log(json.status)
             this.status = json.status
-          } else if (Object.keys(json)[1] === "lobby" || Object.keys(json)[0] === "lobby") {
+          } else if (Object.keys(json)[1] === "lobby") {
             this.player = json.player
+            console.log("ich heiße " + this.player)
             this.lobby.participants = json.lobby
             console.log(this.lobby.participants[0] + " " + this.lobby.participants[1])
+          } else if (Object.keys(json)[0] === "lobby") {
+            this.lobby.participants = json.lobby
           } else {
+            console.log(this.player + " fewfewfewfwefwfewwewf")
             this.size = json.matchfieldSize;
             this.fields = json.matchField
             this.currentPlayerIndex = json.currentPlayerIndex

@@ -1,34 +1,38 @@
 <template>
-        <div id="gamefield" class="col-auto init-game-mid">
-          <table class="matchfield">
-            <tbody>
-            <template v-for="(row, index) in fields">
-              <tr :key="'row' + index">
-                <template v-for="(aField, index) in row.cols">
-                  <td v-if="aField.isSet" class="char-pic field" :key="'aField' + index">
-                    <div v-if="aField.colour && currentPlayerIndex === 0" >
-                      <input class="fig-cards blue" type="image" @click="clickSet(aField.row, aField.col)" :src="'http://localhost:9000/' + aField.figSrc" alt=""/>
-                    </div>
-                    <div v-else-if="!aField.colour && currentPlayerIndex === 1">
-                      <input class="fig-cards red" type="image" @click="clickSet(aField.row, aField.col)" :src="'http://localhost:9000/' + aField.figSrc" alt=""/>
-                    </div>
-                    <div v-else-if="currentPlayerIndex === 1 && aField.colour">
-                      <input class="fig-cards" type="image" @click="clickSet(aField.row, aField.col)" :src="'http://localhost:9000/' + aField.blueSrc" alt="blue"/>
-                    </div>
-                    <div v-else-if="currentPlayerIndex === 0 && !aField.colour">
-                      <input class="fig-cards" type="image" @click="clickSet(aField.row, aField.col)" :src="'http://localhost:9000/' + aField.redSrc" alt="red"/>
-                    </div>
-                  </td>
-                  <td v-else-if="aField.isWater" class="char-pic">
-                  </td>
-                  <td v-else class="char-pic field">
-                  </td>
-                </template>
-              </tr>
-            </template>
-            </tbody>
-          </table>
-        </div>
+  <div id="gamefield" class="col-auto init-game-mid">
+    <table class="matchfield">
+      <tbody>
+      <template v-for="(row, index) in fields">
+        <tr :key="'row' + index">
+          <template v-for="(aField, index) in row.cols">
+            <td v-if="aField.isSet" class="char-pic field" :key="'aField' + index">
+              <div v-if="aField.colour && currentPlayerIndex === 0">
+                <input class="fig-cards blue" type="image" @click="clickSet(aField.row, aField.col)"
+                       :src="'http://localhost:9000/' + aField.figSrc" alt=""/>
+              </div>
+              <div v-else-if="!aField.colour && currentPlayerIndex === 1">
+                <input class="fig-cards red" type="image" @click="clickSet(aField.row, aField.col)"
+                       :src="'http://localhost:9000/' + aField.figSrc" alt=""/>
+              </div>
+              <div v-else-if="currentPlayerIndex === 1 && aField.colour">
+                <input class="fig-cards" type="image" @click="clickSet(aField.row, aField.col)"
+                       :src="'http://localhost:9000/' + aField.blueSrc" alt="blue"/>
+              </div>
+              <div v-else-if="currentPlayerIndex === 0 && !aField.colour">
+                <input class="fig-cards" type="image" @click="clickSet(aField.row, aField.col)"
+                       :src="'http://localhost:9000/' + aField.redSrc" alt="red"/>
+              </div>
+            </td>
+            <td v-else-if="aField.isWater" class="char-pic">
+            </td>
+            <td v-else class="char-pic field">
+            </td>
+          </template>
+        </tr>
+      </template>
+      </tbody>
+    </table>
+  </div>
 </template>
 
 <script>
@@ -45,14 +49,15 @@ export default {
     }
   },
   props: {
-      size: Number,
-      fields: Array,
-      currentPlayerIndex: Number,
-      currentPlayer: String,
-      playerListBufferBlue: Number,
-      playerListBufferRed: Number,
-      gameStatus: String,
-      border: Object
+    size: Number,
+    fields: Array,
+    currentPlayerIndex: Number,
+    currentPlayer: String,
+    playerListBufferBlue: Number,
+    playerListBufferRed: Number,
+    gameStatus: String,
+    border: Object,
+    player: String
   },
   methods: {
     move(dir, row, col) {

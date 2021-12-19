@@ -1,38 +1,38 @@
 <template>
-      <div id="gamefield" class="col-auto init-game-mid">
-        <table class="matchfield">
-          <tbody>
-          <template v-for="(row, index) in fields">
-            <tr :key="'row' + index">
-              <template v-for="(aField, index) in row.cols">
-                <td v-if="aField.isSet" class="char-pic field" :key="'aField' + index">
-                  <div v-if="aField.colour && playerListBufferBlue !== 0">
-                    <input class="fig-cards blue" type="image" :src="'http://localhost:9000/' + aField.figSrc" alt=""/>
-                  </div>
-                  <div v-else-if="!aField.colour && playerListBufferRed !== 0">
-                    <input class="fig-cards red" type="image" :src="'http://localhost:9000/' + aField.figSrc" alt=""/>
-                  </div>
-                  <div v-else-if="playerListBufferBlue === 0 && aField.colour">
-                    <input class="fig-cards" type="image" :src="'http://localhost:9000/' + aField.blueSrc" alt="blue"/>
-                  </div>
-                  <div v-else-if="playerListBufferRed === 0 && !aField.colour">
-                    <input class="fig-cards" type="image" :src="'http://localhost:9000/' + aField.redSrc" alt="red"/>
-                  </div>
-                  <div v-else>
-                  </div>
-                </td>
-                <td v-else-if="aField.isWater || aField.row === 4 || aField.row === 5" class="char-pic">
-                </td>
-                <td v-else class="char-pic field">
-                  <input class="fig-cards" type="image" @click="clickSet(aField.row, aField.col)"
-                         :src="'http://localhost:9000/' + aField.blackSrc" alt="black"/>
-                </td>
-              </template>
-            </tr>
+  <div id="gamefield" class="col-auto init-game-mid">
+    <table class="matchfield">
+      <tbody>
+      <template v-for="(row, index) in fields">
+        <tr :key="'row' + index">
+          <template v-for="(aField, index) in row.cols">
+            <td v-if="aField.isSet" class="char-pic field" :key="'aField' + index">
+              <div v-if="aField.colour && playerListBufferBlue !== 0">
+                <input class="fig-cards blue" type="image" :src="'http://localhost:9000/' + aField.figSrc" alt=""/>
+              </div>
+              <div v-else-if="!aField.colour && playerListBufferRed !== 0">
+                <input class="fig-cards red" type="image" :src="'http://localhost:9000/' + aField.figSrc" alt=""/>
+              </div>
+              <div v-else-if="playerListBufferBlue === 0 && aField.colour">
+                <input class="fig-cards" type="image" :src="'http://localhost:9000/' + aField.blueSrc" alt="blue"/>
+              </div>
+              <div v-else-if="playerListBufferRed === 0 && !aField.colour">
+                <input class="fig-cards" type="image" :src="'http://localhost:9000/' + aField.redSrc" alt="red"/>
+              </div>
+              <div v-else>
+              </div>
+            </td>
+            <td v-else-if="aField.isWater || aField.row === 4 || aField.row === 5" class="char-pic">
+            </td>
+            <td v-else class="char-pic field">
+              <input class="fig-cards" type="image" @click="clickSet(aField.row, aField.col)"
+                     :src="'http://localhost:9000/' + aField.blackSrc" alt="black"/>
+            </td>
           </template>
-          </tbody>
-        </table>
-      </div>
+        </tr>
+      </template>
+      </tbody>
+    </table>
+  </div>
 </template>
 
 
@@ -54,7 +54,8 @@ export default {
     playerListBufferBlue: Number,
     playerListBufferRed: Number,
     gameStatus: String,
-    border: Object
+    border: Object,
+    player: String
   },
   methods: {
     async goToPlayGame() {
@@ -66,6 +67,7 @@ export default {
       await new Promise(resolve => setTimeout(resolve, 2000));
     },
     set(row, col, charac) {
+      console.log(this.player)
       window.websocket.send(JSON.stringify({
         "set": {
           "row": row,
@@ -75,8 +77,8 @@ export default {
       }))
     },
     clickSet(row, col) {
-        this.row = row
-        this.col = col
+      this.row = row
+      this.col = col
     },
 
     onkeydown(event) {
