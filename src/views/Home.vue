@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <Start v-if="status === 'start'" :lobby="lobby"></Start>
+    <Start v-if="status === 'start'" :lobby="lobby" :player="player"></Start>
 
     <SetNames v-else-if="status === 'lobby'" :status="status" :lobby="lobby"></SetNames>
 

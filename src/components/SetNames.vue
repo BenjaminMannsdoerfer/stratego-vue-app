@@ -131,6 +131,12 @@ export default {
     let elHtml = document.getElementsByTagName('html')[0]
     elHtml.style.overflowY = null
   },
+  created() {
+      window.websocket.send(JSON.stringify({
+        "lobby": {
+          "currentPlayer": this.player
+        }}))
+  }
 }
 </script>
 
