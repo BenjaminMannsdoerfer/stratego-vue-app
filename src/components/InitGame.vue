@@ -6,11 +6,17 @@
         <tr :key="'row' + index">
           <template v-for="(aField, index) in row.cols">
             <td v-if="aField.isSet" class="char-pic field" :key="'aField' + index">
-              <div v-if="aField.colour && playerListBufferBlue !== 0">
+              <div v-if="aField.colour && playerListBufferBlue !== 0 && currentPlayer === player">
                 <input class="fig-cards blue" type="image" :src="'http://localhost:9000/' + aField.figSrc" alt=""/>
               </div>
-              <div v-else-if="!aField.colour && playerListBufferRed !== 0">
+              <div v-else-if="aField.colour && playerListBufferBlue !== 0 && currentPlayer !== player">
+                <input class="fig-cards" type="image" :src="'http://localhost:9000/' + aField.blueSrc" alt="blue"/>
+              </div>
+              <div v-else-if="!aField.colour && playerListBufferRed !== 0 && currentPlayer === player">
                 <input class="fig-cards red" type="image" :src="'http://localhost:9000/' + aField.figSrc" alt=""/>
+              </div>
+              <div v-else-if="!aField.colour && playerListBufferRed !== 0 && currentPlayer !== player">
+                <input class="fig-cards" type="image" :src="'http://localhost:9000/' + aField.redSrc" alt="red"/>
               </div>
               <div v-else-if="playerListBufferBlue === 0 && aField.colour">
                 <input class="fig-cards" type="image" :src="'http://localhost:9000/' + aField.blueSrc" alt="blue"/>
