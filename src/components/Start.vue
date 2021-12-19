@@ -49,11 +49,10 @@ export default {
       if (this.player === '') {
         return;
       }
-      this.lobby.participants.push(this.player)
       window.websocket.send(JSON.stringify({
         "lobby": {
-        "currentPlayer": this.player,
-            "updateLobby": this.lobby
+        "currentPlayer": this.player
+            //"updateLobby": this.lobby
       }}))
     },
 

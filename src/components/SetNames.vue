@@ -76,7 +76,8 @@ export default {
     }
   },
   props: {
-    lobby: Object
+    lobby: Object,
+    player: String
   },
   methods: {
     changeStatus() {
@@ -117,8 +118,8 @@ export default {
       this.changeStatus()
       window.websocket.send(JSON.stringify({
         "setNames": {
-          "player1": this.player1,
-          "player2": this.player2
+          "player1": this.lobby.participants[0],
+          "player2": this.lobby.participants[1]
         }
       }))
     },
@@ -131,12 +132,6 @@ export default {
     let elHtml = document.getElementsByTagName('html')[0]
     elHtml.style.overflowY = null
   },
-  created() {
-      window.websocket.send(JSON.stringify({
-        "lobby": {
-          "currentPlayer": this.player
-        }}))
-  }
 }
 </script>
 

@@ -69,7 +69,8 @@ export default {
     playerListBufferBlue: Number,
     playerListBufferRed: Number,
     gameStatus: String,
-    border: Object
+    border: Object,
+    player: String
   },
   components: {PlayGame, InitGame},
   methods: {

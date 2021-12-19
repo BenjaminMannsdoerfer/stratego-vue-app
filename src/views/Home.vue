@@ -7,7 +7,7 @@
     <Board v-else-if="status === 'Board'" :size="size" :fields="fields" :currentPlayerIndex="currentPlayerIndex"
            :currentPlayer="currentPlayer" :playerListBufferBlue="playerListBufferBlue"
            :playerListBufferRed="playerListBufferRed"
-           :gameStatus="gameStatus" :border="border"></Board>
+           :gameStatus="gameStatus" :border="border" :player="player"></Board>
 
   </v-app>
 </template>
@@ -61,8 +61,7 @@ export default {
           if (Object.keys(json)[0] === "status") {
             console.log(json.status)
             this.status = json.status
-            this.player = json.player
-          } else if (Object.keys(json)[1] === "lobby") {
+          } else if (Object.keys(json)[1] === "lobby" || Object.keys(json)[0] === "lobby") {
             this.player = json.player
             this.lobby.participants = json.lobby
             console.log(this.lobby.participants[0] + " " + this.lobby.participants[1])
