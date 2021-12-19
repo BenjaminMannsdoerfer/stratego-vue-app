@@ -78,20 +78,6 @@ export default {
       { listItem: 'Join', to: '/playGame' }
     ],
   }),
-  components: {
-  },
-  methods: {
-    async join() {
-      window.websocket.send(JSON.stringify({
-        "join": {
-          "joinGame": "successful"
-        }
-      }))
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      await this.$router.push({path: '/playGame'}).catch(() => {
-      })
-    },
-  }
 }
 </script>
 

@@ -31,12 +31,12 @@
             </td>
             <td v-else class="char-pic field">
               <div v-if="currentPlayer === player">
-              <input class="fig-cards" type="image" @click="clickSet(aField.row, aField.col)"
-                     :src="'http://localhost:9000/' + aField.blackSrc" alt="black"/>
+                <input class="fig-cards" type="image" @click="clickSet(aField.row, aField.col)"
+                       :src="'http://localhost:9000/' + aField.blackSrc" alt="black"/>
               </div>
               <div v-else-if="currentPlayer !== player">
                 <img class="fig-cards" type="image"
-                       :src="'http://localhost:9000/' + aField.blackSrc" alt="black"/>
+                     :src="'http://localhost:9000/' + aField.blackSrc" alt="black"/>
               </div>
             </td>
           </template>

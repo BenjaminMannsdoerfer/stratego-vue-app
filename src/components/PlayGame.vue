@@ -12,7 +12,7 @@
               </div>
               <div v-else-if="aField.colour && currentPlayerIndex === 0 && currentPlayer !== player">
                 <img class="fig-cards" type="image"
-                       :src="'http://localhost:9000/' + aField.blueSrc" alt="blue"/>
+                     :src="'http://localhost:9000/' + aField.blueSrc" alt="blue"/>
               </div>
               <div v-else-if="!aField.colour && currentPlayerIndex === 1 && currentPlayer === player">
                 <input class="fig-cards red" type="image" @click="clickSet(aField.row, aField.col)"
@@ -20,22 +20,16 @@
               </div>
               <div v-else-if="!aField.colour && currentPlayerIndex === 1 && currentPlayer !== player">
                 <img class="fig-cards" type="image"
-                       :src="'http://localhost:9000/' + aField.redSrc" alt="red"/>
+                     :src="'http://localhost:9000/' + aField.redSrc" alt="red"/>
               </div>
-
-
               <div v-else-if="!aField.colour && currentPlayerIndex === 0 && currentPlayer !== player">
                 <img class="fig-cards red" type="image"
-                       :src="'http://localhost:9000/' + aField.figSrc" alt=""/>
+                     :src="'http://localhost:9000/' + aField.figSrc" alt=""/>
               </div>
               <div v-else-if="aField.colour && currentPlayerIndex === 1 && currentPlayer !== player">
                 <img class="fig-cards blue" type="image"
                      :src="'http://localhost:9000/' + aField.figSrc" alt=""/>
               </div>
-
-
-
-
               <div v-else-if="currentPlayerIndex === 1 && aField.colour">
                 <input class="fig-cards" type="image" @click="clickSet(aField.row, aField.col)"
                        :src="'http://localhost:9000/' + aField.blueSrc" alt="blue"/>
