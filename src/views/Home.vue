@@ -35,14 +35,14 @@ export default {
     status: "start",
     lobby: {
       participants: []
-    }
+    },
   }),
   components: {
     Board,
     PlayGame,
     InitGame,
     SetNames,
-    Start
+    Start,
   },
   methods: {
     createWebsocket() {
@@ -53,7 +53,17 @@ export default {
           }
         }))
         console.log("Connected to Websocket");
+        window.onclose = function () {
+          console.log('Connection with Websocket Closed!');
+        };
+
+        window.onerror = function (error) {
+          console.log('Error in Websocket Occured: ' + error);
+        };
       }
+      window.websocket.onclose = function(event) {
+        console.log("WebSocket is closed now.");
+      };
       window.websocket.onmessage = (e) => {
         if (typeof e.data === "string") {
           let json = JSON.parse(e.data);
@@ -74,9 +84,6 @@ export default {
             this.playerListBufferBlue = json.playerListBufferBlue
             this.playerListBufferRed = json.playerListBufferRed
             this.border = json.border
-            if (this.playerListBufferBlue === 0 && this.playerListBufferRed === 0 && window.location.href.indexOf("initGame") > -1) {
-              this.goToPlayGame()
-            }
           }
         }
       }

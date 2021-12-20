@@ -70,14 +70,6 @@ export default {
     player: String
   },
   methods: {
-    async goToPlayGame() {
-      window.websocket.send(JSON.stringify({
-        "join": {
-          "playGame": true,
-        }
-      }))
-      await new Promise(resolve => setTimeout(resolve, 2000));
-    },
     set(row, col, charac) {
       console.log(this.player)
       window.websocket.send(JSON.stringify({

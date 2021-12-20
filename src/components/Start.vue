@@ -25,16 +25,15 @@
 </template>
 
 <script>
-
 export default {
   name: 'Start',
   data() {
     return {
-      player: ""
+      player: "",
     }
   },
   props: {
-    lobby: Object
+    lobby: Object,
   },
   methods: {
     changeStatus() {
