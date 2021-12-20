@@ -1,6 +1,16 @@
 <template>
   <v-form class="backgroundd">
     <v-container fluid>
+      <v-row justify="center" style="text-align: center">
+      <v-col
+          cols="12"
+          sm="6"
+      >
+        <h2 v-if="player === lobby.participants[0]" class="color-blue">{{"Welcome to Stratego: " + player}}</h2>
+        <h2 v-else-if="player === lobby.participants[1]" class="color-red">{{"Welcome to Stratego: " + player}}</h2>
+
+      </v-col>
+      </v-row>
     <v-row justify="center">
       <v-col
           class="d-flex"
@@ -18,21 +28,16 @@
             sm="6"
             md="3"
         >
-          <h2>{{lobby.participants[0]}}</h2>
+          <h2 v-if="player === lobby.participants[0]" class="color-blue">{{lobby.participants[0]}}</h2>
+          <h2 v-else-if="player !== lobby.participants[0]" class="color-blue">{{lobby.participants[0]}}</h2>
         </v-col>
         <v-col
             cols="12"
             sm="6"
             md="3"
         >
-          <h2>{{lobby.participants[1]}}</h2>
-        </v-col>
-        <v-col
-            cols="12"
-            sm="6"
-            md="3"
-        >
-          <h2>{{"myName: " + player}}</h2>
+          <h2 v-if="player === lobby.participants[1]" class="color-red">{{lobby.participants[1]}}</h2>
+          <h2 v-else-if="player !== lobby.participants[1]" class="color-red">{{lobby.participants[1]}}</h2>
         </v-col>
         <v-row justify="center">
           <v-col
@@ -47,21 +52,6 @@
               @click="getNames()"
           >
             Play
-          </v-btn>
-        </div>
-          </v-col>
-          <v-col
-              cols="12"
-              sm="6"
-              md="3"
-          >
-        <div class="my-2">
-          <v-btn
-              x-large
-              color="rgba(192,141,43,255)"
-              @click="changeStatus()"
-          >
-            Join
           </v-btn>
         </div>
           </v-col>

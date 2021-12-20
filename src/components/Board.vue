@@ -1,6 +1,6 @@
 <template>
   <div class="row text-center" style="flex: 0 0 auto">
-    <h2>{{"hier steht mein Name: " + player}}</h2>
+    <h2>{{"Player: " + player}}</h2>
     <div v-if="gameStatus === 'WON'">
       <h2 v-if="currentPlayerIndex === 0" class="color-blue">{{currentPlayer + " you found the flag and won the game!"}}</h2>
       <h2 v-if="currentPlayerIndex === 1" class="color-red">{{currentPlayer + " you found the flag and won the game!"}}</h2>
