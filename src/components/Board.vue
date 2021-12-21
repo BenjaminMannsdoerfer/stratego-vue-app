@@ -4,6 +4,7 @@
     <div v-if="gameStatus === 'WON'">
       <h2 v-if="currentPlayerIndex === 0" class="color-blue">{{currentPlayer + " you found the flag and won the game!"}}</h2>
       <h2 v-if="currentPlayerIndex === 1" class="color-red">{{currentPlayer + " you found the flag and won the game!"}}</h2>
+      <div class="my-2">
       <v-btn
           x-large
           color="rgba(192,141,43,255)"
@@ -11,6 +12,7 @@
       >
         new game
       </v-btn>
+        </div>
     </div>
     <div v-else>
     <h2 v-if="playerListBufferRed === 0 && currentPlayerIndex === 0" class="color-blue">{{currentPlayer + " it's your turn"}}</h2>
