@@ -8,35 +8,35 @@
             <td v-if="aField.isSet" class="char-pic field" :key="'aField' + index">
               <div v-if="aField.colour && currentPlayerIndex === 0 && currentPlayer === player">
                 <input class="fig-cards blue" type="image" @click="clickSet(aField.row, aField.col)"
-                       :src="'http://localhost:9000/' + aField.figSrc" alt=""/>
+                       :src="'https://mighty-mesa-63968.herokuapp.com/' + aField.figSrc" alt=""/>
               </div>
               <div v-else-if="aField.colour && currentPlayerIndex === 0 && currentPlayer !== player">
                 <img class="fig-cards" type="image"
-                     :src="'http://localhost:9000/' + aField.blueSrc" alt="blue"/>
+                     :src="'https://mighty-mesa-63968.herokuapp.com/' + aField.blueSrc" alt="blue"/>
               </div>
               <div v-else-if="!aField.colour && currentPlayerIndex === 1 && currentPlayer === player">
                 <input class="fig-cards red" type="image" @click="clickSet(aField.row, aField.col)"
-                       :src="'http://localhost:9000/' + aField.figSrc" alt=""/>
+                       :src="'https://mighty-mesa-63968.herokuapp.com/' + aField.figSrc" alt=""/>
               </div>
               <div v-else-if="!aField.colour && currentPlayerIndex === 1 && currentPlayer !== player">
                 <img class="fig-cards" type="image"
-                     :src="'http://localhost:9000/' + aField.redSrc" alt="red"/>
+                     :src="'https://mighty-mesa-63968.herokuapp.com/' + aField.redSrc" alt="red"/>
               </div>
               <div v-else-if="!aField.colour && currentPlayerIndex === 0 && currentPlayer !== player">
                 <img class="fig-cards red" type="image"
-                     :src="'http://localhost:9000/' + aField.figSrc" alt=""/>
+                     :src="'https://mighty-mesa-63968.herokuapp.com/' + aField.figSrc" alt=""/>
               </div>
               <div v-else-if="aField.colour && currentPlayerIndex === 1 && currentPlayer !== player">
                 <img class="fig-cards blue" type="image"
-                     :src="'http://localhost:9000/' + aField.figSrc" alt=""/>
+                     :src="'https://mighty-mesa-63968.herokuapp.com/' + aField.figSrc" alt=""/>
               </div>
               <div v-else-if="currentPlayerIndex === 1 && aField.colour">
                 <input class="fig-cards" type="image" @click="clickSet(aField.row, aField.col)"
-                       :src="'http://localhost:9000/' + aField.blueSrc" alt="blue"/>
+                       :src="'https://mighty-mesa-63968.herokuapp.com/' + aField.blueSrc" alt="blue"/>
               </div>
               <div v-else-if="currentPlayerIndex === 0 && !aField.colour">
                 <input class="fig-cards" type="image" @click="clickSet(aField.row, aField.col)"
-                       :src="'http://localhost:9000/' + aField.redSrc" alt="red"/>
+                       :src="'https://mighty-mesa-63968.herokuapp.com/' + aField.redSrc" alt="red"/>
               </div>
             </td>
             <td v-else-if="aField.isWater" class="char-pic">

@@ -21,12 +21,12 @@
     <h2 v-else-if="playerListBufferRed > 0 && currentPlayerIndex === 1" class="color-red">{{"Enter your figures " + currentPlayer}}</h2>
     </div>
     <div class="init-game-top">
-      <img class="img-fluid img-game-top" :src="'http://localhost:9000/' + border.top"/>
+      <img class="img-fluid img-game-top" :src="'https://mighty-mesa-63968.herokuapp.com/' + border.top"/>
     </div>
     <div class="mid-border">
       <div class="row justify-content-center">
         <div class="col-auto init-game-left">
-          <img class="img-game-left" :src="'http://localhost:9000/' + border.left"/>
+          <img class="img-game-left" :src="'https://mighty-mesa-63968.herokuapp.com/' + border.left"/>
         </div>
         <InitGame v-if="this.playerListBufferRed > 0" :size="size" :fields="fields"
                   :currentPlayerIndex="currentPlayerIndex"
@@ -39,12 +39,12 @@
                   :playerListBufferRed="playerListBufferRed"
                   :gameStatus="gameStatus" :border="border" :player="player"></PlayGame>
         <div class="col-auto init-game-right">
-          <img class="img-game-right" :src="'http://localhost:9000/' + border.right"/>
+          <img class="img-game-right" :src="'https://mighty-mesa-63968.herokuapp.com/' + border.right"/>
         </div>
       </div>
     </div>
     <div class="init-game-bot">
-      <img class="img-game-bot" :src="'http://localhost:9000/' + border.bot"/>
+      <img class="img-game-bot" :src="'https://mighty-mesa-63968.herokuapp.com/' + border.bot"/>
     </div>
     <div class="my-2">
       <v-btn

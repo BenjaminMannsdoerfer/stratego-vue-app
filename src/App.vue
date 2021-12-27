@@ -66,7 +66,7 @@
 
 <script>
 
-window.websocket = new WebSocket("ws://mighty-mesa-63968.herokuapp.com/websocket")
+window.websocket = new WebSocket("wss://mighty-mesa-63968.herokuapp.com/websocket")
 export default {
   data: () => ({
     drawer: null,
