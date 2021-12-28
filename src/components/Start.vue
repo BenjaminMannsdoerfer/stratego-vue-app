@@ -9,6 +9,7 @@
             md="3"
         >
           <v-text-field
+              class="input-field"
               label="Enter your name"
               solo
               v-model="player"
@@ -51,7 +52,6 @@ export default {
       window.websocket.send(JSON.stringify({
         "lobby": {
         "currentPlayer": this.player
-            //"updateLobby": this.lobby
       }}))
     },
 

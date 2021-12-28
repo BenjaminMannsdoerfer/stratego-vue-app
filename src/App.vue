@@ -73,9 +73,7 @@ export default {
     items: [
       { title: 'Home', icon: 'mdi-fencing', to: '/' },
       { title: 'About', icon: 'mdi-help-box', to: '/about' },
-    ],
-    settings : [
-      { listItem: 'Join', to: '/playGame' }
+      { title: 'Authentication', icon: 'mdi-account', to: '/authentication' },
     ],
   }),
 }

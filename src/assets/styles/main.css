@@ -11,8 +11,20 @@
     text-align: center;
 }
 
-.row {
-    background-color: #fcf5da;
+.card-header {
+    background-color: #c08d2b !important;
+}
+
+.card-body {
+    background-color: #ecd88a;
+}
+
+.input-field {
+    background-color: #fcf5da !important;
+}
+
+.auth-button {
+    text-align: center;
 }
 
 .margin-center {
