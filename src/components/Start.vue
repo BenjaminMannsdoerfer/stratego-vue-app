@@ -2,7 +2,16 @@
   <v-form class="backgroundd">
     <v-container fluid>
       <v-row justify="center">
-
+        <v-col
+            style="text-align: center"
+            cols="12"
+            sm="6"
+            md="4"
+        >
+        <h2>{{"Welcome to Stratego"}}</h2>
+        </v-col>
+      </v-row>
+      <v-row justify="center">
         <v-col
             cols="12"
             sm="6"
@@ -17,8 +26,8 @@
         </v-col>
       </v-row>
       <v-row justify="center">
-        <v-col cols="12" sm="6" md="3">
-          <v-img src="@/assets/images/media/stratego_start.png" @click="changeStatus()" height="93" width="320"/>
+        <v-col cols="12" sm="6" md="6">
+          <v-img src="@/assets/images/media/stratego_start.png" class="margin-center" justify="center" @click="changeStatus()" height="93" width="320"/>
         </v-col>
       </v-row>
     </v-container>
