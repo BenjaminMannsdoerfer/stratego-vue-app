@@ -21,12 +21,12 @@
     <h2 v-else-if="playerListBufferRed > 0 && currentPlayerIndex === 1" class="color-red">{{"Enter your figures " + currentPlayer}}</h2>
     </div>
     <div class="init-game-top">
-      <img class="img-fluid img-game-top" :src="'https://mighty-mesa-63968.herokuapp.com/' + border.top"/>
+      <img class="img-fluid img-game-top" :src="url + border.top"/>
     </div>
     <div class="mid-border">
       <div class="row justify-content-center">
         <div class="col-auto init-game-left">
-          <img class="img-game-left" :src="'https://mighty-mesa-63968.herokuapp.com/' + border.left"/>
+          <img class="img-game-left" :src="url + border.left" alt="border left"/>
         </div>
         <InitGame v-if="this.playerListBufferRed > 0" :size="size" :fields="fields"
                   :currentPlayerIndex="currentPlayerIndex"
@@ -39,12 +39,12 @@
                   :playerListBufferRed="playerListBufferRed"
                   :gameStatus="gameStatus" :border="border" :player="player"></PlayGame>
         <div class="col-auto init-game-right">
-          <img class="img-game-right" :src="'https://mighty-mesa-63968.herokuapp.com/' + border.right"/>
+          <img class="img-game-right" :src="url + border.right"/>
         </div>
       </div>
     </div>
     <div class="init-game-bot">
-      <img class="img-game-bot" :src="'https://mighty-mesa-63968.herokuapp.com/' + border.bot"/>
+      <img class="img-game-bot" :src="url + border.bot"/>
     </div>
     <div class="my-2">
       <v-btn
@@ -64,6 +64,11 @@ import PlayGame from "./PlayGame";
 
 export default {
   name: "Board",
+  data () {
+    return {
+      url: process.env.VUE_APP_MY_DOMAIN
+    }
+  },
   props: {
     size: Number,
     fields: Array,

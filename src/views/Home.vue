@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <Start v-if="status === 'start'" :lobby="lobby" :player="player"></Start>
+    <Start v-if="status === 'start' && authentication === true" :lobby="lobby" :player="player"></Start>
 
     <SetNames v-else-if="status === 'lobby'" :status="status" :lobby="lobby" :player="player"></SetNames>
 
@@ -19,10 +19,12 @@ import SetNames from "../components/SetNames";
 import InitGame from "../components/InitGame";
 import PlayGame from "../components/PlayGame";
 import Board from "../components/Board";
+import {firebaseAuth} from "../main";
 
 export default {
   name: 'Home',
   data: () => ({
+    authentication: false,
     player: "",
     size: 10,
     fields: [],
@@ -87,7 +89,18 @@ export default {
           }
         }
       }
-    }
+      firebaseAuth.getAuth().onAuthStateChanged(user =>  {
+        if (user) {
+          // User is signed in.
+          console.log("User is signed in.")
+          return this.authentication = true;
+        } else {
+          // No user is signed in.
+          console.log("No user is signed in.")
+          return this.authentication = false;
+        }
+      });
+    },
   },
   created() {
     this.createWebsocket();

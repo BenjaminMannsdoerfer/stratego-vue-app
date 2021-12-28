@@ -7,7 +7,7 @@
           <div class="card-header">Login</div>
           <div class="card-body">
 <!--            <div v-if="error" class="alert alert-danger">{{error}}</div>-->
-            <form action="#" @submit.prevent="submit">
+            <form action="#" @submit.prevent="login">
               <div class="form-group row">
                 <label for="email" class="col-md-4 col-form-label text-md-right align-self-center">Email</label>
 
@@ -59,6 +59,8 @@
 </template>
 
 <script>
+import {firebaseAuth} from "../main";
+
 export default {
   name: "Login",
   data () {
@@ -70,13 +72,20 @@ export default {
       }
     }
   },
-  props: {
-    authStatus: Boolean
-  },
   methods: {
     register() {
       this.loginStatus = false
       this.$emit('statusEvent', this.loginStatus)
+    },
+    login() {
+      firebaseAuth
+          .signInWithEmailAndPassword(firebaseAuth.getAuth(), this.form.email, this.form.password)
+          .then(data => {
+            this.$router.replace({ name: "Home" });
+          })
+          .catch(err => {
+            this.error = err.message;
+          });
     }
   }
 }
