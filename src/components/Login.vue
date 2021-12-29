@@ -6,7 +6,6 @@
         <div class="card">
           <div class="card-header">Login</div>
           <div class="card-body">
-<!--            <div v-if="error" class="alert alert-danger">{{error}}</div>-->
             <form action="#" @submit.prevent="login">
               <div class="form-group row">
                 <label for="email" class="col-md-4 col-form-label text-md-right align-self-center">Email</label>
@@ -68,8 +67,8 @@ export default {
       form: {
         email: '',
         password: '',
-        loginStatus: true
-      }
+      },
+      loginStatus: true
     }
   },
   methods: {

@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <Login v-if="authStatus" @statusEvent="updateStatus"></Login>
-    <Register v-else></Register>
+    <Register v-else @statusEvent="updateStatus"></Register>
   </v-app>
 
 </template>

@@ -19,7 +19,7 @@ import SetNames from "../components/SetNames";
 import InitGame from "../components/InitGame";
 import PlayGame from "../components/PlayGame";
 import Board from "../components/Board";
-import {firebaseAuth} from "../main";
+import {firebaseAuth} from "@/main";
 
 export default {
   name: 'Home',
@@ -92,6 +92,7 @@ export default {
       firebaseAuth.getAuth().onAuthStateChanged(user =>  {
         if (user) {
           // User is signed in.
+          console.log(user.displayName)
           console.log("User is signed in.")
           return this.authentication = true;
         } else {
