@@ -17,16 +17,79 @@
                       value
                       required
                       autofocus
-                      v-model="email"
+                      v-model="newEmail"
                   />
                 </div>
               </div>
 
               <div class="form-group row mb-0">
                 <div class="col-md-6 offset-md-3 auth-button">
-                  <button type="submit" class="btn btn-primary mr-10" @click="changeEmail()">Change Email</button>
                   <button type="submit" class="btn btn-primary mr-10" @click="changePassword()">Change Password</button>
                   <v-row justify="center">
+                    <v-dialog
+                        v-model="dialog"
+                        persistent
+                        max-width="600px"
+                    >
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-btn
+                            color="primary"
+                            dark
+                            v-bind="attrs"
+                            v-on="on"
+                        >
+                          Change Email
+                        </v-btn>
+                      </template>
+                      <v-card>
+                        <v-card-title>
+                          <span class="text-h5">Authenticate</span>
+                        </v-card-title>
+                        <v-card-text>
+                          <v-container>
+                            <v-row>
+                              <v-col cols="12">
+                                <v-text-field
+                                    label="Email*"
+                                    required
+                                    v-model="userEmailSignIn"
+                                ></v-text-field>
+                              </v-col>
+                              <v-col cols="12">
+                                <v-text-field
+                                    label="Password*"
+                                    type="password"
+                                    required
+                                    v-model="userPasswordSignIn"
+                                ></v-text-field>
+                              </v-col>
+                            </v-row>
+                          </v-container>
+                          <small>*indicates required field</small>
+                        </v-card-text>
+                        <v-card-actions>
+                          <v-spacer></v-spacer>
+                          <v-btn
+                              color="blue darken-1"
+                              text
+                              @click="dialog = false"
+                          >
+                            Close
+                          </v-btn>
+                          <v-btn
+                              color="blue darken-1"
+                              text
+                              @click="reauthenticateChangeEmail()"
+                          >
+                            Save
+                          </v-btn>
+                        </v-card-actions>
+                      </v-card>
+                    </v-dialog>
+                  </v-row>
+
+
+<!--                  <v-row justify="center">
                     <v-dialog
                         v-model="dialog"
                         persistent
@@ -80,14 +143,16 @@
                           <v-btn
                               color="blue darken-1"
                               text
-                              @click="deleteAccount()"
+                              @click="reauthenticateDeleteAccount()"
                           >
                             Save
                           </v-btn>
                         </v-card-actions>
                       </v-card>
                     </v-dialog>
-                  </v-row>
+                  </v-row>-->
+
+
                 </div>
               </div>
           </div>
@@ -104,26 +169,35 @@ export default {
   name: "Account",
   data() {
     return {
-      email: this.$store.getters.user.email,
       userEmail: '',
       userPassword: '',
+      userEmailSignIn: '',
+      userPasswordSignIn: '',
+      newEmail: '',
       dialog: false
     }
   },
   methods: {
-    changeEmail() {
-
+    reauthenticateChangeEmail() {
+      this.dialog = false
+      const user = firebaseAuth.getAuth().currentUser;
+      const credential = firebaseAuth.EmailAuthProvider.credential(
+          this.userEmailSignIn,
+          this.userPasswordSignIn
+      );
+      firebaseAuth.reauthenticateWithCredential(user, credential);
+      firebaseAuth.updateEmail(firebaseAuth.getAuth().currentUser, this.newEmail)
     },
     changePassword() {
       this.loginStatus = 'changePassword'
       this.$emit('statusEvent', this.loginStatus)
     },
-    reauthenticate() {
+    /*reauthenticateDeleteAccount() {
       this.dialog = false
       const user = firebaseAuth.getAuth().currentUser;
       const credential = firebaseAuth.EmailAuthProvider.credential(
-          this.email,
-          this.password
+          this.userEmail,
+          this.userPassword
       );
       firebaseAuth.reauthenticateWithCredential(user, credential);
       this.deleteAccount()
@@ -135,7 +209,7 @@ export default {
       }).catch((error) => {
         // An error ocurred
       });
-    }
+    }*/
   }
 }
 </script>
