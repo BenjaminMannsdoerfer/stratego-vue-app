@@ -26,7 +26,6 @@
 
               <div class="form-group row">
                 <label for="password" class="col-md-4 col-form-label text-md-right align-self-center">Password</label>
-
                 <div class="col-md-6">
                   <input
                       id="password"
@@ -39,10 +38,19 @@
                 </div>
               </div>
 
+              <div class="form-group row">
+                <div class="col-md-12 col-form-label text-center" @click="forgotPassword">
+                  <p>
+                    <a>Forgot Password</a>
+                  </p>
+                </div>
+              </div>
+
               <div class="form-group row mb-0">
-                <div class="col-md-6 offset-md-4 auth-button">
+                <div class="col-md-6 offset-md-3 auth-button">
                   <button type="submit" class="btn btn-primary mr-10">Login</button>
-                  <button type="submit" class="btn btn-primary" @click="register()">Register</button>
+                  <button type="submit" class="btn btn-primary mr-10" @click="register()">Register</button>
+                  <button type="submit" class="btn btn-primary" @click="registerWithGoogle()">Register with Google</button>
                 </div>
                 <div class="col-md-8 offset-md-4">
 
@@ -68,12 +76,16 @@ export default {
         email: '',
         password: '',
       },
-      loginStatus: true
+      loginStatus: ''
     }
   },
   methods: {
     register() {
-      this.loginStatus = false
+      this.loginStatus = 'register'
+      this.$emit('statusEvent', this.loginStatus)
+    },
+    forgotPassword() {
+      this.loginStatus = 'forgotPassword'
       this.$emit('statusEvent', this.loginStatus)
     },
     login() {
@@ -85,6 +97,18 @@ export default {
           .catch(err => {
             this.error = err.message;
           });
+    },
+    registerWithGoogle() {
+      let provider = new firebaseAuth.GoogleAuthProvider();
+      firebaseAuth.signInWithRedirect(firebaseAuth.getAuth(), provider)
+      firebaseAuth.getAuth().signInWithPopup(provider)
+      .then((result) => {
+        const credential = provider.credentialFromResult(result);
+        let token = credential.access_token;
+        let user = result.user;
+        console.log(token) // Token
+        console.log(user) // User that was authenticated
+      })
     }
   }
 }

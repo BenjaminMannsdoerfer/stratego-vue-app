@@ -86,7 +86,7 @@ export default {
         email: '',
         password: '',
       },
-      loginStatus: false
+      loginStatus: 'login'
     }
   },
   methods: {
@@ -102,7 +102,6 @@ export default {
       });
     },
     back() {
-      this.loginStatus = true
       this.$emit('statusEvent', this.loginStatus)
     },
   }
