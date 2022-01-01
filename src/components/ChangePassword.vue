@@ -5,10 +5,8 @@
         <div class="card">
           <div class="card-header">Reset Password</div>
           <div class="card-body">
-            <form action="#" @submit.prevent="changePassword">
               <div class="form-group row">
                 <label for="newPassword" class="col-md-4 col-form-label text-md-right align-self-center">New password</label>
-
                 <div class="col-md-6">
                   <input
                       id="newPassword"
@@ -40,9 +38,6 @@
               <div class="form-group row mb-0">
                 <div class="col-md-6 offset-md-4 auth-button">
                   <v-btn type="submit" class="btn btn-primary mr-10" @click="back" ><v-icon>mdi-arrow-left</v-icon>Back</v-btn>
-<!--                  <button type="submit" class="btn btn-primary">Continue</button>-->
-
-
                   <v-row justify="center">
                     <v-dialog
                         v-model="dialog"
@@ -105,12 +100,8 @@
                       </v-card>
                     </v-dialog>
                   </v-row>
-
-
-
                 </div>
               </div>
-            </form>
           </div>
         </div>
       </div>
