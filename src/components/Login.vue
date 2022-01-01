@@ -1,5 +1,4 @@
 <template>
-
   <div class="backgroundd">
     <div class="row justify-content-center">
       <div class="col-md-8">
@@ -52,9 +51,6 @@
                   <button type="submit" class="btn btn-primary mr-10" @click="register()">Register</button>
                   <button type="submit" class="btn btn-primary" @click="registerWithGoogle()">Register with Google</button>
                 </div>
-                <div class="col-md-8 offset-md-4">
-
-                </div>
               </div>
             </form>
           </div>
@@ -62,7 +58,6 @@
       </div>
     </div>
   </div>
-
 </template>
 
 <script>

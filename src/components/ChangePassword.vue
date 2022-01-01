@@ -1,0 +1,164 @@
+<template>
+  <div class="backgroundd">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header">Reset Password</div>
+          <div class="card-body">
+            <form action="#" @submit.prevent="changePassword">
+              <div class="form-group row">
+                <label for="newPassword" class="col-md-4 col-form-label text-md-right align-self-center">New password</label>
+
+                <div class="col-md-6">
+                  <input
+                      id="newPassword"
+                      type="password"
+                      class="form-control input-field"
+                      name="email"
+                      value
+                      required
+                      autofocus
+                      v-model="newPassword"
+                  />
+                </div>
+              </div>
+
+              <label for="repeatPassword" class="col-md-4 col-form-label text-md-right align-self-center">Repeat password</label>
+              <div class="col-md-6">
+                <input
+                    id="repeatPassword"
+                    type="password"
+                    class="form-control input-field"
+                    name="email"
+                    value
+                    required
+                    autofocus
+                    v-model="repeatPassword"
+                />
+              </div>
+
+              <div class="form-group row mb-0">
+                <div class="col-md-6 offset-md-4 auth-button">
+                  <v-btn type="submit" class="btn btn-primary mr-10" @click="back" ><v-icon>mdi-arrow-left</v-icon>Back</v-btn>
+<!--                  <button type="submit" class="btn btn-primary">Continue</button>-->
+
+
+                  <v-row justify="center">
+                    <v-dialog
+                        v-model="dialog"
+                        persistent
+                        max-width="600px"
+                    >
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-btn
+                            color="primary"
+                            dark
+                            v-bind="attrs"
+                            v-on="on"
+                        >
+                          Continue
+                        </v-btn>
+                      </template>
+                      <v-card>
+                        <v-card-title>
+                          <span class="text-h5">Authenticate</span>
+                        </v-card-title>
+                        <v-card-text>
+                          <v-container>
+                            <v-row>
+                              <v-col cols="12">
+                                <v-text-field
+                                    label="Email*"
+                                    required
+                                    v-model="email"
+                                ></v-text-field>
+                              </v-col>
+                              <v-col cols="12">
+                                <v-text-field
+                                    label="Password*"
+                                    type="password"
+                                    required
+                                    v-model="password"
+                                ></v-text-field>
+                              </v-col>
+                            </v-row>
+                          </v-container>
+                          <small>*indicates required field</small>
+                        </v-card-text>
+                        <v-card-actions>
+                          <v-spacer></v-spacer>
+                          <v-btn
+                              color="blue darken-1"
+                              text
+                              @click="dialog = false"
+                          >
+                            Close
+                          </v-btn>
+                          <v-btn
+                              color="blue darken-1"
+                              text
+                              @click="reauthenticate(dialog)"
+                          >
+                            Save
+                          </v-btn>
+                        </v-card-actions>
+                      </v-card>
+                    </v-dialog>
+                  </v-row>
+
+
+
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import {firebaseAuth} from "@/main";
+
+export default {
+  name: "ChangePassword",
+  data() {
+    return {
+      email: '',
+      password: '',
+      newPassword: '',
+      repeatPassword: '',
+      loginStatus: 'account',
+      dialog: false
+    }
+  },
+  methods: {
+    back() {
+      this.$emit('statusEvent', this.loginStatus)
+    },
+    changePassword() {
+      let user = firebaseAuth.getAuth().currentUser;
+      firebaseAuth.updatePassword(user, this.newPassword).then(() => {
+        console.log('It works!')
+      }).catch((error) => {
+        console.log(error)
+      });
+    },
+    reauthenticate() {
+      this.dialog = false
+      const user = firebaseAuth.getAuth().currentUser;
+      const credential = firebaseAuth.EmailAuthProvider.credential(
+          this.email,
+          this.password
+      );
+      firebaseAuth.reauthenticateWithCredential(user, credential);
+      this.changePassword()
+    }
+  }
+}
+</script>
+
+<style scoped>
+
+</style>
