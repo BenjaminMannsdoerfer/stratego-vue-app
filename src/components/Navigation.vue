@@ -96,7 +96,7 @@ export default {
           .signOut()
           .then(() => {
             this.$router.replace({
-              name: "Authentication"
+              name: "Home"
             });
           });
     },

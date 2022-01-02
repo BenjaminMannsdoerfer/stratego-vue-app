@@ -120,13 +120,13 @@ export default {
       password: '',
       newPassword: '',
       repeatPassword: '',
-      loginStatus: 'account',
+      authStatus: 'account',
       dialog: false
     }
   },
   methods: {
     back() {
-      this.$emit('statusEvent', this.loginStatus)
+      this.$emit('statusEvent', this.authStatus)
     },
     changePassword() {
       let user = firebaseAuth.getAuth().currentUser;

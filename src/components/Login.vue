@@ -95,14 +95,10 @@ export default {
     },
     registerWithGoogle() {
       let provider = new firebaseAuth.GoogleAuthProvider();
-      firebaseAuth.signInWithRedirect(firebaseAuth.getAuth(), provider)
-      firebaseAuth.getAuth().signInWithPopup(provider)
+      //firebaseAuth.signInWithRedirect(firebaseAuth.getAuth(), provider)
+      firebaseAuth.signInWithPopup(firebaseAuth.getAuth(), provider)
       .then((result) => {
-        const credential = provider.credentialFromResult(result);
-        let token = credential.access_token;
-        let user = result.user;
-        console.log(token) // Token
-        console.log(user) // User that was authenticated
+        console.log("success")
       })
     }
   }

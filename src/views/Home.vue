@@ -2,6 +2,8 @@
   <v-app>
     <Start v-if="status === 'start' && authentication === true" :lobby="lobby" :player="player"></Start>
 
+    <NoLogin v-else-if="authentication === false"></NoLogin>
+
     <SetNames v-else-if="status === 'lobby'" :status="status" :lobby="lobby" :player="player"></SetNames>
 
     <Board v-else-if="status === 'Board'" :size="size" :fields="fields" :currentPlayerIndex="currentPlayerIndex"
@@ -20,6 +22,7 @@ import InitGame from "../components/InitGame";
 import PlayGame from "../components/PlayGame";
 import Board from "../components/Board";
 import {firebaseAuth} from "@/main";
+import NoLogin from "@/components/NoLogin";
 
 export default {
   name: 'Home',
@@ -40,6 +43,7 @@ export default {
     },
   }),
   components: {
+    NoLogin,
     Board,
     PlayGame,
     InitGame,

@@ -3,7 +3,7 @@
     <div class="row justify-content-center">
       <div class="col-md-8">
         <div class="card">
-          <div class="card-header">Reset Password</div>
+          <div class="card-header">Forgot Password</div>
           <div class="card-body">
             <form action="#" @submit.prevent="resetPassword">
               <div class="form-group row">
@@ -47,12 +47,12 @@ export default {
       email: '',
       error: '',
       emailSending: false,
-      loginStatus: 'login'
+      authStatus: 'login'
     }
   },
   methods: {
     back() {
-      this.$emit('statusEvent', this.loginStatus)
+      this.$emit('statusEvent', this.authStatus)
     },
     resetPassword() {
       if (!this.email) {
