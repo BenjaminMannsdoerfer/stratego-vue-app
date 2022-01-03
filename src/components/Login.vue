@@ -8,7 +8,6 @@
             <form action="#" @submit.prevent="login">
               <div class="form-group row">
                 <label for="email" class="col-md-4 col-form-label text-md-right align-self-center">Email</label>
-
                 <div class="col-md-6">
                   <input
                       id="email"
@@ -22,7 +21,6 @@
                   />
                 </div>
               </div>
-
               <div class="form-group row">
                 <label for="password" class="col-md-4 col-form-label text-md-right align-self-center">Password</label>
                 <div class="col-md-6">
@@ -36,15 +34,13 @@
                   />
                 </div>
               </div>
-
               <div class="form-group row">
-                <div class="col-md-12 col-form-label text-center" @click="forgotPassword">
+                <div class="col-md-12 col-form-label text-center">
                   <p>
-                    <a>Forgot Password</a>
+                    <a @click="forgotPassword">Forgot Password</a>
                   </p>
                 </div>
               </div>
-
               <div class="form-group row mb-0">
                 <div class="col-md-6 offset-md-3 auth-button">
                   <button type="submit" class="btn btn-primary mr-10">Login</button>
@@ -61,7 +57,7 @@
 </template>
 
 <script>
-import {firebaseAuth} from "../main";
+import {firebaseAuth} from "@/main";
 
 export default {
   name: "Login",
@@ -86,19 +82,16 @@ export default {
     async login() {
       // encode as UTF-8
       const msgBuffer = new TextEncoder().encode(this.form.password);
-
       // hash the message
       const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-
       // convert ArrayBuffer to Array
       const hashArray = Array.from(new Uint8Array(hashBuffer));
-
       // convert bytes to hex string
       const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
       console.log(hashHex)
       firebaseAuth
           .signInWithEmailAndPassword(firebaseAuth.getAuth(), this.form.email, hashHex)
-          .then(data => {
+          .then(() => {
             this.$router.replace({name: "Home"});
           })
           .catch(err => {
@@ -109,7 +102,7 @@ export default {
       let provider = new firebaseAuth.GoogleAuthProvider();
       //firebaseAuth.signInWithRedirect(firebaseAuth.getAuth(), provider)
       firebaseAuth.signInWithPopup(firebaseAuth.getAuth(), provider)
-      .then((result) => {
+      .then(() => {
         console.log("success")
       })
     }

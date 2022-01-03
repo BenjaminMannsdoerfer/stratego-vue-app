@@ -85,7 +85,6 @@ export default {
       this.row = row
       this.col = col
     },
-
     onkeydown(event) {
       switch (event.keyCode) {
         case 70:
@@ -136,7 +135,6 @@ export default {
   created() {
     window.onkeydown = this.onkeydown
   },
-
 }
 </script>
 

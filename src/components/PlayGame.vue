@@ -86,7 +86,6 @@ export default {
         }
       }))
     },
-
     attack(row, col, rowD, colD) {
       window.websocket.send(JSON.stringify({
         "attack": {
@@ -97,7 +96,6 @@ export default {
         }
       }))
     },
-
     clickSet(row, col) {
       if (this.setAttack === false) {
         this.row = row
@@ -113,7 +111,6 @@ export default {
         }
       }
     },
-
     onkeydown(event) {
       switch (event.keyCode) {
         case 65:

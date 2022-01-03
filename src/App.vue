@@ -10,15 +10,16 @@
 <script>
 
 import Navigation from "@/components/Navigation";
+
 window.websocket = new WebSocket(process.env.VUE_APP_WEBSOCKET)
 export default {
   components: {Navigation},
   data: () => ({
 
     items: [
-      { title: 'Home', icon: 'mdi-fencing', to: '/' },
-      { title: 'About', icon: 'mdi-help-box', to: '/about' },
-      { title: 'Authentication', icon: 'mdi-account', to: '/authentication' },
+      {title: 'Home', icon: 'mdi-fencing', to: '/'},
+      {title: 'About', icon: 'mdi-help-box', to: '/about'},
+      {title: 'Authentication', icon: 'mdi-account', to: '/authentication'},
     ],
   }),
 }

@@ -5,13 +5,18 @@
         <div class="card">
           <div class="card-header">Account</div>
           <div class="card-body">
-            <div class="form-group row mb-0">
+            <div class="form-group row">
               <div class="col-md-6 offset-md-3 auth-button">
                 <button type="submit" class="btn btn-primary mr-10" @click="home()">Home</button>
-                <button type="submit" class="btn btn-primary mr-10" @click="sendEmailVerification()">Email Verification</button>
-                <div v-if="auth.getAuth().currentUser.email.includes('@gmail.com') || auth.getAuth().currentUser.email.includes('@googlemail.com')"></div>
-                <button v-else type="submit" class="btn btn-primary mr-10" @click="changePassword()">Change Password</button>
-                <div v-if="auth.getAuth().currentUser.email.includes('@gmail.com') || auth.getAuth().currentUser.email.includes('@googlemail.com')"></div>
+                <button type="submit" class="btn btn-primary mr-10" @click="sendEmailVerification()">Email
+                  Verification
+                </button>
+                <div
+                    v-if="auth.getAuth().currentUser.email.includes('@gmail.com') || auth.getAuth().currentUser.email.includes('@googlemail.com')"></div>
+                <button v-else type="submit" class="btn btn-primary mr-10" @click="changePassword()">Change Password
+                </button>
+                <div
+                    v-if="auth.getAuth().currentUser.email.includes('@gmail.com') || auth.getAuth().currentUser.email.includes('@googlemail.com')"></div>
                 <button v-else type="submit" class="btn btn-primary mr-10" @click="changeEmail()">Change Email</button>
                 <button
                     v-if="auth.getAuth().currentUser.email.includes('@gmail.com') || auth.getAuth().currentUser.email.includes('@googlemail.com')"
@@ -115,16 +120,9 @@ export default {
         const actionCodeSettings = {
           url: `${process.env.VUE_APP_HOST_NAME}?email=${user.email}`,
         };
-        console.log(actionCodeSettings.url)
         firebaseAuth.sendEmailVerification(user, actionCodeSettings);
       } else {
         console.log("still verified")
-      }
-
-      if (user.emailVerified === true) {
-        console.log("email verified")
-      } else {
-        console.log("email not verified")
       }
     },
     changeEmail() {
@@ -141,13 +139,10 @@ export default {
     async reauthenticateDeleteAccount() {
       // encode as UTF-8
       const msgBuffer = new TextEncoder().encode(this.userPassword);
-
       // hash the message
       const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-
       // convert ArrayBuffer to Array
       const hashArray = Array.from(new Uint8Array(hashBuffer));
-
       // convert bytes to hex string
       const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
       this.dialog = false
@@ -158,7 +153,6 @@ export default {
       );
       await firebaseAuth.reauthenticateWithCredential(user, credential);
       await firebaseAuth.deleteUser(user).then(() => {
-        console.log("Account deleted")
         this.authStatus = 'login'
         this.loginStatus = false
         this.$emit('loginEvent', this.loginStatus)
@@ -166,9 +160,7 @@ export default {
         this.$router.push({name: 'Home'})
       }).catch((error) => {
         console.log(error)
-        // An error ocurred
       });
-      console.log(this.authStatus + " " + this.loginStatus)
     },
     async reauthenticateDeleteGoogleAccount() {
       const user = firebaseAuth.getAuth().currentUser;
@@ -180,7 +172,7 @@ export default {
         this.$router.push({name: 'Home'})
       }).catch((error) => {
         console.log(error)
-      });// User that was authenticated
+      });
     }
   }
 }

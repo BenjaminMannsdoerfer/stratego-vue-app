@@ -1,16 +1,12 @@
 <template>
   <v-app>
     <Start v-if="status === 'start' && authentication === true" :lobby="lobby" :player="player"></Start>
-
     <NoLogin v-else-if="authentication === false"></NoLogin>
-
     <SetNames v-else-if="status === 'lobby'" :status="status" :lobby="lobby" :player="player"></SetNames>
-
     <Board v-else-if="status === 'Board'" :size="size" :fields="fields" :currentPlayerIndex="currentPlayerIndex"
            :currentPlayer="currentPlayer" :playerListBufferBlue="playerListBufferBlue"
            :playerListBufferRed="playerListBufferRed"
            :gameStatus="gameStatus" :border="border" :player="player"></Board>
-
   </v-app>
 </template>
 
@@ -67,7 +63,7 @@ export default {
           console.log('Error in Websocket Occured: ' + error);
         };
       }
-      window.websocket.onclose = function(event) {
+      window.websocket.onclose = function () {
         console.log("WebSocket is closed now.");
       };
       window.websocket.onmessage = (e) => {
@@ -93,15 +89,10 @@ export default {
           }
         }
       }
-      firebaseAuth.getAuth().onAuthStateChanged(user =>  {
+      firebaseAuth.getAuth().onAuthStateChanged(user => {
         if (user) {
-          // User is signed in.
-          console.log(user.displayName)
-          console.log("User is signed in.")
           return this.authentication = true;
         } else {
-          // No user is signed in.
-          console.log("No user is signed in.")
           return this.authentication = false;
         }
       });
@@ -110,7 +101,6 @@ export default {
   created() {
     this.createWebsocket();
   }
-
 }
 </script>
 

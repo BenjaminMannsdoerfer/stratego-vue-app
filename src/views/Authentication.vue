@@ -1,10 +1,14 @@
 <template>
   <v-app>
     <Login v-if="authStatus === 'login' && loginStatus === false" @statusEvent="updateStatus"></Login>
-    <Account v-else-if="authStatus === 'account' && loginStatus === true" @statusEvent="updateStatus" @loginEvent="updateLogin"></Account>
-    <ChangePassword v-else-if="authStatus === 'changePassword' && loginStatus === true" @statusEvent="updateStatus"></ChangePassword>
-    <ChangeEmail v-else-if="authStatus === 'changeEmail' && loginStatus === true" @statusEvent="updateStatus"></ChangeEmail>
-    <ForgotPassword v-else-if="authStatus === 'forgotPassword' && loginStatus === false" @statusEvent="updateStatus"></ForgotPassword>
+    <Account v-else-if="authStatus === 'account' && loginStatus === true" @statusEvent="updateStatus"
+             @loginEvent="updateLogin"></Account>
+    <ChangePassword v-else-if="authStatus === 'changePassword' && loginStatus === true"
+                    @statusEvent="updateStatus"></ChangePassword>
+    <ChangeEmail v-else-if="authStatus === 'changeEmail' && loginStatus === true"
+                 @statusEvent="updateStatus"></ChangeEmail>
+    <ForgotPassword v-else-if="authStatus === 'forgotPassword' && loginStatus === false"
+                    @statusEvent="updateStatus"></ForgotPassword>
     <Register v-else-if="authStatus === 'register' && loginStatus === false" @statusEvent="updateStatus"></Register>
   </v-app>
 </template>
@@ -21,12 +25,12 @@ import {firebaseAuth} from "@/main";
 export default {
   name: "Authentication",
   components: {ChangePassword, ChangeEmail, ForgotPassword, Login, Register, Account},
-  data () {
+  data() {
     return {
       authStatus: 'login',
       loginStatus: false
-      }
-    },
+    }
+  },
   methods: {
     updateStatus(authStatus) {
       this.authStatus = authStatus
@@ -38,16 +42,11 @@ export default {
     }
   },
   created() {
-    firebaseAuth.getAuth().onAuthStateChanged(user =>  {
+    firebaseAuth.getAuth().onAuthStateChanged(user => {
       if (user) {
-        // User is signed in.
-        console.log(user.displayName)
-        console.log("User is signed in.")
         this.authStatus = 'account'
         return this.loginStatus = true;
       } else {
-        // No user is signed in.
-        console.log("No user is signed in.")
         return this.loginStatus = false;
       }
     });

@@ -1,27 +1,33 @@
 <template>
   <div class="backgroundd text-center" style="flex: 0 0 auto">
-    <h2>{{"Player: " + player}}</h2>
+    <h2>{{ "Player: " + player }}</h2>
     <div v-if="gameStatus === 'WON'">
-      <h2 v-if="currentPlayerIndex === 0" class="color-blue">{{currentPlayer + " you found the flag and won the game!"}}</h2>
-      <h2 v-if="currentPlayerIndex === 1" class="color-red">{{currentPlayer + " you found the flag and won the game!"}}</h2>
+      <h2 v-if="currentPlayerIndex === 0" class="color-blue">
+        {{ currentPlayer + " you found the flag and won the game!" }}</h2>
+      <h2 v-if="currentPlayerIndex === 1" class="color-red">
+        {{ currentPlayer + " you found the flag and won the game!" }}</h2>
       <div class="my-2">
-      <v-btn
-          x-large
-          color="rgba(192,141,43,255)"
-          @click="changeStatus()"
-      >
-        new game
-      </v-btn>
-        </div>
+        <v-btn
+            x-large
+            color="rgba(192,141,43,255)"
+            @click="changeStatus()"
+        >
+          new game
+        </v-btn>
+      </div>
     </div>
     <div v-else>
-    <h2 v-if="playerListBufferRed === 0 && currentPlayerIndex === 0" class="color-blue">{{currentPlayer + " it's your turn"}}</h2>
-    <h2 v-else-if="playerListBufferRed === 0 && currentPlayerIndex === 1" class="color-red">{{currentPlayer + " it's your turn"}}</h2>
-    <h2 v-else-if="playerListBufferRed > 0 && currentPlayerIndex === 0" class="color-blue">{{"Enter your figures " + currentPlayer}}</h2>
-    <h2 v-else-if="playerListBufferRed > 0 && currentPlayerIndex === 1" class="color-red">{{"Enter your figures " + currentPlayer}}</h2>
+      <h2 v-if="playerListBufferRed === 0 && currentPlayerIndex === 0" class="color-blue">
+        {{ currentPlayer + " it's your turn" }}</h2>
+      <h2 v-else-if="playerListBufferRed === 0 && currentPlayerIndex === 1" class="color-red">
+        {{ currentPlayer + " it's your turn" }}</h2>
+      <h2 v-else-if="playerListBufferRed > 0 && currentPlayerIndex === 0" class="color-blue">
+        {{ "Enter your figures " + currentPlayer }}</h2>
+      <h2 v-else-if="playerListBufferRed > 0 && currentPlayerIndex === 1" class="color-red">
+        {{ "Enter your figures " + currentPlayer }}</h2>
     </div>
     <div class="init-game-top">
-      <img class="img-fluid img-game-top" :src="url + border.top"/>
+      <img class="img-fluid img-game-top" :src="url + border.top" alt="border top"/>
     </div>
     <div class="mid-border">
       <div class="row justify-content-center">
@@ -39,12 +45,12 @@
                   :playerListBufferRed="playerListBufferRed"
                   :gameStatus="gameStatus" :border="border" :player="player"></PlayGame>
         <div class="col-auto init-game-right">
-          <img class="img-game-right" :src="url + border.right"/>
+          <img class="img-game-right" :src="url + border.right" alt="border right"/>
         </div>
       </div>
     </div>
     <div class="init-game-bot">
-      <img class="img-game-bot" :src="url + border.bot"/>
+      <img class="img-game-bot" :src="url + border.bot" alt="border bot"/>
     </div>
     <div class="my-2">
       <v-btn
@@ -64,7 +70,7 @@ import PlayGame from "./PlayGame";
 
 export default {
   name: "Board",
-  data () {
+  data() {
     return {
       url: process.env.VUE_APP_MY_DOMAIN
     }
@@ -97,7 +103,6 @@ export default {
       }))
     },
   }
-
 }
 </script>
 

@@ -8,7 +8,6 @@
             <form action="#" @submit.prevent="resetPassword">
               <div class="form-group row">
                 <label for="email" class="col-md-4 col-form-label text-md-right align-self-center">Email</label>
-
                 <div class="col-md-6">
                   <input
                       id="email"
@@ -22,10 +21,12 @@
                   />
                 </div>
               </div>
-
               <div class="form-group row mb-0">
                 <div class="col-md-6 offset-md-4 auth-button">
-                  <v-btn type="submit" class="btn btn-primary mr-10" @click="back" ><v-icon>mdi-arrow-left</v-icon>Back</v-btn>
+                  <v-btn type="submit" class="btn btn-primary mr-10" @click="back">
+                    <v-icon>mdi-arrow-left</v-icon>
+                    Back
+                  </v-btn>
                   <button type="submit" class="btn btn-primary">Continue</button>
                 </div>
               </div>

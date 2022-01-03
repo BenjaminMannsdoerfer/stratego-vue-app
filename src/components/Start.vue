@@ -8,7 +8,7 @@
             sm="6"
             md="4"
         >
-        <h2>{{"Welcome to Stratego"}}</h2>
+          <h2>{{ "Welcome to Stratego" }}</h2>
         </v-col>
       </v-row>
       <v-row justify="center">
@@ -27,7 +27,8 @@
       </v-row>
       <v-row justify="center">
         <v-col cols="12" sm="6" md="6">
-          <v-img src="@/assets/images/media/stratego_start.png" class="margin-center" justify="center" @click="changeStatus()" height="93" width="320"/>
+          <v-img src="@/assets/images/media/stratego_start.png" class="margin-center" justify="center"
+                 @click="changeStatus()" height="93" width="320"/>
         </v-col>
       </v-row>
     </v-container>
@@ -60,10 +61,10 @@ export default {
       }
       window.websocket.send(JSON.stringify({
         "lobby": {
-        "currentPlayer": this.player
-      }}))
+          "currentPlayer": this.player
+        }
+      }))
     },
-
   },
   mounted: function () {
     let elHtml = document.getElementsByTagName('html')[0]

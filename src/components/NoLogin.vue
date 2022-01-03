@@ -8,18 +8,20 @@
             sm="6"
             md="4"
         >
-          <h2><pre>{{"Welcome to Stratego\nYou are not logged in\nPlease login"}}</pre></h2>
+          <h2>
+            <pre>{{ "Welcome to Stratego\nYou are not logged in\nPlease login" }}</pre>
+          </h2>
         </v-col>
       </v-row>
       <v-row justify="center">
-          <v-col
-              style="text-align: center"
-              cols="12"
-              sm="6"
-              md="4"
-          >
-            <button type="submit" class="btn btn-primary" @click="login()">Login</button>
-          </v-col>
+        <v-col
+            style="text-align: center"
+            cols="12"
+            sm="6"
+            md="4"
+        >
+          <button type="submit" class="btn btn-primary" @click="login()">Login</button>
+        </v-col>
       </v-row>
     </v-container>
   </v-form>
@@ -30,7 +32,7 @@ export default {
   name: "NoLogin",
   methods: {
     login() {
-      this.$router.push({name : 'Authentication'})
+      this.$router.push({name: 'Authentication'})
     }
   }
 }

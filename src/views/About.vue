@@ -2,19 +2,23 @@
   <div>
     <body class="backgroundd">
     <div class="spielfeld_img">
-      <img class="img-fluid about-playfield" src="../assets/images/media/Stratego_plateau.jpg"  alt="Stratego Spielbrett" title="Spielbrett Stratego"/>
+      <img class="img-fluid about-playfield" src="../assets/images/media/Stratego_plateau.jpg" alt="Stratego Spielbrett"
+           title="Spielbrett Stratego"/>
     </div>
 
     <div class="row">
-      <div class="col text-center"> <!--gameplay text-left-->
-        <h3 class ="text-center">Gameplay:</h3>
-        <p> Stratego is a strategy board game for two players. Each player has 40 pieces representing different characters.
-          We modified the game a little bit so you can walk with all characters (except flag and bomb) just one field up, down, to the right or to the left.
-          You also can attack the oppenents with your figures. To win the game you have to find and attack the flag of your enemy.</p>
+      <div class="col text-center">
+        <h3 class="text-center">Gameplay:</h3>
+        <p> Stratego is a strategy board game for two players. Each player has 40 pieces representing different
+          characters.
+          We modified the game a little bit so you can walk with all characters (except flag and bomb) just one field
+          up, down, to the right or to the left.
+          You also can attack the oppenents with your figures. To win the game you have to find and attack the flag of
+          your enemy.</p>
       </div>
 
-      <div class="col text-center"> <!-- figures-->
-        <div class = "h3-text">
+      <div class="col text-center">
+        <div class="h3-text">
           <h3 style="padding-left:8px;">The figures are ranked from highest to lowest as follows:</h3>
         </div>
         <div class="fig-txtt">
@@ -29,39 +33,48 @@
             </tr>
             <tr>
               <td style="font-weight:bold;">2.Marshal</td>
-              <td><img src="../assets/images/media/figures/stratego-marshal.svg" alt="player" width="30" height="60"/></td>
+              <td><img src="../assets/images/media/figures/stratego-marshal.svg" alt="player" width="30" height="60"/>
+              </td>
             </tr>
             <tr>
               <td style="font-weight:bold;">3.General</td>
-              <td><img src="../assets/images/media/figures/stratego-general.svg" alt="player" width="30" height="60"/></td>
+              <td><img src="../assets/images/media/figures/stratego-general.svg" alt="player" width="30" height="60"/>
+              </td>
             </tr>
             <tr>
               <td style="font-weight:bold;">4.Cononel</td>
-              <td><img src="../assets/images/media/figures/stratego-colonel.svg" alt="player" width="30" height="60"/></td>
+              <td><img src="../assets/images/media/figures/stratego-colonel.svg" alt="player" width="30" height="60"/>
+              </td>
             </tr>
             <tr>
               <td style="font-weight:bold;">5.Major</td>
-              <td><img src="../assets/images/media/figures/stratego-major.svg" alt="player" width="30" height="60"/></td>
+              <td><img src="../assets/images/media/figures/stratego-major.svg" alt="player" width="30" height="60"/>
+              </td>
             </tr>
             <tr>
               <td style="font-weight:bold;">6.Captain</td>
-              <td><img src="../assets/images/media/figures/stratego-captain.svg" alt="player" width="30" height="60"/></td>
+              <td><img src="../assets/images/media/figures/stratego-captain.svg" alt="player" width="30" height="60"/>
+              </td>
             </tr>
             <tr>
               <td style="font-weight:bold;">7.Lieutenant</td>
-              <td><img src="../assets/images/media/figures/stratego-lieutenant.svg" alt="player" width="30" height="60"/></td>
+              <td><img src="../assets/images/media/figures/stratego-lieutenant.svg" alt="player" width="30"
+                       height="60"/></td>
             </tr>
             <tr>
               <td style="font-weight:bold;">8.Sergeant</td>
-              <td><img src="../assets/images/media/figures/stratego-sergeant.svg" alt="player" width="30" height="60"/></td>
+              <td><img src="../assets/images/media/figures/stratego-sergeant.svg" alt="player" width="30" height="60"/>
+              </td>
             </tr>
             <tr>
               <td style="font-weight:bold;">9.Miner</td>
-              <td><img src="../assets/images/media/figures/stratego-miner.svg" alt="player" width="30" height="60"/></td>
+              <td><img src="../assets/images/media/figures/stratego-miner.svg" alt="player" width="30" height="60"/>
+              </td>
             </tr>
             <tr>
               <td style="font-weight:bold;">10.Scout</td>
-              <td><img src="../assets/images/media/figures/stratego-scout.svg" alt="player" width="30" height="60"/></td>
+              <td><img src="../assets/images/media/figures/stratego-scout.svg" alt="player" width="30" height="60"/>
+              </td>
             </tr>
             <tr>
               <td style="font-weight:bold;">11.Spy</td>
@@ -77,7 +90,7 @@
 
       <div class="rules col">
         <h3 class="text-center">Rules:</h3>
-        <ul class = "char text-center">
+        <ul class="char text-center">
           <li>Flag is the most important figure</li>
           <li>Miner and Bomb: only the miner can defuse the Bomb</li>
           <li>Every other figure loses against the Bomb</li>
@@ -92,13 +105,16 @@
       <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img class="d-block img-fluid " src="../assets/images/media/start_screen.png" alt="First slide" width="513" height="500">
+            <img class="d-block img-fluid " src="../assets/images/media/start_screen.png" alt="First slide" width="513"
+                 height="500">
           </div>
           <div class="carousel-item">
-            <img class="d-block img-fluid " src="../assets/images/media/game_screen.png" alt="Second slide" width = "669" height="500">
+            <img class="d-block img-fluid " src="../assets/images/media/game_screen.png" alt="Second slide" width="669"
+                 height="500">
           </div>
           <div class="carousel-item">
-            <img class="d-block img-fluid " src="../assets/images/media/move_screen.png" alt="Third slide" width = "669" height="500">
+            <img class="d-block img-fluid " src="../assets/images/media/move_screen.png" alt="Third slide" width="669"
+                 height="500">
           </div>
         </div>
         <a class="carousel-control-prev" role="button" data-slide="prev">
@@ -114,17 +130,16 @@
     <div class="github_box">
       <h3>You want to contribute to our project?</h3>
       <form action="https://github.com/BenjaminMannsdoerfer/stratego-web-app" target="_blank">
-        <a href="https://github.com/BenjaminMannsdoerfer/stratego-web-app" class="btn btn-dark btn-lg btn-primary-spacing" role="button">Our Github repository</a>
+        <a href="https://github.com/BenjaminMannsdoerfer/stratego-web-app"
+           class="btn btn-dark btn-lg btn-primary-spacing" role="button">Our Github repository</a>
       </form>
     </div>
     </body>
   </div>
 </template>
 
-
-
 <script>
-export default{
+export default {
   name: "AboutComponent",
   data: () => ({
     model: 0,

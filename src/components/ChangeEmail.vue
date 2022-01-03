@@ -7,7 +7,6 @@
           <div class="card-body">
             <div class="form-group row">
               <label for="email" class="col-md-4 col-form-label text-md-right align-self-center">Email</label>
-
               <div class="col-md-6">
                 <input
                     id="email"
@@ -21,10 +20,12 @@
                 />
               </div>
             </div>
-
             <div class="form-group row mb-0">
               <div class="col-md-6 offset-md-3 auth-button">
-                <v-btn type="submit" class="btn btn-primary mr-10" @click="back" ><v-icon>mdi-arrow-left</v-icon>Back</v-btn>
+                <v-btn type="submit" class="btn btn-primary mr-10" @click="back">
+                  <v-icon>mdi-arrow-left</v-icon>
+                  Back
+                </v-btn>
                 <v-row justify="center">
                   <v-dialog
                       v-model="dialog"
@@ -114,13 +115,10 @@ export default {
     async reauthenticateChangeEmail() {
       // encode as UTF-8
       const msgBuffer = new TextEncoder().encode(this.userPassword);
-
       // hash the message
       const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-
       // convert ArrayBuffer to Array
       const hashArray = Array.from(new Uint8Array(hashBuffer));
-
       // convert bytes to hex string
       const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
       console.log(hashHex)

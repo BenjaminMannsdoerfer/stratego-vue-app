@@ -2,25 +2,26 @@
   <v-form class="backgroundd">
     <v-container fluid>
       <v-row justify="center" style="text-align: center">
-      <v-col
-          cols="12"
-          sm="6"
-      >
-        <h2 v-if="player === lobby.participants[0]" class="color-blue">{{"Welcome to Stratego: " + player}}</h2>
-        <h2 v-else-if="player === lobby.participants[1]" class="color-red">{{"Welcome to Stratego: " + player}}</h2>
+        <v-col
+            cols="12"
+            sm="6"
+        >
+          <h2 v-if="player === lobby.participants[0]" class="color-blue">{{ "Welcome to Stratego: " + player }}</h2>
+          <h2 v-else-if="player === lobby.participants[1]" class="color-red">{{ "Welcome to Stratego: " + player }}</h2>
 
-      </v-col>
+        </v-col>
       </v-row>
-    <v-row justify="center">
-      <v-col
-          class="d-flex"
-          cols="12"
-          sm="6"
-      >
-        <v-select item-text="name" item-value="value" :items="items" @change="getMatchfieldSize" label="select matchfield size">
-        </v-select>
-      </v-col>
-    </v-row>
+      <v-row justify="center">
+        <v-col
+            class="d-flex"
+            cols="12"
+            sm="6"
+        >
+          <v-select item-text="name" item-value="value" :items="items" @change="getMatchfieldSize"
+                    label="select matchfield size">
+          </v-select>
+        </v-col>
+      </v-row>
       <v-row justify="center" style="text-align: center">
 
         <v-col
@@ -28,16 +29,16 @@
             sm="6"
             md="3"
         >
-          <h2 v-if="player === lobby.participants[0]" class="color-blue">{{lobby.participants[0]}}</h2>
-          <h2 v-else-if="player !== lobby.participants[0]" class="color-blue">{{lobby.participants[0]}}</h2>
+          <h2 v-if="player === lobby.participants[0]" class="color-blue">{{ lobby.participants[0] }}</h2>
+          <h2 v-else-if="player !== lobby.participants[0]" class="color-blue">{{ lobby.participants[0] }}</h2>
         </v-col>
         <v-col
             cols="12"
             sm="6"
             md="3"
         >
-          <h2 v-if="player === lobby.participants[1]" class="color-red">{{lobby.participants[1]}}</h2>
-          <h2 v-else-if="player !== lobby.participants[1]" class="color-red">{{lobby.participants[1]}}</h2>
+          <h2 v-if="player === lobby.participants[1]" class="color-red">{{ lobby.participants[1] }}</h2>
+          <h2 v-else-if="player !== lobby.participants[1]" class="color-red">{{ lobby.participants[1] }}</h2>
         </v-col>
         <v-row justify="center">
           <v-col
@@ -45,17 +46,17 @@
               sm="6"
               md="3"
           >
-        <div class="my-2" id="btn">
-          <v-btn
-              x-large
-              color="rgba(192,141,43,255)"
-              @click="getNames()"
-          >
-            Play
-          </v-btn>
-        </div>
+            <div class="my-2" id="btn">
+              <v-btn
+                  x-large
+                  color="rgba(192,141,43,255)"
+                  @click="getNames()"
+              >
+                Play
+              </v-btn>
+            </div>
           </v-col>
-          </v-row>
+        </v-row>
       </v-row>
     </v-container>
   </v-form>
@@ -64,10 +65,11 @@
 <script>
 export default {
   name: 'SetNames',
-  data () {
+  data() {
     return {
-        items: [{name: 'small', value: 4}, {name: 'medium', value: 7}, {name: 'large', value: 10
-        }],
+      items: [{name: 'small', value: 4}, {name: 'medium', value: 7}, {
+        name: 'large', value: 10
+      }],
     }
   },
   props: {
@@ -82,8 +84,7 @@ export default {
         }
       }))
     },
-
-    getMatchfieldSize: function(size) {
+    getMatchfieldSize: function (size) {
       switch (size) {
         case 4:
           window.websocket.send(JSON.stringify({
@@ -104,7 +105,6 @@ export default {
             "large": {
               "matchfieldSize": size
             }
-
           }))
           break;
       }
@@ -119,11 +119,11 @@ export default {
       }))
     },
   },
-  mounted: function() {
+  mounted: function () {
     let elHtml = document.getElementsByTagName('html')[0]
     elHtml.style.overflowY = 'hidden'
   },
-  destroyed: function() {
+  destroyed: function () {
     let elHtml = document.getElementsByTagName('html')[0]
     elHtml.style.overflowY = null
   },
