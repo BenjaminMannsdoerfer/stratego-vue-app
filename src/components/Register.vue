@@ -6,28 +6,8 @@
             <div class="card-header">Register</div>
             <div class="card-body">
               <form action="#" @submit.prevent="register">
-
-                <div class="form-group row">
-                  <label for="email" class="col-md-4 col-form-label text-md-right align-self-center">Name</label>
-                <div class="col-md-6">
-                  <input
-                      id="name"
-                      type="name"
-                      class="form-control"
-                      name="name"
-                      value
-                      required
-                      autofocus
-                      v-model="form.name"
-                  />
-                </div>
-                </div>
-
                 <div class="form-group row">
                   <label for="email" class="col-md-4 col-form-label text-md-right align-self-center">Email</label>
-
-
-
                   <div class="col-md-6">
                     <input
                         id="email"
@@ -41,7 +21,6 @@
                     />
                   </div>
                 </div>
-
                 <div class="form-group row">
                   <label for="password" class="col-md-4 col-form-label text-md-right align-self-center">Password</label>
 
@@ -56,14 +35,10 @@
                     />
                   </div>
                 </div>
-
                 <div class="form-group row mb-0">
                   <div class="col-md-6 offset-md-4 auth-button">
                     <v-btn type="submit" class="btn btn-primary mr-10" @click="back" ><v-icon>mdi-arrow-left</v-icon>Back</v-btn>
                     <button type="submit" class="btn btn-primary">Register</button>
-                  </div>
-                  <div class="col-md-8 offset-md-4">
-
                   </div>
                 </div>
               </form>
@@ -82,7 +57,6 @@ export default {
   data () {
     return {
       form: {
-        name: '',
         email: '',
         password: '',
       },
@@ -91,7 +65,7 @@ export default {
   },
   methods: {
     async register() {
-      /*// encode as UTF-8
+      // encode as UTF-8
       const msgBuffer = new TextEncoder().encode(this.form.password);
 
       // hash the message
@@ -102,8 +76,8 @@ export default {
 
       // convert bytes to hex string
       const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-      console.log(hashHex)*/
-      await firebaseAuth.createUserWithEmailAndPassword(firebaseAuth.getAuth(), this.form.email, this.form.password)
+      console.log(hashHex)
+      await firebaseAuth.createUserWithEmailAndPassword(firebaseAuth.getAuth(), this.form.email, hashHex)
           .then(data => {
             const actionCodeSettings = {
               url: `${process.env.VUE_APP_HOST_NAME}?email=${data.user.email}`,

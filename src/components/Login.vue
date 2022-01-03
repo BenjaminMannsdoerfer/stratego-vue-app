@@ -83,11 +83,23 @@ export default {
       this.loginStatus = 'forgotPassword'
       this.$emit('statusEvent', this.loginStatus)
     },
-    login() {
+    async login() {
+      // encode as UTF-8
+      const msgBuffer = new TextEncoder().encode(this.form.password);
+
+      // hash the message
+      const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+
+      // convert ArrayBuffer to Array
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+
+      // convert bytes to hex string
+      const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+      console.log(hashHex)
       firebaseAuth
-          .signInWithEmailAndPassword(firebaseAuth.getAuth(), this.form.email, this.form.password)
+          .signInWithEmailAndPassword(firebaseAuth.getAuth(), this.form.email, hashHex)
           .then(data => {
-            this.$router.replace({ name: "Home" });
+            this.$router.replace({name: "Home"});
           })
           .catch(err => {
             this.error = err.message;

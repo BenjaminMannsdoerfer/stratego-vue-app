@@ -9,8 +9,10 @@
               <div class="col-md-6 offset-md-3 auth-button">
                 <button type="submit" class="btn btn-primary mr-10" @click="home()">Home</button>
                 <button type="submit" class="btn btn-primary mr-10" @click="sendEmailVerification()">Email Verification</button>
-                <button type="submit" class="btn btn-primary mr-10" @click="changePassword()">Change Password</button>
-                <button type="submit" class="btn btn-primary mr-10" @click="changeEmail()">Change Email</button>
+                <div v-if="auth.getAuth().currentUser.email.includes('@gmail.com') || auth.getAuth().currentUser.email.includes('@googlemail.com')"></div>
+                <button v-else type="submit" class="btn btn-primary mr-10" @click="changePassword()">Change Password</button>
+                <div v-if="auth.getAuth().currentUser.email.includes('@gmail.com') || auth.getAuth().currentUser.email.includes('@googlemail.com')"></div>
+                <button v-else type="submit" class="btn btn-primary mr-10" @click="changeEmail()">Change Email</button>
                 <button
                     v-if="auth.getAuth().currentUser.email.includes('@gmail.com') || auth.getAuth().currentUser.email.includes('@googlemail.com')"
                     type="submit" class="btn btn-primary mr-10" @click="reauthenticateDeleteGoogleAccount()">Delete
@@ -137,11 +139,22 @@ export default {
       this.$router.push({name: "Home"});
     },
     async reauthenticateDeleteAccount() {
+      // encode as UTF-8
+      const msgBuffer = new TextEncoder().encode(this.userPassword);
+
+      // hash the message
+      const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+
+      // convert ArrayBuffer to Array
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+
+      // convert bytes to hex string
+      const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
       this.dialog = false
-      const user = firebaseAuth.getAuth().currentUser;
-      const credential = firebaseAuth.EmailAuthProvider.credential(
+      const user = await firebaseAuth.getAuth().currentUser;
+      const credential = await firebaseAuth.EmailAuthProvider.credential(
           this.userEmail,
-          this.userPassword
+          hashHex
       );
       await firebaseAuth.reauthenticateWithCredential(user, credential);
       await firebaseAuth.deleteUser(user).then(() => {

@@ -3,7 +3,7 @@
     <div class="row justify-content-center">
       <div class="col-md-8">
         <div class="card">
-          <div class="card-header">Reset Password</div>
+          <div class="card-header">Change Password</div>
           <div class="card-body">
               <div class="form-group row">
                 <label for="newPassword" class="col-md-4 col-form-label text-md-right align-self-center">New password</label>
@@ -56,7 +56,7 @@
                       </template>
                       <v-card>
                         <v-card-title>
-                          <span class="text-h5">Authenticate</span>
+                          <span class="text-h5">Authenticate with Email and old Password</span>
                         </v-card-title>
                         <v-card-text>
                           <v-container>
@@ -128,23 +128,47 @@ export default {
     back() {
       this.$emit('statusEvent', this.authStatus)
     },
-    changePassword() {
-      let user = firebaseAuth.getAuth().currentUser;
-      firebaseAuth.updatePassword(user, this.newPassword).then(() => {
+    async changePassword() {
+      // encode as UTF-8
+      const msgBuffer = new TextEncoder().encode(this.newPassword);
+
+      // hash the message
+      const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+
+      // convert ArrayBuffer to Array
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+
+      // convert bytes to hex string
+      const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+      console.log(hashHex)
+      let user = await firebaseAuth.getAuth().currentUser;
+      await firebaseAuth.updatePassword(user, hashHex).then(() => {
         console.log('It works!')
       }).catch((error) => {
         console.log(error)
       });
     },
-    reauthenticate() {
+    async reauthenticate() {
+      // encode as UTF-8
+      const msgBuffer = new TextEncoder().encode(this.password);
+
+      // hash the message
+      const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+
+      // convert ArrayBuffer to Array
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+
+      // convert bytes to hex string
+      const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+      console.log(hashHex)
       this.dialog = false
-      const user = firebaseAuth.getAuth().currentUser;
-      const credential = firebaseAuth.EmailAuthProvider.credential(
+      const user = await firebaseAuth.getAuth().currentUser;
+      const credential = await firebaseAuth.EmailAuthProvider.credential(
           this.email,
-          this.password
+          hashHex
       );
-      firebaseAuth.reauthenticateWithCredential(user, credential);
-      this.changePassword()
+      await firebaseAuth.reauthenticateWithCredential(user, credential);
+      await this.changePassword()
     }
   }
 }

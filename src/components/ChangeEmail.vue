@@ -3,7 +3,7 @@
     <div class="row justify-content-center">
       <div class="col-md-8">
         <div class="card">
-          <div class="card-header">Account</div>
+          <div class="card-header">Change Email</div>
           <div class="card-body">
             <div class="form-group row">
               <label for="email" class="col-md-4 col-form-label text-md-right align-self-center">Email</label>
@@ -112,11 +112,23 @@ export default {
   },
   methods: {
     async reauthenticateChangeEmail() {
+      // encode as UTF-8
+      const msgBuffer = new TextEncoder().encode(this.userPassword);
+
+      // hash the message
+      const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+
+      // convert ArrayBuffer to Array
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+
+      // convert bytes to hex string
+      const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+      console.log(hashHex)
       this.dialog = false
       const user = firebaseAuth.getAuth().currentUser;
       const credential = firebaseAuth.EmailAuthProvider.credential(
           this.userEmail,
-          this.userPassword
+          hashHex
       );
       await firebaseAuth.reauthenticateWithCredential(user, credential);
       await firebaseAuth.updateEmail(firebaseAuth.getAuth().currentUser, this.newEmail)
