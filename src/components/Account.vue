@@ -8,6 +8,7 @@
             <div class="form-group row mb-0">
               <div class="col-md-6 offset-md-3 auth-button">
                 <button type="submit" class="btn btn-primary mr-10" @click="home()">Home</button>
+                <button type="submit" class="btn btn-primary mr-10" @click="sendEmailVerification()">Email Verification</button>
                 <button type="submit" class="btn btn-primary mr-10" @click="changePassword()">Change Password</button>
                 <button type="submit" class="btn btn-primary mr-10" @click="changeEmail()">Change Email</button>
                 <button
@@ -105,6 +106,25 @@ export default {
     }
   },
   methods: {
+    sendEmailVerification() {
+      const user = firebaseAuth.getAuth().currentUser
+      user.reload()
+      if (user.emailVerified === false) {
+        const actionCodeSettings = {
+          url: `${process.env.VUE_APP_HOST_NAME}?email=${user.email}`,
+        };
+        console.log(actionCodeSettings.url)
+        firebaseAuth.sendEmailVerification(user, actionCodeSettings);
+      } else {
+        console.log("still verified")
+      }
+
+      if (user.emailVerified === true) {
+        console.log("email verified")
+      } else {
+        console.log("email not verified")
+      }
+    },
     changeEmail() {
       this.authStatus = 'changeEmail'
       this.$emit('statusEvent', this.authStatus)

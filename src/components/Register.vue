@@ -90,16 +90,33 @@ export default {
     }
   },
   methods: {
-    register() {
-      firebaseAuth.createUserWithEmailAndPassword(firebaseAuth.getAuth(), this.form.email, this.form.password)
+    async register() {
+      /*// encode as UTF-8
+      const msgBuffer = new TextEncoder().encode(this.form.password);
+
+      // hash the message
+      const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+
+      // convert ArrayBuffer to Array
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+
+      // convert bytes to hex string
+      const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+      console.log(hashHex)*/
+      await firebaseAuth.createUserWithEmailAndPassword(firebaseAuth.getAuth(), this.form.email, this.form.password)
           .then(data => {
+            const actionCodeSettings = {
+              url: `${process.env.VUE_APP_HOST_NAME}?email=${data.user.email}`,
+            };
+            firebaseAuth.sendEmailVerification(data.user, actionCodeSettings);
             data.user
                 .updateProfile({
                   displayName: this.form.name
-          })})
-      .catch(err => {
-        this.error = err.message;
-      });
+                })
+          })
+          .catch(err => {
+            this.error = err.message;
+          });
     },
     back() {
       this.$emit('statusEvent', this.loginStatus)
