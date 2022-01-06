@@ -43,9 +43,23 @@
               </div>
               <div class="form-group row mb-0">
                 <div class="col-md-6 offset-md-3 auth-button">
-                  <button type="submit" class="btn btn-primary mr-10">Login</button>
-                  <button type="submit" class="btn btn-primary mr-10" @click="register()">Register</button>
-                  <button type="submit" class="btn btn-primary" @click="registerWithGoogle()">Register with Google</button>
+                  <v-btn
+                      color="rgba(192,141,43,255)"
+                      type="submit"
+                      class="btn btn-primary mr-10"
+                  >Login</v-btn>
+                  <v-btn
+                      color="rgba(192,141,43,255)"
+                      type="submit"
+                      class="btn btn-primary mr-10"
+                      @click="register"
+                  >Register</v-btn>
+                  <v-btn
+                      color="rgba(192,141,43,255)"
+                      type="submit"
+                      class="btn btn-primary"
+                      @click="registerWithGoogle"
+                  >Register with Google</v-btn>
                 </div>
               </div>
             </form>

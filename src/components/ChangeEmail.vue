@@ -16,17 +16,20 @@
                     value
                     required
                     autofocus
-                    v-model="newEmail"
+                    v-model="this.newEmail"
                 />
               </div>
             </div>
             <div class="form-group row mb-0">
-              <div class="col-md-6 offset-md-3 auth-button">
-                <v-btn type="submit" class="btn btn-primary mr-10" @click="back">
+              <div class="col-md-6 offset-md-4 auth-button">
+                <v-btn
+                    type="submit"
+                    color="rgba(192,141,43,255)"
+                    class="btn btn-primary mr-10"
+                    @click="back">
                   <v-icon>mdi-arrow-left</v-icon>
                   Back
                 </v-btn>
-                <v-row justify="center">
                   <v-dialog
                       v-model="dialog"
                       persistent
@@ -34,8 +37,9 @@
                   >
                     <template v-slot:activator="{ on, attrs }">
                       <v-btn
-                          color="primary"
-                          dark
+                          type="submit"
+                          color="rgba(192,141,43,255)"
+                          class="btn btn-primary mr-10"
                           v-bind="attrs"
                           v-on="on"
                       >
@@ -87,7 +91,6 @@
                       </v-card-actions>
                     </v-card>
                   </v-dialog>
-                </v-row>
               </div>
             </div>
           </div>

@@ -20,7 +20,11 @@
             sm="6"
             md="4"
         >
-          <button type="submit" class="btn btn-primary" @click.prevent="login">Login</button>
+          <v-btn
+              x-large
+              color="rgba(192,141,43,255)"
+              @click.prevent="login"
+          >Login</v-btn>
         </v-col>
       </v-row>
     </v-container>

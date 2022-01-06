@@ -21,6 +21,7 @@
                 />
               </div>
             </div>
+            <div class="form-group row">
             <label for="repeatPassword" class="col-md-4 col-form-label text-md-right align-self-center">Repeat
               password</label>
             <div class="col-md-6">
@@ -35,13 +36,17 @@
                   v-model="repeatPassword"
               />
             </div>
+              </div>
             <div class="form-group row mb-0">
               <div class="col-md-6 offset-md-4 auth-button">
-                <v-btn type="submit" class="btn btn-primary mr-10" @click="back">
+                <v-btn
+                    type="submit"
+                    color="rgba(192,141,43,255)"
+                    class="btn btn-primary mr-10"
+                    @click="back">
                   <v-icon>mdi-arrow-left</v-icon>
                   Back
                 </v-btn>
-                <v-row justify="center">
                   <v-dialog
                       v-model="dialog"
                       persistent
@@ -49,12 +54,12 @@
                   >
                     <template v-slot:activator="{ on, attrs }">
                       <v-btn
-                          color="primary"
-                          dark
+                          type="submit"
+                          color="rgba(192,141,43,255)"
+                          class="btn btn-primary"
                           v-bind="attrs"
                           v-on="on"
-                      >
-                        Continue
+                      >Continue
                       </v-btn>
                     </template>
                     <v-card>
@@ -102,7 +107,6 @@
                       </v-card-actions>
                     </v-card>
                   </v-dialog>
-                </v-row>
               </div>
             </div>
           </div>

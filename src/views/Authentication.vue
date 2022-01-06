@@ -34,11 +34,9 @@ export default {
   methods: {
     updateStatus(authStatus) {
       this.authStatus = authStatus
-      console.log(this.authStatus)
     },
     updateLogin(loginStatus) {
       this.loginStatus = loginStatus
-      console.log(this.loginStatus)
     }
   },
   created() {

@@ -7,41 +7,63 @@
           <div class="card-body">
             <div class="form-group row">
               <div class="col-md-6 offset-md-3 auth-button">
-                <button type="submit" class="btn btn-primary mr-10" @click="home()">Home</button>
-                <button type="submit" class="btn btn-primary mr-10" @click="sendEmailVerification()">Email
-                  Verification
-                </button>
+                <v-btn
+                    color="rgba(192,141,43,255)"
+                    type="submit"
+                    class="btn btn-primary mr-10"
+                    @click="home"
+                >Home</v-btn>
+                <v-btn
+                    color="rgba(192,141,43,255)"
+                    type="submit"
+                    class="btn btn-primary"
+                    @click="sendEmailVerification"
+                >Email Verification</v-btn>
+              </div>
+              <div class="col-md-8 offset-md-2 auth-button">
                 <div
                     v-if="auth.getAuth().currentUser.email.includes('@gmail.com') || auth.getAuth().currentUser.email.includes('@googlemail.com')"></div>
-                <button v-else type="submit" class="btn btn-primary mr-10" @click="changePassword()">Change Password
-                </button>
+                <v-btn
+                    v-else
+                    color="rgba(192,141,43,255)"
+                    type="submit"
+                    class="btn btn-primary mr-10"
+                    @click="changePassword"
+                >Change Password</v-btn>
                 <div
                     v-if="auth.getAuth().currentUser.email.includes('@gmail.com') || auth.getAuth().currentUser.email.includes('@googlemail.com')"></div>
-                <button v-else type="submit" class="btn btn-primary mr-10" @click="changeEmail()">Change Email</button>
-                <button
+                <v-btn
+                    v-else
+                    color="rgba(192,141,43,255)"
+                    type="submit"
+                    class="btn btn-primary mr-10"
+                    @click="changeEmail"
+                >Change Email</v-btn>
+                <v-btn
                     v-if="auth.getAuth().currentUser.email.includes('@gmail.com') || auth.getAuth().currentUser.email.includes('@googlemail.com')"
-                    type="submit" class="btn btn-primary mr-10" @click="reauthenticateDeleteGoogleAccount()">Delete
-                  Google Account
-                </button>
-                <v-row v-else justify="center">
+                    color="rgba(192,141,43,255)"
+                    type="submit"
+                    class="btn btn-primary"
+                    @click="reauthenticateDeleteGoogleAccount"
+                >Delete Google Account</v-btn>
                   <v-dialog
+                      v-else
                       v-model="dialog"
                       persistent
                       max-width="600px"
                   >
                     <template v-slot:activator="{ on, attrs }">
                       <v-btn
-                          color="primary"
-                          dark
+                          color="rgba(192,141,43,255)"
+                          type="submit"
+                          class="btn btn-primary mr-10"
                           v-bind="attrs"
                           v-on="on"
-                      >
-                        Delete acccount
-                      </v-btn>
+                      >Delete Account</v-btn>
                     </template>
                     <v-card>
                       <v-card-title>
-                        <span class="text-h5">Authenticate</span>
+                        <span class="text-h5">Authenticate with Email and Password</span>
                       </v-card-title>
                       <v-card-text>
                         <v-container>
@@ -66,7 +88,6 @@
                         <small>*indicates required field</small>
                       </v-card-text>
                       <v-card-actions>
-                        <v-spacer></v-spacer>
                         <v-btn
                             color="blue darken-1"
                             text
@@ -77,15 +98,14 @@
                         <v-btn
                             color="blue darken-1"
                             text
-                            @click="reauthenticateDeleteAccount()"
+                            @click="reauthenticateDeleteAccount"
                         >
                           Save
                         </v-btn>
                       </v-card-actions>
                     </v-card>
                   </v-dialog>
-                </v-row>
-              </div>
+                </div>
             </div>
           </div>
         </div>
