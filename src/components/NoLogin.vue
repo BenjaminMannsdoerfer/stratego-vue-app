@@ -20,7 +20,7 @@
             sm="6"
             md="4"
         >
-          <button type="submit" class="btn btn-primary" @click="login()">Login</button>
+          <button type="submit" class="btn btn-primary" @click.prevent="login">Login</button>
         </v-col>
       </v-row>
     </v-container>
@@ -32,7 +32,7 @@ export default {
   name: "NoLogin",
   methods: {
     login() {
-      this.$router.push({name: 'Authentication'})
+      this.$router.push({name: "Authentication"});
     }
   }
 }
