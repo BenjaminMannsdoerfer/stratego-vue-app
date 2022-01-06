@@ -134,6 +134,19 @@
            class="btn btn-dark btn-lg btn-primary-spacing" role="button">Our Github repository</a>
       </form>
     </div>
+    <v-btn
+        v-scroll="onScroll"
+        v-show="fab"
+        fab
+        dark
+        fixed
+        bottom
+        right
+        color="#c08d2b"
+        @click="toTop"
+    >
+      <v-icon color="black">mdi-arrow-up</v-icon>
+    </v-btn>
     </body>
   </div>
 </template>
@@ -142,6 +155,7 @@
 export default {
   name: "AboutComponent",
   data: () => ({
+    fab: false,
     model: 0,
     colors: [
       'primary',
@@ -151,6 +165,16 @@ export default {
       'orange',
     ],
   }),
+  methods: {
+    onScroll (e) {
+      if (typeof window === 'undefined') return
+      const top = window.pageYOffset ||   e.target.scrollTop || 0
+      this.fab = top > 20
+    },
+    toTop () {
+      this.$vuetify.goTo(0)
+    }
+  }
 }
 
 </script>

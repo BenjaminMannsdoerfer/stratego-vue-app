@@ -10,6 +10,19 @@
     <ForgotPassword v-else-if="authStatus === 'forgotPassword' && loginStatus === false"
                     @statusEvent="updateStatus"></ForgotPassword>
     <Register v-else-if="authStatus === 'register' && loginStatus === false" @statusEvent="updateStatus"></Register>
+    <v-btn
+        v-scroll="onScroll"
+        v-show="fab"
+        fab
+        dark
+        fixed
+        bottom
+        right
+        color="#c08d2b"
+        @click="toTop"
+    >
+      <v-icon color="black">mdi-arrow-up</v-icon>
+    </v-btn>
   </v-app>
 </template>
 
@@ -28,7 +41,8 @@ export default {
   data() {
     return {
       authStatus: 'login',
-      loginStatus: false
+      loginStatus: false,
+      fab: false
     }
   },
   methods: {
@@ -37,6 +51,14 @@ export default {
     },
     updateLogin(loginStatus) {
       this.loginStatus = loginStatus
+    },
+    onScroll (e) {
+      if (typeof window === 'undefined') return
+      const top = window.pageYOffset ||   e.target.scrollTop || 0
+      this.fab = top > 20
+    },
+    toTop () {
+      this.$vuetify.goTo(0)
     }
   },
   created() {
@@ -48,7 +70,7 @@ export default {
         return this.loginStatus = false;
       }
     });
-  }
+  },
 }
 </script>
 
