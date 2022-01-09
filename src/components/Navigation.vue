@@ -54,10 +54,22 @@
         <v-spacer></v-spacer>
       </template>
       <template v-if="user.loggedIn">
-        <v-btn @click.prevent="signOut" class="text-right">
-          <v-icon>mdi-arrow-left</v-icon>
-          SignOut
-        </v-btn>
+        <div class="form-group row justify-end">
+          <div class="col-md-2 offset-md-4">
+        <div v-if="player === lobby.participants[0]" style="font-size: 20px" class="color-blue">
+          {{"Player: " + player}}
+        </div>
+        <div v-if="player === lobby.participants[1]" style="font-size: 20px" class="color-red">
+          {{"Player: " + player}}
+        </div>
+          </div>
+          <div class="col-md-2 offset-md-5">
+            <v-btn @click.prevent="signOut" class="text-right">
+              <v-icon>mdi-arrow-left</v-icon>
+              SignOut
+            </v-btn>
+          </div>
+        </div>
       </template>
       <template v-else>
         <v-btn @click.prevent="login" class="text-right">
@@ -87,7 +99,9 @@ export default {
     }
   },
   props: {
-    items: Array
+    items: Array,
+    player: String,
+    lobby: Object
   },
   methods: {
     signOut() {

@@ -1,6 +1,6 @@
 <template>
   <v-app id="inspire" class="backgroundd">
-    <Navigation :items="items"></Navigation>
+    <Navigation :items="items" :player="player" :lobby="lobby"></Navigation>
     <v-main>
       <router-view :websocket="websocket" :authentication="authentication" :player="player" :size="size"
       :fields="fields" :currentPlayerIndex="currentPlayerIndex" :currentPlayer="currentPlayer"

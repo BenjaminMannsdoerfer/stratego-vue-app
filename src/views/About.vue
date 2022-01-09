@@ -129,8 +129,8 @@
     </div>
     <div class="github_box">
       <h3>You want to contribute to our project?</h3>
-      <form action="https://github.com/BenjaminMannsdoerfer/stratego-web-app" target="_blank">
-        <a href="https://github.com/BenjaminMannsdoerfer/stratego-web-app"
+      <form action="https://github.com/BenjaminMannsdoerfer/stratego-vue-app" target="_blank">
+        <a href="https://github.com/BenjaminMannsdoerfer/stratego-vue-app"
            class="btn btn-dark btn-lg btn-primary-spacing" role="button">Our Github repository</a>
       </form>
     </div>
