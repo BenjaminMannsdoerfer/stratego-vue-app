@@ -74,11 +74,12 @@ export default {
     playerListBufferRed: Number,
     gameStatus: String,
     border: Object,
-    player: String
+    player: String,
+    websocket: WebSocket
   },
   methods: {
     move(dir, row, col) {
-      window.websocket.send(JSON.stringify({
+      this.websocket.send(JSON.stringify({
         "move": {
           "row": row,
           "col": col,
@@ -87,7 +88,7 @@ export default {
       }))
     },
     attack(row, col, rowD, colD) {
-      window.websocket.send(JSON.stringify({
+      this.websocket.send(JSON.stringify({
         "attack": {
           "row": row,
           "col": col,

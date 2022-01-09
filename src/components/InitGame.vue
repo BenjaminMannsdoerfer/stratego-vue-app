@@ -68,12 +68,12 @@ export default {
     playerListBufferRed: Number,
     gameStatus: String,
     border: Object,
-    player: String
+    player: String,
+    websocket: WebSocket
   },
   methods: {
     set(row, col, charac) {
-      console.log(this.player)
-      window.websocket.send(JSON.stringify({
+      this.websocket.send(JSON.stringify({
         "set": {
           "row": row,
           "col": col,

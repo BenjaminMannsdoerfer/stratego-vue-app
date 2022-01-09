@@ -38,10 +38,11 @@ export default {
   },
   props: {
     lobby: Object,
+    websocket: WebSocket
   },
   methods: {
     changeStatus() {
-      window.websocket.send(JSON.stringify({
+      this.websocket.send(JSON.stringify({
         "status": {
           "currentStatus": "lobby"
         }
@@ -52,7 +53,7 @@ export default {
       if (this.player === '') {
         return;
       }
-      window.websocket.send(JSON.stringify({
+      this.websocket.send(JSON.stringify({
         "lobby": {
           "currentPlayer": this.player
         }

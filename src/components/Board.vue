@@ -38,12 +38,12 @@
                   :currentPlayerIndex="currentPlayerIndex"
                   :currentPlayer="currentPlayer" :playerListBufferBlue="playerListBufferBlue"
                   :playerListBufferRed="playerListBufferRed"
-                  :gameStatus="gameStatus" :border="border" :player="player"></InitGame>
+                  :gameStatus="gameStatus" :border="border" :player="player" :websocket="websocket"></InitGame>
         <PlayGame v-else-if="this.playerListBufferRed === 0" :size="size" :fields="fields"
                   :currentPlayerIndex="currentPlayerIndex"
                   :currentPlayer="currentPlayer" :playerListBufferBlue="playerListBufferBlue"
                   :playerListBufferRed="playerListBufferRed"
-                  :gameStatus="gameStatus" :border="border" :player="player"></PlayGame>
+                  :gameStatus="gameStatus" :border="border" :player="player" :websocket="websocket"></PlayGame>
         <div class="col-auto init-game-right">
           <img class="img-game-right" :src="url + border.right" alt="border right"/>
         </div>
@@ -84,19 +84,20 @@ export default {
     playerListBufferRed: Number,
     gameStatus: String,
     border: Object,
-    player: String
+    player: String,
+    websocket: WebSocket
   },
   components: {PlayGame, InitGame},
   methods: {
     init() {
-      window.websocket.send(JSON.stringify({
+      this.websocket.send(JSON.stringify({
         "init": {
           "playGame": true,
         }
       }))
     },
     changeStatus() {
-      window.websocket.send(JSON.stringify({
+      this.websocket.send(JSON.stringify({
         "status": {
           "currentStatus": "start"
         }

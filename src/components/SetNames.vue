@@ -81,11 +81,12 @@ export default {
   },
   props: {
     lobby: Object,
-    player: String
+    player: String,
+    websocket: WebSocket
   },
   methods: {
     changeStatus() {
-      window.websocket.send(JSON.stringify({
+      this.websocket.send(JSON.stringify({
         "status": {
           "currentStatus": "Board"
         }
@@ -94,21 +95,21 @@ export default {
     getMatchfieldSize: function (size) {
       switch (size) {
         case 4:
-          window.websocket.send(JSON.stringify({
+          this.websocket.send(JSON.stringify({
             "small": {
               "matchfieldSize": size
             }
           }))
           break;
         case 7:
-          window.websocket.send(JSON.stringify({
+          this.websocket.send(JSON.stringify({
             "medium": {
               "matchfieldSize": size
             }
           }))
           break;
         case 10:
-          window.websocket.send(JSON.stringify({
+          this.websocket.send(JSON.stringify({
             "large": {
               "matchfieldSize": size
             }
@@ -118,7 +119,7 @@ export default {
     },
     getNames: function () {
       this.changeStatus()
-      window.websocket.send(JSON.stringify({
+      this.websocket.send(JSON.stringify({
         "setNames": {
           "player1": this.lobby.participants[0],
           "player2": this.lobby.participants[1]
