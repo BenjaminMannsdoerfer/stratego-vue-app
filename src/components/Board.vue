@@ -53,7 +53,7 @@
       <img class="img-game-bot" :src="url + border.bot" alt="border bot"/>
     </div>
     <div class="my-2">
-      <v-btn
+      <v-btn v-if="this.playerListBufferRed !== 0"
           x-large
           color="rgba(192,141,43,255)"
           @click="init()"

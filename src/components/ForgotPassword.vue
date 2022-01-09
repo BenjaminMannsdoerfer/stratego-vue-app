@@ -23,11 +23,21 @@
               </div>
               <div class="form-group row mb-0">
                 <div class="col-md-6 offset-md-4 auth-button">
-                  <v-btn type="submit" class="btn btn-primary mr-10" @click="back">
+                  <v-btn
+                      type="submit"
+                      color="rgba(192,141,43,255)"
+                      class="btn btn-primary mr-10"
+                      @click="back">
                     <v-icon>mdi-arrow-left</v-icon>
                     Back
                   </v-btn>
-                  <button type="submit" class="btn btn-primary">Continue</button>
+                  <v-btn
+                      type="submit"
+                      color="rgba(192,141,43,255)"
+                      class="btn btn-primary"
+                      @click="resetPassword">
+                    Continue
+                  </v-btn>
                 </div>
               </div>
             </form>
