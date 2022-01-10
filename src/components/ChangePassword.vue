@@ -109,6 +109,21 @@
                   </v-dialog>
               </div>
             </div>
+            <v-snackbar
+                v-model="snackbar"
+            >
+              {{ snackbarText }}
+              <template v-slot:action="{ attrs }">
+                <v-btn
+                    color="red"
+                    text
+                    v-bind="attrs"
+                    @click="snackbar = false"
+                >
+                  Close
+                </v-btn>
+              </template>
+            </v-snackbar>
           </div>
         </div>
       </div>
@@ -128,6 +143,8 @@ export default {
       newPassword: '',
       repeatPassword: '',
       authStatus: 'account',
+      snackbar: false,
+      snackbarText: 'Password successful changed',
       dialog: false
     }
   },
@@ -147,10 +164,10 @@ export default {
       console.log(hashHex)
       let user = await firebaseAuth.getAuth().currentUser;
       await firebaseAuth.updatePassword(user, hashHex).then(() => {
-        console.log('It works!')
       }).catch((error) => {
         console.log(error)
       });
+      this.snackbar = true
     },
     async reauthenticate() {
       // encode as UTF-8
