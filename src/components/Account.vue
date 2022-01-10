@@ -129,6 +129,7 @@ export default {
       authStatus: '',
       loginStatus: true,
       dialog: false,
+      snackbarStatus: 'delete',
       auth: firebaseAuth
     }
   },
@@ -172,24 +173,20 @@ export default {
           hashHex
       );
       await firebaseAuth.reauthenticateWithCredential(user, credential);
+      this.authStatus = 'login'
+      this.$emit('statusEvent', this.authStatus)
+      this.$emit('snackbarEvent', this.snackbarStatus)
       await firebaseAuth.deleteUser(user).then(() => {
-        this.authStatus = 'login'
-        this.loginStatus = false
-        this.$emit('loginEvent', this.loginStatus)
-        this.$emit('statusEvent', this.authStatus)
-        this.$router.push({name: 'Home'})
       }).catch((error) => {
         console.log(error)
       });
     },
     async reauthenticateDeleteGoogleAccount() {
       const user = firebaseAuth.getAuth().currentUser;
+      this.authStatus = 'login'
+      this.$emit('statusEvent', this.authStatus)
+      this.$emit('snackbarEvent', this.snackbarStatus)
       await firebaseAuth.deleteUser(user).then(() => {
-        this.authStatus = 'login'
-        this.loginStatus = false
-        this.$emit('loginEvent', this.loginStatus)
-        this.$emit('statusEvent', this.authStatus)
-        this.$router.push({name: 'Home'})
       }).catch((error) => {
         console.log(error)
       });

@@ -2,7 +2,7 @@
   <v-app>
     <Login v-if="authStatus === 'login' && loginStatus === false" @statusEvent="updateStatus" @snackbarEvent="updateSnackbar"></Login>
     <Account v-else-if="authStatus === 'account' && loginStatus === true" @statusEvent="updateStatus"
-             @loginEvent="updateLogin"></Account>
+             @loginEvent="updateLogin" @snackbarEvent="updateSnackbar"></Account>
     <ChangePassword v-else-if="authStatus === 'changePassword' && loginStatus === true"
                     @statusEvent="updateStatus"></ChangePassword>
     <ChangeEmail v-else-if="authStatus === 'changeEmail' && loginStatus === true"
@@ -95,6 +95,10 @@ export default {
         }
         return this.loginStatus = true;
       } else {
+        if (this.snackbarStatus === 'delete') {
+          this.snackbarText = 'Your account has been deleted'
+          this.snackbar = true
+        }
         return this.loginStatus = false;
       }
     });
