@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <Login v-if="authStatus === 'login' && loginStatus === false" @statusEvent="updateStatus"></Login>
+    <Login v-if="authStatus === 'login' && loginStatus === false" @statusEvent="updateStatus" @snackbarEvent="updateSnackbar"></Login>
     <Account v-else-if="authStatus === 'account' && loginStatus === true" @statusEvent="updateStatus"
              @loginEvent="updateLogin"></Account>
     <ChangePassword v-else-if="authStatus === 'changePassword' && loginStatus === true"
@@ -9,7 +9,7 @@
                  @statusEvent="updateStatus"></ChangeEmail>
     <ForgotPassword v-else-if="authStatus === 'forgotPassword' && loginStatus === false"
                     @statusEvent="updateStatus"></ForgotPassword>
-    <Register v-else-if="authStatus === 'register' && loginStatus === false" @statusEvent="updateStatus"></Register>
+    <Register v-else-if="authStatus === 'register' && loginStatus === false" @statusEvent="updateStatus" @snackbarEvent="updateSnackbar"></Register>
     <v-btn
         v-scroll="onScroll"
         v-show="fab"
@@ -23,6 +23,21 @@
     >
       <v-icon color="black">mdi-arrow-up</v-icon>
     </v-btn>
+    <v-snackbar
+        v-model="snackbar"
+    >
+      {{ snackbarText }}
+      <template v-slot:action="{ attrs }">
+        <v-btn
+            color="red"
+            text
+            v-bind="attrs"
+            @click="snackbar = false"
+        >
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
   </v-app>
 </template>
 
@@ -42,6 +57,9 @@ export default {
     return {
       authStatus: 'login',
       loginStatus: false,
+      snackbarStatus: '',
+      snackbar: false,
+      snackbarText: '',
       fab: false
     }
   },
@@ -51,6 +69,9 @@ export default {
     },
     updateLogin(loginStatus) {
       this.loginStatus = loginStatus
+    },
+    updateSnackbar(snackbarStatus) {
+      this.snackbarStatus = snackbarStatus
     },
     onScroll (e) {
       if (typeof window === 'undefined') return
@@ -65,6 +86,13 @@ export default {
     firebaseAuth.getAuth().onAuthStateChanged(user => {
       if (user) {
         this.authStatus = 'account'
+        if (this.snackbarStatus === 'register') {
+          this.snackbarText = 'Register successful'
+          this.snackbar = true
+        } else if (this.snackbarStatus === 'login') {
+          this.snackbarText = 'Login successful'
+          this.snackbar = true
+        }
         return this.loginStatus = true;
       } else {
         return this.loginStatus = false;

@@ -31,7 +31,6 @@ import SetNames from "../components/SetNames";
 import InitGame from "../components/InitGame";
 import PlayGame from "../components/PlayGame";
 import Board from "../components/Board";
-import {firebaseAuth} from "@/main";
 import NoLogin from "@/components/NoLogin";
 import NoWebsocketAvailable from "@/components/NoWebsocketAvailable";
 

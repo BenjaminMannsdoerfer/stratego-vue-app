@@ -72,11 +72,13 @@ export default {
         email: '',
         password: '',
       },
-      loginStatus: 'login'
+      loginStatus: 'login',
+      snackbarStatus: 'register'
     }
   },
   methods: {
     async register() {
+      this.$emit('snackbarEvent', this.snackbarStatus)
       // encode as UTF-8
       const msgBuffer = new TextEncoder().encode(this.form.password);
       // hash the message
@@ -92,10 +94,10 @@ export default {
               url: `${process.env.VUE_APP_HOST_NAME}?email=${data.user.email}`,
             };
             firebaseAuth.sendEmailVerification(data.user, actionCodeSettings);
-            data.user
+            /*data.user
                 .updateProfile({
                   displayName: this.form.name
-                })
+                })*/
           })
           .catch(err => {
             this.error = err.message;

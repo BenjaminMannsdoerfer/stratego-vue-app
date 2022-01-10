@@ -81,7 +81,8 @@ export default {
         email: '',
         password: '',
       },
-      loginStatus: ''
+      loginStatus: '',
+      snackbarStatus: 'login'
     }
   },
   methods: {
@@ -94,6 +95,7 @@ export default {
       this.$emit('statusEvent', this.loginStatus)
     },
     async login() {
+      this.$emit('snackbarEvent', this.snackbarStatus)
       // encode as UTF-8
       const msgBuffer = new TextEncoder().encode(this.form.password);
       // hash the message
@@ -106,7 +108,7 @@ export default {
       firebaseAuth
           .signInWithEmailAndPassword(firebaseAuth.getAuth(), this.form.email, hashHex)
           .then(() => {
-            this.$router.replace({name: "Home"});
+            //this.$router.replace({name: "Home"});
           })
           .catch(err => {
             this.error = err.message;
