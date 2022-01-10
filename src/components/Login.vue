@@ -47,19 +47,22 @@
                       color="rgba(192,141,43,255)"
                       type="submit"
                       class="btn btn-primary mr-10"
-                  >Login</v-btn>
+                  >Login
+                  </v-btn>
                   <v-btn
                       color="rgba(192,141,43,255)"
                       type="submit"
                       class="btn btn-primary mr-10"
                       @click="register"
-                  >Register</v-btn>
+                  >Register
+                  </v-btn>
                   <v-btn
                       color="rgba(192,141,43,255)"
                       type="submit"
                       class="btn btn-primary"
                       @click="registerWithGoogle"
-                  >Register with Google</v-btn>
+                  >Register with Google
+                  </v-btn>
                 </div>
               </div>
             </form>
@@ -75,7 +78,7 @@ import {firebaseAuth} from "@/main";
 
 export default {
   name: "Login",
-  data () {
+  data() {
     return {
       form: {
         email: '',
@@ -96,7 +99,7 @@ export default {
     },
     async login() {
       this.$emit('snackbarEvent', this.snackbarStatus)
-      // encode as UTF-8
+      /*// encode as UTF-8
       const msgBuffer = new TextEncoder().encode(this.form.password);
       // hash the message
       const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
@@ -104,9 +107,9 @@ export default {
       const hashArray = Array.from(new Uint8Array(hashBuffer));
       // convert bytes to hex string
       const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-      console.log(hashHex)
+      */
       firebaseAuth
-          .signInWithEmailAndPassword(firebaseAuth.getAuth(), this.form.email, hashHex)
+          .signInWithEmailAndPassword(firebaseAuth.getAuth(), this.form.email, this.form.password)
           .catch(err => {
             this.error = err.message;
           });
@@ -114,11 +117,10 @@ export default {
     registerWithGoogle() {
       this.$emit('snackbarEvent', this.snackbarStatus)
       let provider = new firebaseAuth.GoogleAuthProvider();
-      //firebaseAuth.signInWithRedirect(firebaseAuth.getAuth(), provider)
       firebaseAuth.signInWithPopup(firebaseAuth.getAuth(), provider)
-      .then(() => {
-        console.log("success")
-      })
+          .then(() => {
+            console.log("success")
+          })
     }
   }
 }

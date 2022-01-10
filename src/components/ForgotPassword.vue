@@ -41,6 +41,21 @@
                 </div>
               </div>
             </form>
+            <v-snackbar
+                v-model="snackbar"
+            >
+              {{ snackbarText }}
+              <template v-slot:action="{ attrs }">
+                <v-btn
+                    color="red"
+                    text
+                    v-bind="attrs"
+                    @click="snackbar = false"
+                >
+                  Close
+                </v-btn>
+              </template>
+            </v-snackbar>
           </div>
         </div>
       </div>
@@ -58,6 +73,8 @@ export default {
       email: '',
       error: '',
       emailSending: false,
+      snackbar: false,
+      snackbarText: 'A password recovery email has been sent to you. Please check your emails.',
       authStatus: 'login'
     }
   },
@@ -80,6 +97,7 @@ export default {
             this.emailSending = false;
             this.error = error.message;
           });
+      this.snackbar = true
     }
   }
 }

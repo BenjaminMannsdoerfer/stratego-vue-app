@@ -12,13 +12,15 @@
                     type="submit"
                     class="btn btn-primary mr-10"
                     @click="home"
-                >Home</v-btn>
+                >Home
+                </v-btn>
                 <v-btn
                     color="rgba(192,141,43,255)"
                     type="submit"
                     class="btn btn-primary"
                     @click="sendEmailVerification"
-                >Email Verification</v-btn>
+                >Email Verification
+                </v-btn>
               </div>
               <div class="col-md-8 offset-md-2 auth-button">
                 <div
@@ -29,7 +31,8 @@
                     type="submit"
                     class="btn btn-primary mr-10"
                     @click="changePassword"
-                >Change Password</v-btn>
+                >Change Password
+                </v-btn>
                 <div
                     v-if="auth.getAuth().currentUser.email.includes('@gmail.com') || auth.getAuth().currentUser.email.includes('@googlemail.com')"></div>
                 <v-btn
@@ -38,74 +41,77 @@
                     type="submit"
                     class="btn btn-primary mr-10"
                     @click="changeEmail"
-                >Change Email</v-btn>
+                >Change Email
+                </v-btn>
                 <v-btn
                     v-if="auth.getAuth().currentUser.email.includes('@gmail.com') || auth.getAuth().currentUser.email.includes('@googlemail.com')"
                     color="rgba(192,141,43,255)"
                     type="submit"
                     class="btn btn-primary"
                     @click="reauthenticateDeleteGoogleAccount"
-                >Delete Google Account</v-btn>
-                  <v-dialog
-                      v-else
-                      v-model="dialog"
-                      persistent
-                      max-width="600px"
-                  >
-                    <template v-slot:activator="{ on, attrs }">
+                >Delete Google Account
+                </v-btn>
+                <v-dialog
+                    v-else
+                    v-model="dialog"
+                    persistent
+                    max-width="600px"
+                >
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-btn
+                        color="rgba(192,141,43,255)"
+                        type="submit"
+                        class="btn btn-primary mr-10"
+                        v-bind="attrs"
+                        v-on="on"
+                    >Delete Account
+                    </v-btn>
+                  </template>
+                  <v-card>
+                    <v-card-title>
+                      <span class="text-h5">Authenticate with Email and Password</span>
+                    </v-card-title>
+                    <v-card-text>
+                      <v-container>
+                        <v-row>
+                          <v-col cols="12">
+                            <v-text-field
+                                label="Email*"
+                                required
+                                v-model="userEmail"
+                            ></v-text-field>
+                          </v-col>
+                          <v-col cols="12">
+                            <v-text-field
+                                label="Password*"
+                                type="password"
+                                required
+                                v-model="userPassword"
+                            ></v-text-field>
+                          </v-col>
+                        </v-row>
+                      </v-container>
+                      <small>*indicates required field</small>
+                    </v-card-text>
+                    <v-card-actions>
                       <v-btn
-                          color="rgba(192,141,43,255)"
-                          type="submit"
-                          class="btn btn-primary mr-10"
-                          v-bind="attrs"
-                          v-on="on"
-                      >Delete Account</v-btn>
-                    </template>
-                    <v-card>
-                      <v-card-title>
-                        <span class="text-h5">Authenticate with Email and Password</span>
-                      </v-card-title>
-                      <v-card-text>
-                        <v-container>
-                          <v-row>
-                            <v-col cols="12">
-                              <v-text-field
-                                  label="Email*"
-                                  required
-                                  v-model="userEmail"
-                              ></v-text-field>
-                            </v-col>
-                            <v-col cols="12">
-                              <v-text-field
-                                  label="Password*"
-                                  type="password"
-                                  required
-                                  v-model="userPassword"
-                              ></v-text-field>
-                            </v-col>
-                          </v-row>
-                        </v-container>
-                        <small>*indicates required field</small>
-                      </v-card-text>
-                      <v-card-actions>
-                        <v-btn
-                            color="blue darken-1"
-                            text
-                            @click="dialog = false"
-                        >
-                          Close
-                        </v-btn>
-                        <v-btn
-                            color="blue darken-1"
-                            text
-                            @click="reauthenticateDeleteAccount"
-                        >
-                          Save
-                        </v-btn>
-                      </v-card-actions>
-                    </v-card>
-                  </v-dialog>
-                </div>
+                          color="blue darken-1"
+                          text
+                          @click="dialog = false"
+                      >
+                        Close
+                      </v-btn>
+                      <v-btn
+                          color="blue darken-1"
+                          text
+                          @click="reauthenticateDeleteAccount"
+                      >
+                        Save
+                      </v-btn>
+                    </v-card-actions>
+                  </v-card>
+                </v-dialog>
+              </div>
             </div>
           </div>
         </div>
@@ -158,19 +164,20 @@ export default {
       this.$router.push({name: "Home"});
     },
     async reauthenticateDeleteAccount() {
-      // encode as UTF-8
+      /*// encode as UTF-8
       const msgBuffer = new TextEncoder().encode(this.userPassword);
       // hash the message
       const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
       // convert ArrayBuffer to Array
       const hashArray = Array.from(new Uint8Array(hashBuffer));
       // convert bytes to hex string
-      const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+      const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');*/
       this.dialog = false
       const user = await firebaseAuth.getAuth().currentUser;
       const credential = await firebaseAuth.EmailAuthProvider.credential(
           this.userEmail,
-          hashHex
+          this.userPassword
+          //hashHex
       );
       await firebaseAuth.reauthenticateWithCredential(user, credential);
       this.authStatus = 'login'

@@ -56,12 +56,12 @@
       <template v-if="user.loggedIn">
         <div class="form-group row justify-end">
           <div class="col-md-2 offset-md-4">
-        <div v-if="player === lobby.participants[0]" style="font-size: 20px" class="color-blue">
-          {{"Player: " + player}}
-        </div>
-        <div v-if="player === lobby.participants[1]" style="font-size: 20px" class="color-red">
-          {{"Player: " + player}}
-        </div>
+            <div v-if="player === lobby.participants[0]" style="font-size: 20px" class="color-blue">
+              {{ "Player: " + player }}
+            </div>
+            <div v-if="player === lobby.participants[1]" style="font-size: 20px" class="color-red">
+              {{ "Player: " + player }}
+            </div>
           </div>
           <div class="col-md-2 offset-md-5">
             <v-btn @click.prevent="signOut" class="text-right">

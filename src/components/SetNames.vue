@@ -5,63 +5,62 @@
         <div class="card">
           <div class="card-header text-center"><h2>{{ "Welcome to Stratego" }}</h2></div>
           <div class="card-body">
-              <v-row justify="center" style="text-align: center">
-                <v-col
-                    cols="12"
-                    sm="6"
-                >
-                  <h2 v-if="player === lobby.participants[0]" class="color-blue">{{"Player: " + player}}</h2>
-                  <h2 v-else-if="player === lobby.participants[1]" class="color-red">{{"Player: " + player}}</h2>
+            <v-row justify="center" style="text-align: center">
+              <v-col
+                  cols="12"
+                  sm="6"
+              >
+                <h2 v-if="player === lobby.participants[0]" class="color-blue">{{ "Player: " + player }}</h2>
+                <h2 v-else-if="player === lobby.participants[1]" class="color-red">{{ "Player: " + player }}</h2>
+              </v-col>
+            </v-row>
+            <v-row justify="center">
+              <v-col
+                  class="d-flex"
+                  cols="12"
+                  sm="6"
+              >
+                <v-select item-text="name" item-value="value" :items="items" @change="getMatchfieldSize"
+                          label="select matchfield size">
+                </v-select>
+              </v-col>
+            </v-row>
+            <v-row justify="center" style="text-align: center">
 
-                </v-col>
-              </v-row>
+              <v-col
+                  cols="12"
+                  sm="6"
+                  md="3"
+              >
+                <h2 v-if="player === lobby.participants[0]" class="color-blue">{{ lobby.participants[0] }}</h2>
+                <h2 v-else-if="player !== lobby.participants[0]" class="color-blue">{{ lobby.participants[0] }}</h2>
+              </v-col>
+              <v-col
+                  cols="12"
+                  sm="6"
+                  md="3"
+              >
+                <h2 v-if="player === lobby.participants[1]" class="color-red">{{ lobby.participants[1] }}</h2>
+                <h2 v-else-if="player !== lobby.participants[1]" class="color-red">{{ lobby.participants[1] }}</h2>
+              </v-col>
               <v-row justify="center">
                 <v-col
-                    class="d-flex"
-                    cols="12"
-                    sm="6"
-                >
-                  <v-select item-text="name" item-value="value" :items="items" @change="getMatchfieldSize"
-                            label="select matchfield size">
-                  </v-select>
-                </v-col>
-              </v-row>
-              <v-row justify="center" style="text-align: center">
-
-                <v-col
                     cols="12"
                     sm="6"
                     md="3"
                 >
-                  <h2 v-if="player === lobby.participants[0]" class="color-blue">{{ lobby.participants[0] }}</h2>
-                  <h2 v-else-if="player !== lobby.participants[0]" class="color-blue">{{ lobby.participants[0] }}</h2>
+                  <div class="my-2" id="btn">
+                    <v-btn
+                        x-large
+                        color="rgba(192,141,43,255)"
+                        @click="getNames()"
+                    >
+                      Play
+                    </v-btn>
+                  </div>
                 </v-col>
-                <v-col
-                    cols="12"
-                    sm="6"
-                    md="3"
-                >
-                  <h2 v-if="player === lobby.participants[1]" class="color-red">{{ lobby.participants[1] }}</h2>
-                  <h2 v-else-if="player !== lobby.participants[1]" class="color-red">{{ lobby.participants[1] }}</h2>
-                </v-col>
-                <v-row justify="center">
-                  <v-col
-                      cols="12"
-                      sm="6"
-                      md="3"
-                  >
-                    <div class="my-2" id="btn">
-                      <v-btn
-                          x-large
-                          color="rgba(192,141,43,255)"
-                          @click="getNames()"
-                      >
-                        Play
-                      </v-btn>
-                    </div>
-                  </v-col>
-                </v-row>
               </v-row>
+            </v-row>
           </div>
         </div>
       </div>

@@ -15,17 +15,17 @@
                 ></v-text-field>
               </v-col>
             </v-row>
-              <v-row justify="center">
-                <v-col cols="12" sm="6" md="6">
-                  <v-img src="@/assets/images/media/stratego_start.png" class="margin-center" justify="center"
-                         @click="changeStatus()" height="93" width="320"/>
-                </v-col>
-              </v-row>
-            </div>
+            <v-row justify="center">
+              <v-col cols="12" sm="6" md="6">
+                <v-img src="@/assets/images/media/stratego_start.png" class="margin-center" justify="center"
+                       @click="changeStatus()" height="93" width="320"/>
+              </v-col>
+            </v-row>
           </div>
         </div>
       </div>
     </div>
+  </div>
 </template>
 
 <script>

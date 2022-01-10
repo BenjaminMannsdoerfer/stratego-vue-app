@@ -24,7 +24,8 @@
               x-large
               color="rgba(192,141,43,255)"
               @click.prevent="login"
-          >Login</v-btn>
+          >Login
+          </v-btn>
         </v-col>
       </v-row>
     </v-container>
