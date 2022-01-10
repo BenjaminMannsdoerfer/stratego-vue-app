@@ -107,14 +107,12 @@ export default {
       console.log(hashHex)
       firebaseAuth
           .signInWithEmailAndPassword(firebaseAuth.getAuth(), this.form.email, hashHex)
-          .then(() => {
-            //this.$router.replace({name: "Home"});
-          })
           .catch(err => {
             this.error = err.message;
           });
     },
     registerWithGoogle() {
+      this.$emit('snackbarEvent', this.snackbarStatus)
       let provider = new firebaseAuth.GoogleAuthProvider();
       //firebaseAuth.signInWithRedirect(firebaseAuth.getAuth(), provider)
       firebaseAuth.signInWithPopup(firebaseAuth.getAuth(), provider)
