@@ -54,6 +54,21 @@
                 </div>
               </div>
             </form>
+            <v-snackbar
+                v-model="snackbar"
+            >
+              {{ snackbarText }}
+              <template v-slot:action="{ attrs }">
+                <v-btn
+                    color="red"
+                    text
+                    v-bind="attrs"
+                    @click="snackbar = false"
+                >
+                  Close
+                </v-btn>
+              </template>
+            </v-snackbar>
           </div>
         </div>
       </div>
@@ -74,8 +89,8 @@ export default {
       },
       loginStatus: 'login',
       snackbarStatus: 'register',
-      password_strength_show: false,
-      password_beispiel:"123"
+      snackbar: false,
+      snackbarText: ''
     }
   },
   methods: {
@@ -89,11 +104,12 @@ export default {
       const hashArray = Array.from(new Uint8Array(hashBuffer));
       // convert bytes to hex string
       const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');*/
-      var checknumber = this.checkPasswordStrenght(this.form.password)
-      if(!checknumber) {
-        alert("password too short")
+      let checkNumber = this.checkPasswordStrenght(this.form.password)
+      if(!checkNumber) {
+        this.snackbarText = 'Password too short'
+        this.snackbar = true
       }
-      if(checknumber) {
+      if(checkNumber) {
         await firebaseAuth.createUserWithEmailAndPassword(firebaseAuth.getAuth(), this.form.email, this.form.password)
             .then(data => {
               const actionCodeSettings = {
@@ -102,7 +118,10 @@ export default {
               firebaseAuth.sendEmailVerification(data.user, actionCodeSettings);
             })
             .catch(err => {
+              this.snackbarText = 'Email already registered'
+              this.snackbar = true
               this.error = err.message;
+              console.log(err.message)
             });
       }
     },
