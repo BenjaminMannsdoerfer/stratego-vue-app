@@ -73,7 +73,9 @@ export default {
         password: '',
       },
       loginStatus: 'login',
-      snackbarStatus: 'register'
+      snackbarStatus: 'register',
+      password_strength_show: false,
+      password_beispiel:"123"
     }
   },
   methods: {
@@ -87,20 +89,35 @@ export default {
       const hashArray = Array.from(new Uint8Array(hashBuffer));
       // convert bytes to hex string
       const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');*/
-      await firebaseAuth.createUserWithEmailAndPassword(firebaseAuth.getAuth(), this.form.email, this.form.password)
-          .then(data => {
-            const actionCodeSettings = {
-              url: `${process.env.VUE_APP_HOST_NAME}?email=${data.user.email}`,
-            };
-            firebaseAuth.sendEmailVerification(data.user, actionCodeSettings);
-          })
-          .catch(err => {
-            this.error = err.message;
-          });
+      var checknumber = this.checkPasswordStrenght(this.form.password)
+      if(!checknumber) {
+        alert("password too short")
+      }
+      if(checknumber) {
+        await firebaseAuth.createUserWithEmailAndPassword(firebaseAuth.getAuth(), this.form.email, this.form.password)
+            .then(data => {
+              const actionCodeSettings = {
+                url: `${process.env.VUE_APP_HOST_NAME}?email=${data.user.email}`,
+              };
+              firebaseAuth.sendEmailVerification(data.user, actionCodeSettings);
+            })
+            .catch(err => {
+              this.error = err.message;
+            });
+      }
     },
     back() {
       this.$emit('statusEvent', this.loginStatus)
     },
+    checkPasswordStrenght(password){
+        if (password.length < 6) {
+          return false
+        }
+        //if (password.length > 12) {
+        //  return true
+        //}
+        return true
+    }
   }
 }
 </script>
