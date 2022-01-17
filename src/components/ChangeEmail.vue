@@ -133,20 +133,11 @@ export default {
   },
   methods: {
     reauthenticateChangeEmail() {
-      /* // encode as UTF-8
-      const msgBuffer = new TextEncoder().encode(this.userPassword);
-      // hash the message
-      const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-      // convert ArrayBuffer to Array
-      const hashArray = Array.from(new Uint8Array(hashBuffer));
-      // convert bytes to hex string
-      const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');*/
       this.dialog = false
       const user = firebaseAuth.getAuth().currentUser;
       const credential = firebaseAuth.EmailAuthProvider.credential(
           this.userEmail,
           this.userPassword
-          //hashHex
       );
       firebaseAuth.reauthenticateWithCredential(user, credential);
       firebaseAuth.updateEmail(firebaseAuth.getAuth().currentUser, this.newEmail)

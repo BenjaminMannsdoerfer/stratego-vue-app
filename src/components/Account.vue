@@ -164,14 +164,6 @@ export default {
       this.$router.push({name: "Home"});
     },
     async reauthenticateDeleteAccount() {
-      /*// encode as UTF-8
-      const msgBuffer = new TextEncoder().encode(this.userPassword);
-      // hash the message
-      const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-      // convert ArrayBuffer to Array
-      const hashArray = Array.from(new Uint8Array(hashBuffer));
-      // convert bytes to hex string
-      const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');*/
       this.dialog = false
       const user = await firebaseAuth.getAuth().currentUser;
       const credential = await firebaseAuth.EmailAuthProvider.credential(

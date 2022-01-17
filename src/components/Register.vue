@@ -96,20 +96,10 @@ export default {
   methods: {
     async register() {
       this.$emit('snackbarEvent', this.snackbarStatus)
-      /*// encode as UTF-8
-      const msgBuffer = new TextEncoder().encode(this.form.password);
-      // hash the message
-      const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-      // convert ArrayBuffer to Array
-      const hashArray = Array.from(new Uint8Array(hashBuffer));
-      // convert bytes to hex string
-      const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');*/
-      let checkNumber = this.checkPasswordStrenght(this.form.password)
-      if(!checkNumber) {
+      if(!this.checkPasswordStrenght(this.form.password)) {
         this.snackbarText = 'Password too short'
         this.snackbar = true
-      }
-      if(checkNumber) {
+      } else {
         await firebaseAuth.createUserWithEmailAndPassword(firebaseAuth.getAuth(), this.form.email, this.form.password)
             .then(data => {
               const actionCodeSettings = {
@@ -132,9 +122,6 @@ export default {
         if (password.length < 6) {
           return false
         }
-        //if (password.length > 12) {
-        //  return true
-        //}
         return true
     }
   }

@@ -153,15 +153,6 @@ export default {
       this.$emit('statusEvent', this.authStatus)
     },
     async changePassword() {
-      /*// encode as UTF-8
-      const msgBuffer = new TextEncoder().encode(this.newPassword);
-      // hash the message
-      const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-      // convert ArrayBuffer to Array
-      const hashArray = Array.from(new Uint8Array(hashBuffer));
-      // convert bytes to hex string
-      const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-      console.log(hashHex)*/
       let user = await firebaseAuth.getAuth().currentUser;
       await firebaseAuth.updatePassword(user, this.newPassword).then(() => {
       }).catch((error) => {
@@ -170,15 +161,6 @@ export default {
       this.snackbar = true
     },
     async reauthenticate() {
-      /*// encode as UTF-8
-      const msgBuffer = new TextEncoder().encode(this.password);
-      // hash the message
-      const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-      // convert ArrayBuffer to Array
-      const hashArray = Array.from(new Uint8Array(hashBuffer));
-      // convert bytes to hex string
-      const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-      console.log(hashHex)*/
       this.dialog = false
       const user = await firebaseAuth.getAuth().currentUser;
       const credential = await firebaseAuth.EmailAuthProvider.credential(

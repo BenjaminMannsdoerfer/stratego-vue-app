@@ -21,35 +21,39 @@
         <div class="h3-text">
           <h3 style="padding-left:8px;">The figures are ranked from highest to lowest as follows:</h3>
         </div>
-        <div class="fig-txtt">
+        <div>
           <table>
             <tr>
               <th></th>
               <th></th>
             </tr>
             <tr>
-              <td style="font-weight:bold;">1.Bomb</td>
-              <td><img src="../assets/images/media/figures/stratego-bomb.svg" alt="player" width="30" height="60"/></td>
+              <td style="font-weight:bold;">0.Flag</td>
+              <td><img src="../assets/images/media/figures/stratego-flag.svg" alt="player" width="30" height="60"/></td>
             </tr>
             <tr>
-              <td style="font-weight:bold;">2.Marshal</td>
-              <td><img src="../assets/images/media/figures/stratego-marshal.svg" alt="player" width="30" height="60"/>
+              <td style="font-weight:bold;">1.Spy</td>
+              <td><img src="../assets/images/media/figures/stratego-spy.svg" alt="player" width="30" height="60"/></td>
+            </tr>
+            <tr>
+              <td style="font-weight:bold;">2.Scout</td>
+              <td><img src="../assets/images/media/figures/stratego-scout.svg" alt="player" width="30" height="60"/>
               </td>
             </tr>
             <tr>
-              <td style="font-weight:bold;">3.General</td>
-              <td><img src="../assets/images/media/figures/stratego-general.svg" alt="player" width="30" height="60"/>
+              <td style="font-weight:bold;">3.Miner</td>
+              <td><img src="../assets/images/media/figures/stratego-miner.svg" alt="player" width="30" height="60"/>
               </td>
             </tr>
             <tr>
-              <td style="font-weight:bold;">4.Cononel</td>
-              <td><img src="../assets/images/media/figures/stratego-colonel.svg" alt="player" width="30" height="60"/>
+              <td style="font-weight:bold;">4.Sergeant</td>
+              <td><img src="../assets/images/media/figures/stratego-sergeant.svg" alt="player" width="30" height="60"/>
               </td>
             </tr>
             <tr>
-              <td style="font-weight:bold;">5.Major</td>
-              <td><img src="../assets/images/media/figures/stratego-major.svg" alt="player" width="30" height="60"/>
-              </td>
+              <td style="font-weight:bold;">5.Lieutenant</td>
+              <td><img src="../assets/images/media/figures/stratego-lieutenant.svg" alt="player" width="30"
+                       height="60"/></td>
             </tr>
             <tr>
               <td style="font-weight:bold;">6.Captain</td>
@@ -57,37 +61,32 @@
               </td>
             </tr>
             <tr>
-              <td style="font-weight:bold;">7.Lieutenant</td>
-              <td><img src="../assets/images/media/figures/stratego-lieutenant.svg" alt="player" width="30"
-                       height="60"/></td>
-            </tr>
-            <tr>
-              <td style="font-weight:bold;">8.Sergeant</td>
-              <td><img src="../assets/images/media/figures/stratego-sergeant.svg" alt="player" width="30" height="60"/>
+              <td style="font-weight:bold;">7.Major</td>
+              <td><img src="../assets/images/media/figures/stratego-major.svg" alt="player" width="30" height="60"/>
               </td>
             </tr>
             <tr>
-              <td style="font-weight:bold;">9.Miner</td>
-              <td><img src="../assets/images/media/figures/stratego-miner.svg" alt="player" width="30" height="60"/>
+              <td style="font-weight:bold;">8.Cononel</td>
+              <td><img src="../assets/images/media/figures/stratego-colonel.svg" alt="player" width="30" height="60"/>
               </td>
             </tr>
             <tr>
-              <td style="font-weight:bold;">10.Scout</td>
-              <td><img src="../assets/images/media/figures/stratego-scout.svg" alt="player" width="30" height="60"/>
+              <td style="font-weight:bold;">9.General</td>
+              <td><img src="../assets/images/media/figures/stratego-general.svg" alt="player" width="30" height="60"/>
               </td>
             </tr>
             <tr>
-              <td style="font-weight:bold;">11.Spy</td>
-              <td><img src="../assets/images/media/figures/stratego-spy.svg" alt="player" width="30" height="60"/></td>
+              <td style="font-weight:bold;">10.Marshal</td>
+              <td><img src="../assets/images/media/figures/stratego-marshal.svg" alt="player" width="30" height="60"/>
+              </td>
             </tr>
             <tr>
-              <td style="font-weight:bold;">12.Flag</td>
-              <td><img src="../assets/images/media/figures/stratego-flag.svg" alt="player" width="30" height="60"/></td>
+              <td style="font-weight:bold;">11.Bomb</td>
+              <td><img src="../assets/images/media/figures/stratego-bomb.svg" alt="player" width="30" height="60"/></td>
             </tr>
           </table>
         </div>
       </div>
-
       <div class="rules col">
         <h3 class="text-center">Rules:</h3>
         <ul class="char text-center">
@@ -98,7 +97,6 @@
           <li>Flag and Bomb can’t be moved</li>
         </ul>
       </div>
-
     </div>
     <div class="screenshot">
       <h3>Screenshots:</h3>
